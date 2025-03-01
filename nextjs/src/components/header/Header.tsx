@@ -10,15 +10,17 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu"
+import { FunctionComponent } from "react";
 
-const Header = () => {
+const Header:FunctionComponent = () => {
+  const user=false
   return (
     <header className="absolute z-10 w-full">
-      <div className="flex items-center justify-between border bg-black  ">
+      <div className="flex items-center justify-between   ">
         <Link href="/">
           <Image
             className="dark:invert mx-10 p-1"
-            src="/REX.png"
+            src="/REX (1).png"
             alt="Next.js logo"
             width={100}
             height={1}
@@ -46,8 +48,9 @@ const Header = () => {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-        <Link href={"/login"} className=" mx-4 text-white"><Button className="text-xl cursor-pointer">Sign In</Button></Link>
-        <Link href={"/login"} className=" mr-4 text-white"><Button className="text-xl cursor-pointer ">Sign Up</Button></Link>
+        {!user&&<Link href={"/login"} className=" mx-4 text-white"><Button className="text-xl cursor-pointer">Sign In</Button></Link>}
+        {user&&<Link href={"/login"} className=" mx-4 text-white"><Button className="text-xl cursor-pointer">Logout</Button></Link>}
+        {!user&&<Link href={"/signup"} className=" mr-4 text-white"><Button className="text-xl cursor-pointer ">Sign Up</Button></Link>}
       
         </div>
         

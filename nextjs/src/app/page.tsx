@@ -1,103 +1,79 @@
+import Herosection2 from "@/components/header/Heroection2";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
+    <div className="">
+      <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#f5f6f9]  w-full py-20 ">
+        <div
+          className="absolute inset-0 "
+          style={{
+            backgroundImage: `
+       url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84d2aafab5df981424158_grid.svg"), 
+       url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84c1f1cc8a00e8f633418_gradient2.avif"), 
+       url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84c1bf3134413fea84cd2_gradient1.avif"), 
+       url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84c1ba84d2edd7c424f24_gradient3.avif"),
+        url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84c1b7118d4f0d6df750d_gradient4.avif"),
+        url("https://cdn.prod.website-files.com/66e66be520fb9aea363b6423/66e84c1be9734769c3aba2cd_gradient5.avif")
+      `,
+            backgroundPosition:
+              "50%, 0 100%, 100% 100%, 100% 100%, 0 100%, 0 100%",
+            backgroundRepeat:
+              "no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat",
+            backgroundSize:
+              "cover, contain, contain, contain, contain, contain",
+          }}
         />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+        {/* Your content here */}
+        <div className="  flex  justify-center ">
+          <div>
+            <div className="relative flex flex-col items-center  text-center mt-30 space-x-3">
+              {/* Background Overlay */}
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+              {/* Content */}
+              <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
+                Master Forex Trading from Nepal
+              </h1>
+              <p className="mt-4 text-lg text-gray-600 max-w-2xl">
+                Learn Forex strategies, risk management, and live trading
+                insights with experts. Join Nepal’s #1 Forex learning platform
+                today!
+              </p>
+
+              {/* CTA Buttons */}
+              <div className="mt-6 flex flex-wrap gap-4">
+                <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700">
+                  Start Learning Today
+                </button>
+                <button className="px-6 py-3 border border-blue-600 text-blue-600 font-medium rounded-lg shadow-md hover:bg-blue-100">
+                  Join Free Webinar
+                </button>
+              </div>
+
+              {/* Trust Signals */}
+              <div className="mt-8 flex flex-wrap gap-4 text-gray-700">
+                <p>📈 Best Strategy </p>
+                <p>🏆 Expert Mentors</p>
+                <p>🌍 Learn Anytime, Anywhere</p>
+              </div>
+              <div className="mt-40 text-red-500">
+                <h1 className="text-5xl fon-bold shadow-2xl">Grab Limited Offer 90% </h1>
+                <h1 className="text-5xl fon-bold shadow-2xl">off on  Course</h1>
+              </div>
+            </div>
+          </div>
+
+          <Image
+            src={"/header-pic.png"}
+            alt="maniamge"
+            height={100}
+            className="relative z-40"
+            width={600}
+          ></Image>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-        <Button variant={"ghost"}>Laxman</Button>
-      </footer>
+      </div>
+      <Herosection2/>
     </div>
   );
 }

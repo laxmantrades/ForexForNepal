@@ -1,13 +1,27 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
-const SignUp= () => {
+const SignUp = () => {
+  const signUpHandler = () => {
+    try {
+      window.location.href = "http://localhost:5005/login";
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex items-center justify-center min-h-screen relative ">
       <div className="border p-50 radius-xl">
-        <h1 className="text-4xl font-bold text-center">Sign up  your account!</h1>
-        <Button variant={"outline"} className="text-xl text-center px-20 mt-5 cursor-pointer">
+        <h1 className="text-4xl font-bold text-center">
+          Sign up your account!
+        </h1>
+        <Button
+          variant={"outline"}
+          onClick={signUpHandler}
+          className="text-xl text-center px-20 mt-5 cursor-pointer"
+        >
           <Image
             src={"/google.png"}
             width={30}
@@ -20,10 +34,25 @@ const SignUp= () => {
         </Button>
         <div className="flex text-center items-center justify-center space-x-2 mt-4">
           <h1>Already have account?</h1>
-          <span> <Link href={"/login"} className="underline text-blue-600">Login</Link></span>
+          <span>
+            {" "}
+            <Link href={"/login"} className="underline text-blue-600">
+              Login
+            </Link>
+          </span>
         </div>
-        <h1 className="text-center mt-10">By clicking continue, you agree to our</h1>
-        <h1 className="text-center "><Link href={"/"} className="underline">Terms of Service</Link> and <Link href={"/"} className="underline">Privacy Policy.</Link> </h1>
+        <h1 className="text-center mt-10">
+          By clicking continue, you agree to our
+        </h1>
+        <h1 className="text-center ">
+          <Link href={"/"} className="underline">
+            Terms of Service
+          </Link>{" "}
+          and{" "}
+          <Link href={"/"} className="underline">
+            Privacy Policy.
+          </Link>{" "}
+        </h1>
       </div>
     </div>
   );

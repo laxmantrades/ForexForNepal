@@ -11,9 +11,9 @@ const authenticationRoute = express_1.default.Router();
 authenticationRoute.route("/login").get(passport_1.default.authenticate("google", {
     scope: ["profile", "email"],
     //accessType: "offline", // Request a refresh token for offline access
-    //prompt: "consent",
+    "prompt": "select_account"
 }));
-authenticationRoute.get("/auth/google/callback", authentication_controller_1.GoogleCallBack);
+authenticationRoute.route("/auth/google/callback").get(authentication_controller_1.GoogleCallBack);
 authenticationRoute.route("/authcheck").get(authentication_controller_1.AuthCheck);
 authenticationRoute.route("/logout").get(authentication_controller_1.Logout);
 exports.default = authenticationRoute;

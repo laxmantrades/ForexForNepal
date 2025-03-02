@@ -9,16 +9,23 @@ const passport_1 = __importDefault(require("passport"));
 const express_session_1 = __importDefault(require("express-session"));
 const authentication_route_1 = __importDefault(require("./routes/authentication.route"));
 const googlestrategy_1 = __importDefault(require("./middlewares/googlestrategy"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 dotenv_1.default.config();
+console.log(process.env.FRONTEND_URL_NEXTJS);
+const corsOptions = {
+    origin: [process.env.FRONTEND_URL_NEXTJS, process.env.FRONTEND_URL_REACT],
+    credentials: true,
+};
+app.use((0, cors_1.default)(corsOptions));
 app.use((0, express_session_1.default)({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        //sameSite: "strict",
+        //secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24,
     },
 }));

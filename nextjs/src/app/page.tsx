@@ -1,5 +1,7 @@
+"use client";
+
 import Herosection2 from "@/components/header/Heroection2";
-import { Button } from "@/components/ui/button";
+
 import Image from "next/image";
 
 export default function Home() {
@@ -58,8 +60,10 @@ export default function Home() {
                 <p>🌍 Learn Anytime, Anywhere</p>
               </div>
               <div className="mt-40 text-red-500">
-                <h1 className="text-5xl fon-bold shadow-2xl">Grab Limited Offer 90% </h1>
-                <h1 className="text-5xl fon-bold shadow-2xl">off on  Course</h1>
+                <h1 className="text-5xl fon-bold shadow-2xl">
+                  Grab Limited Offer 90%{" "}
+                </h1>
+                <h1 className="text-5xl fon-bold shadow-2xl">off on Course</h1>
               </div>
             </div>
           </div>
@@ -73,7 +77,7 @@ export default function Home() {
           ></Image>
         </div>
       </div>
-      <Herosection2/>
+      <Herosection2 />
     </div>
   );
 }

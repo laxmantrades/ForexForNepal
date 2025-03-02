@@ -5,11 +5,17 @@ import passport from "passport";
 import session from "express-session";
 import authenticationRoute from "./routes/authentication.route";
 import GoogleOauth from "./middlewares/googlestrategy";
-
+import cors from "cors";
 
 const app = express();
 
 dotenv.config();
+
+const corsOptions = {
+  origin: [process.env.FRONTEND_URL_NEXTJS!, process.env.FRONTEND_URL_REACT!],
+  credentials: true,
+};
+app.use(cors(corsOptions));
 
 app.use(
   session({
@@ -19,8 +25,8 @@ app.use(
 
     cookie: {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      //sameSite: "strict",
+      //secure: process.env.NODE_ENV === "production",
+      sameSite: "lax",
       maxAge: 1000 * 60 * 60 * 24,
     },
   })
@@ -28,9 +34,7 @@ app.use(
 app.use(passport.initialize()); //initialise passport for authentication
 app.use(passport.session()); //use session for keeping track
 
-passport.use(
-  GoogleOauth
-);
+passport.use(GoogleOauth);
 
 passport.serializeUser((user: any, done) => done(null, user));
 passport.deserializeUser((user: any, done) => {
@@ -39,7 +43,6 @@ passport.deserializeUser((user: any, done) => {
   return done(null, user);
 });
 app.use(authenticationRoute);
-
 
 app.listen(process.env.PORT, () => {
   console.log(`the server is listening on port ${process.env.PORT}`);

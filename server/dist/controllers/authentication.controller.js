@@ -19,8 +19,7 @@ const GoogleCallBack = (req, res) => {
             }
             // Once the user is logged in, you can save the session if needed and redirect
             req.session.save(() => {
-                console.log(req.user);
-                res.redirect("/authcheck"); // Redirect after session is saved
+                res.redirect("http://localhost:3000/?success=true"); // Redirect after session is saved
             });
         });
     })(req, res); // Execute passport logic for Google OAuth
@@ -30,8 +29,11 @@ const AuthCheck = (req, res) => {
     try {
         //console.log(req.isAuthenticated());
         if (req.isAuthenticated()) {
+            const user = req.user;
+            //console.log("This is", user);
             res.status(200).json({
                 authenticated: true,
+                userName: user.displayName,
             });
             return;
         }
@@ -52,7 +54,7 @@ exports.AuthCheck = AuthCheck;
 const Logout = (req, res) => {
     try {
         req.logOut(() => {
-            res.redirect("/");
+            res.redirect("http://localhost:3000");
         });
     }
     catch (error) {

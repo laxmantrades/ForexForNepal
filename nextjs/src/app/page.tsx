@@ -1,10 +1,13 @@
 "use client";
 
 import Herosection2 from "@/components/header/Heroection2";
+import { RootState } from "@/redux/store/store";
 
 import Image from "next/image";
 
+
 export default function Home() {
+
   return (
     <div className="">
       <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#f5f6f9]  w-full py-20 ">

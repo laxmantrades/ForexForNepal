@@ -6,6 +6,7 @@ import session from "express-session";
 import authenticationRoute from "./routes/authentication.route";
 import GoogleOauth from "./middlewares/googlestrategy";
 import cors from "cors";
+import connectDatabae from "./config/db.config";
 
 const app = express();
 
@@ -44,6 +45,8 @@ passport.deserializeUser((user: any, done) => {
 });
 app.use(authenticationRoute);
 
-app.listen(process.env.PORT, () => {
-  console.log(`the server is listening on port ${process.env.PORT}`);
-});
+connectDatabae().then(() =>
+  app.listen(process.env.PORT, () => {
+    console.log(`the server is listening on port ${process.env.PORT}`);
+  })
+);

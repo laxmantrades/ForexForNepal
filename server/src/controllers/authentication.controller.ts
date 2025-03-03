@@ -1,7 +1,9 @@
 import { RequestHandler } from "express";
 import passport from "passport";
+import { createUser } from "../services/userService";
+import { format } from "date-fns";
 
-export const GoogleCallBack: RequestHandler = (req, res) => {
+export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
   passport.authenticate(
     "google",
@@ -27,17 +29,30 @@ export const GoogleCallBack: RequestHandler = (req, res) => {
   )(req, res); // Execute passport logic for Google OAuth
 };
 
-export const AuthCheck: RequestHandler = (req, res) => {
+export const AuthCheck: RequestHandler = async (req, res) => {
   try {
     //console.log(req.isAuthenticated());
 
     if (req.isAuthenticated()) {
       const user: any = req.user;
+      const date = new Date();
+      const formattedDate = format(date, "EEEE MMMM yyyy HH:mm");
+
+      const userData = {
+        email: user?.emails[0]?.value,
+        fullName: user?.displayName,
+        refreshToken: req.sessionID,
+        photoUrl: user.photos[0].value,
+        lastLogin: formattedDate,
+      };
+
+      const createdUser = await createUser(userData);
+
       //console.log("This is", user);
 
       res.status(200).json({
         authenticated: true,
-        userName: user.displayName,
+        user: createdUser,
       });
 
       return;

@@ -4,9 +4,9 @@ import "./globals.css";
 import Header from "@/components/header/Header";
 import { Toaster } from "sonner";
 
-
 import ReduxProvideProps from "./ReduxProvier";
-import ProtectRoute from "./ProtectedRoute";
+
+import LoadingWrapper from "./LoadingWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +34,16 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <ReduxProvideProps>
-          <ProtectRoute>
-          <Toaster />
-          <Header />
-          {children}
-          </ProtectRoute>
+        <LoadingWrapper/>
+          
+         
+            <Toaster />
+            
+            <Header />
+            {children}
+            
+          
+          
         </ReduxProvideProps>
       </body>
     </html>

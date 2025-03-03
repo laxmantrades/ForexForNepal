@@ -1,5 +1,6 @@
 "use client";
-import { Moon, Sun } from "lucide-react";
+import { Loader, LogOut, Moon, Sun, User, UserPen } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -14,13 +15,13 @@ import {
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { userLoggedin } from "@/redux/reducers/authReducer";
+import { changeLoading, userLoggedin } from "@/redux/reducers/authReducer";
 import { RootState } from "@/redux/store/store";
 import { useEffect } from "react";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const selector = useSelector((store: RootState) => store.auth);
+  const user = useSelector((store: RootState) => store.auth);
 
   const AuthCheck = async () => {
     try {
@@ -31,13 +32,21 @@ const Header = () => {
         },
       });
 
-      if (!response.data.authenticated) return;
-
       if (response.data.authenticated) {
-        dispatch(userLoggedin(response?.data?.userName));
+        dispatch(userLoggedin(response?.data?.user));
+        console.log(response);
       }
+      const timeout = setTimeout(() => {
+        dispatch(changeLoading(false));
+      }, 100);
+      return () => {
+        clearTimeout(timeout);
+      };
     } catch (error) {
       console.log(error);
+      setTimeout(() => {
+        dispatch(changeLoading(false));
+      }, 2000);
     }
   };
   const logoutHandler = () => {
@@ -50,11 +59,11 @@ const Header = () => {
 
   useEffect(() => {
     AuthCheck();
-  }, [selector]);
+  }, []);
 
   return (
     <header className="absolute z-10 w-full">
-      <div className="flex items-center justify-between   ">
+      <div className="flex items-center justify-between    ">
         <Link href="/">
           <Image
             className="dark:invert mx-10 p-1"
@@ -65,7 +74,8 @@ const Header = () => {
             priority
           />
         </Link>
-        <div className="mr-10">
+
+        <div className="mr-10 flex items-center justify-center space-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="icon">
@@ -80,20 +90,55 @@ const Header = () => {
               <DropdownMenuItem>System</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          {!selector?.isAuthenticated && (
+
+          {!user?.isAuthenticated && (
             <Link href={"/login"} className=" mx-4 text-white">
               <Button className="text-xl cursor-pointer">Sign In</Button>
             </Link>
           )}
-          {selector?.isAuthenticated && (
-            <Button onClick={logoutHandler} className="text-xl cursor-pointer">
-              Logout
-            </Button>
+          {user?.isAuthenticated && (
+            <Link href={"/courses"} className=" mr-4 text-white">
+              <Button className="text-xl cursor-pointer ">Courses</Button>
+            </Link>
           )}
-          {!selector?.isAuthenticated && (
+
+          {user?.isAuthenticated && (
+            <Button className="text-xl cursor-pointer ">Blog</Button>
+          )}
+
+          {!user?.isAuthenticated && (
             <Link href={"/signup"} className=" mr-4 text-white">
               <Button className="text-xl cursor-pointer ">Sign Up</Button>
             </Link>
+          )}
+          {user.isAuthenticated && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <img
+                  src={user?.user?.photoUrl}
+                  className="rounded-full h-10"
+                ></img>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                  <Button className=" cursor-pointer " variant={"ghost"}>
+                    <UserPen className=" text-black opacity-100" />
+                    Profile
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  {" "}
+                  <Button
+                    onClick={logoutHandler}
+                    className=" cursor-pointer  "
+                    variant={"ghost"}
+                  >
+                    <LogOut className="text-black" />
+                    Logout
+                  </Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           )}
         </div>
       </div>

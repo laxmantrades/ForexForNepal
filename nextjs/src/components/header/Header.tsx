@@ -1,6 +1,5 @@
 "use client";
-import { Loader, LogOut, Moon, Sun, User, UserPen } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LogOut, Moon, Sun, UserPen } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +14,8 @@ import {
 import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
-import { changeLoading, userLoggedin } from "@/redux/reducers/authReducer";
-import { RootState } from "@/redux/store/store";
+import { changeLoading, userLoggedin } from "@/redux/slices/authSlice";
+import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 
 const Header = () => {

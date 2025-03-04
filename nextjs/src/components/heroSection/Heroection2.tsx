@@ -69,7 +69,7 @@ const Herosection2 = () => {
                 </li>
               </ul>
               </div>
-              <Image src={"/trading.png"} alt="trading" height={100} width={420} className="rounded-md"/>
+              <Image src={"/trading.png"} alt="trading" height={100} width={420} className="rounded-md md:w-36"/>
             </div>
           </div>
           <div className="flex items-center justify-center space-x-2 mt-5">

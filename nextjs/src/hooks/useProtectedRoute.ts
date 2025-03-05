@@ -18,6 +18,7 @@ const useProtectedRoute = (redirectPATH: string) => {
       return router.push("/courses")
     }
     
+    
   }, [isAuthenticated, router]);
 };
 export default useProtectedRoute;

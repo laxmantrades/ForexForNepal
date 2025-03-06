@@ -19,6 +19,7 @@ import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 
 const Header = () => {
+  
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.auth);
 
@@ -33,7 +34,7 @@ const Header = () => {
 
       if (response.data.authenticated) {
         dispatch(userLoggedin(response?.data?.user));
-        console.log(response);
+        
       }
       const timeout = setTimeout(() => {
         dispatch(changeLoading(false));

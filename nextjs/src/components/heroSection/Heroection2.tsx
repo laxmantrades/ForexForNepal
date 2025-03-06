@@ -13,7 +13,7 @@ import Image from "next/image";
 
 const Herosection2 = () => {
     const enrolled=false
-  
+    
     
   return (
     <div className="relative text-center mt-4">

@@ -1,10 +1,9 @@
-
-"use client"
-import useProtectedRoute from "@/hooks/useProtectedRoute";
-
-const Course = () => {
-  useProtectedRoute("/login");
-
-  return <div>This is a course page Lorem500</div>;
+import Course from "@/components/student/Course";
+const CoursePage = () => {
+  return (
+    <>
+      <Course />
+    </>
+  );
 };
-export default Course;
+export default CoursePage;

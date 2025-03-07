@@ -2,8 +2,8 @@
 
 type lastVisitedUrl = string;
 import { Button } from "@/components/ui/button";
-import useForSignInRoute from "@/hooks/useForSignInRoute";
-import useProtectedRoute from "@/hooks/useProtectedRoute";
+
+
 import { RootState } from "@/redux/store";
 
 import Image from "next/image";

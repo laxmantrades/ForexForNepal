@@ -19,7 +19,6 @@ import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 
 const Header = () => {
-  
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.auth);
 
@@ -34,11 +33,10 @@ const Header = () => {
 
       if (response.data.authenticated) {
         dispatch(userLoggedin(response?.data?.user));
-        
       }
       const timeout = setTimeout(() => {
         dispatch(changeLoading(false));
-      }, 100);
+      }, 200);
       return () => {
         clearTimeout(timeout);
       };
@@ -46,7 +44,7 @@ const Header = () => {
       console.log(error);
       setTimeout(() => {
         dispatch(changeLoading(false));
-      }, 2000);
+      }, 200);
     }
   };
   const logoutHandler = () => {
@@ -58,11 +56,13 @@ const Header = () => {
   };
 
   useEffect(() => {
-    AuthCheck();
+    if (!user.isAuthenticated) {
+      AuthCheck();
+    }
   }, []);
 
   return (
-    <header className="absolute z-10 w-full">
+    <header className="absolute z-10 w-full ">
       <div className="flex items-center justify-between    ">
         <Link href="/">
           <Image

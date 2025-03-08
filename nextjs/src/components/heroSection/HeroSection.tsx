@@ -1,8 +1,9 @@
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#f5f6f9]  w-full py-20 ">
+    <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#f5f6f9]  w-full pt-20 bg-gradient-to-r from-blue-100 to-purple-100 p-20">
       <div
         className="absolute inset-0 "
         style={{
@@ -46,26 +47,19 @@ const HeroSection = () => {
               </button>
             </div>
 
-            {/* Trust Signals */}
-            <div className="mt-8 flex flex-wrap gap-4 text-gray-700">
-              <p>📈 Best Strategy </p>
-              <p>🏆 Expert Mentors</p>
-              <p>🌍 Learn Anytime, Anywhere</p>
-            </div>
-            <div className="mt-40 text-red-500">
-              <h1 className="text-5xl fon-bold shadow-2xl">
-                Grab Limited Offer 90%{" "}
-              </h1>
-              <h1 className="text-5xl fon-bold shadow-2xl">off on Course</h1>
+            <div className="mt-20">
+              <Button className="text-5xl fon-bold shadow-2xl py-10 cursor-pointer bg-orange-400 hover:bg-orange-400 hover:scale-105 ">
+                Explore Courses
+              </Button>
             </div>
           </div>
         </div>
 
         <Image
-          src={"/header-pic.png"}
+          src={"/g1.png"}
           alt="maniamge"
           height={100}
-          className="relative z-40"
+          className="relative  "
           width={600}
         ></Image>
       </div>

@@ -7,20 +7,24 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useProtectedRoute = (redirectPATH: string) => {
   const pathname = usePathname();
-  console.log(pathname);
 
   const router = useRouter();
-  const { isAuthenticated } = useSelector((store: RootState) => store.auth);
+  const { isAuthenticated, user, loading } = useSelector(
+    (store: RootState) => store.auth
+  );
 
-  const storeLastVisitedUrl=()=>{
-    localStorage.setItem("lastVisitedUrl",pathname)
-  }
+  const storeLastVisitedUrl = () => {
+    localStorage.setItem("lastVisitedUrl", pathname);
+  };
 
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (loading) return;
+
+    if (!user && !isAuthenticated) {
       router.push(redirectPATH);
     }
-    storeLastVisitedUrl()
-  }, [isAuthenticated, router, pathname]);
+
+    storeLastVisitedUrl();
+  }, [pathname, router, isAuthenticated, loading]);
 };
 export default useProtectedRoute;

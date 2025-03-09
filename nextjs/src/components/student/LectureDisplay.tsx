@@ -1,35 +1,37 @@
 import { Separator } from "../ui/separator";
+import LectureDescription from "./LectureDescription";
+import LectureSection from "./LectureSection";
 import VideoComponent from "./VideoComponent";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const LectureDisplay = () => {
   return (
-    <div className="flex mt-30 space-x-10 w-full ">
-      <div className="w-2/3 ml-2 ">
-      <Card>
-  
-  <CardContent>
-  <VideoComponent/>
-  </CardContent>
-  
-</Card>
-
-        <Separator orientation="vertical" />
+    <div className="md:flex flex-row mt-20 w-full ">
+      <div className="w-[90%] md:w-full mx-2  flex-8/12">
+        <Card className="p-0">
+          <CardContent className="p-0">
+            <VideoComponent />
+          </CardContent>
+        </Card>
+        <LectureDescription />
       </div>
 
-      
-      <div className="w-96 mx-2 text-left border">
-        <h1 className="text-2xl font-bold">Forex Beginner </h1>
-        
+      <div className="w-full  text-left flex flex-4/12">
+        <Separator
+          orientation="vertical"
+          className="bg-black font-extrabold "
+        />
+        <div className="text-center w-full">
+          <h1 className="text-2xl text-green-600 font-extrabold"> FRACTALS </h1>
+          <Separator
+            orientation="horizontal"
+            className="bg-black font-extrabold w-full "
+          />
+          {Array.from({ length: 2 }).map(() => (
+            <LectureSection />
+          ))}
+        </div>
       </div>
-
     </div>
   );
 };

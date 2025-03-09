@@ -7,6 +7,9 @@ import authenticationRoute from "./routes/authentication.route";
 import GoogleOauth from "./middlewares/googlestrategy";
 import cors from "cors";
 import connectDatabae from "./config/db.config";
+import courseRouter from "./routes/course.route";
+import sectionRoute from "./routes/section.route";
+import lectureRouter from "./routes/lecture.route";
 
 const app = express();
 
@@ -17,6 +20,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+app.use(express.json())
 
 app.use(
   session({
@@ -44,6 +48,9 @@ passport.deserializeUser((user: any, done) => {
   return done(null, user);
 });
 app.use(authenticationRoute);
+app.use("/api/v1/course",courseRouter)
+app.use("/api/v1/section",sectionRoute)
+app.use("/api/v1/lecture",lectureRouter)
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

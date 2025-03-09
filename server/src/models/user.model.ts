@@ -1,4 +1,4 @@
-import mongoose, { Model } from "mongoose";
+import mongoose, { Document, Model } from "mongoose";
 interface userSchema {
   fullName: string;
   email: string;
@@ -13,33 +13,41 @@ interface IUSERDocument extends userSchema, Document {
   updatedAt: Date;
 }
 
-const userSchema = new mongoose.Schema<IUSERDocument>({
-  fullName: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema<IUSERDocument>(
+  {
+    fullName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    role: {
+      type: String,
+      enum: ["student", "owner", "admin"],
+      default: "student",
+    },
+    coursePurhcased: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Course",
+    },
+    refreshToken: {
+      type: String,
+      required: true,
+    },
+    photoUrl: {
+      type: String,
+    },
+    lastLogin: {
+      type: String,
+    },
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  role: {
-    type: String,
-    enum:["student","owner","admin"],
-    default: "student",
-  },
-  coursePurhcased: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "Course",
-  },
-  refreshToken: {
-    type:String,
-    required:true
-  },
-  photoUrl:{
-    type:String
-  },
-  lastLogin:{
-    type:String
+  {
+    timestamps: true,
   }
-});
-export const User:Model<IUSERDocument> = mongoose.model<IUSERDocument>("User", userSchema);
+);
+export const User: Model<IUSERDocument> = mongoose.model<IUSERDocument>(
+  "User",
+  userSchema
+);

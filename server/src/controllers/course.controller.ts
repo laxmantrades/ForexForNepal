@@ -1,0 +1,127 @@
+import { RequestHandler } from "express";
+import {
+  createCourse,
+  findALLCourse,
+  findCourse,
+  findCourseAndUpdate,
+} from "../services/courseService";
+import { COURSE } from "../models/course.model";
+
+export const CreateCourse: RequestHandler = async (req, res) => {
+  try {
+    console.log(req.body);
+
+    const {
+      courseName,
+      courseTitle,
+      courseDescription,
+      coursePrice,
+      courseThumbnail,
+    } = req.body;
+
+    const UserData = {
+      courseName,
+      courseTitle,
+      courseDescription,
+      coursePrice,
+      courseThumbnail,
+    };
+    const user = await createCourse(UserData);
+    res.status(200).json({
+      message: "Successfully created Course",
+      course: user,
+      success: true,
+    });
+    return;
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went Wrong",
+      success: false,
+    });
+    return;
+  }
+};
+export const UpdateCourse: RequestHandler = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const {
+      courseName,
+      coursePrice,
+      courseDescription,
+      courseTitle,
+      courseThumbnail,
+    } = req.body;
+    if (courseId.length !== 24) {
+      res.status(400).json({
+        message: "You failed the test",
+      });
+      return;
+    }
+    const updatedData = {
+      courseName,
+      coursePrice,
+      courseDescription,
+      courseTitle,
+      courseThumbnail,
+    };
+
+    const course = await findCourseAndUpdate(courseId, updatedData);
+    if (!course) {
+      res.status(404).json({
+        message: "Course Not Found",
+        success: false,
+      });
+      return;
+    }
+
+    res.status(200).json({
+      message: "Successfully Updated Course",
+      success: true,
+      course,
+    });
+    return;
+  } catch (error: any) {
+    res.status(500).json({
+      message: "Some Interal Server Error",
+      success: false,
+    });
+  }
+};
+export const findCourseByID: RequestHandler = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const course = await findCourse(courseId);
+    if (!course) {
+      res.status(404).json({
+        success: false,
+        message: "Course Not Found",
+      });
+      return;
+    }
+    res.status(200).json({
+      message: "Successgully Fetched Course",
+      success: true,
+      course,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Some Interal Server Error",
+      success: false,
+    });
+  }
+};
+export const findAllCourse: RequestHandler = async (req, res) => {
+  try {
+    const course = await findALLCourse();
+    res.status(200).json({
+        message:"Successfully fetched the course",
+        success:true,
+        course
+    })
+  } catch (error) {
+    res.status(500).json({
+      message: "Some Interal Server Error",
+      success: false,
+    });
+  }
+};

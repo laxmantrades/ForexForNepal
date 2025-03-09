@@ -1,18 +1,14 @@
 const VideoComponent = () => {
   return (
-    
+    <div className="relative pb-[56.25%] w-full">
     <iframe
-      width="830"
-      height="500"
-      src="https://www.youtube.com/embed/rtV1eHFiMZc?si=yRjRoO_AhmjcW-Jg"
-      title="YouTube video player"
+      className="absolute w-full h-full"
+      src="https://www.youtube.com/embed/19g66ezsKAg "
       frameBorder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      referrerPolicy="strict-origin-when-cross-origin"
       allowFullScreen
-      className="rounded-xl w-xl h-96"
     ></iframe>
-
+  </div>
+  
   );
 };
 export default VideoComponent;

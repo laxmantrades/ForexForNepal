@@ -40,3 +40,12 @@ export const updateSectionService = async (
     console.log(error);
   }
 };
+
+export const getSectionService = async (sectionId: string) => {
+  try {
+    const section = await SECTION.findById(sectionId);
+    return section;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import {
   createSectionService,
+  getSectionService,
   updateSectionService,
 } from "../services/sectionService";
 
@@ -45,3 +46,25 @@ export const updateSection: RequestHandler = async (req, res) => {
     });
   }
 };
+export const getSectionBySectionID:RequestHandler=async(req,res)=>{
+  try {
+    const {sectionId}=req.params
+    const section=await getSectionService(sectionId)
+    if(!section){
+      res.status(404).json({
+        success:false,
+        message:"Section Not Found"
+      })
+    }
+   res.status(200).json({
+    success:true,
+    message:"Successfyll got section",
+    section
+   })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Something went Wrong",
+    });
+  }
+}

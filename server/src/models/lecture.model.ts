@@ -27,7 +27,7 @@ const lectureSchema = new mongoose.Schema<ILectureDocument>({
     default:false
   }
 
-});
+},{timestamps:true});
 
 
 

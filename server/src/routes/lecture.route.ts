@@ -1,11 +1,12 @@
 import express from "express"
+import { createLecture, deleteLecture, getLecture, updateLecture } from "../controllers/lecture.controller"
 
 const lectureRouter=express.Router()
-lectureRouter.route("/:courseId/:sectionId/create-lecture").post()
-lectureRouter.route("/:courseId/:sectionId/:lectureId").patch()
-lectureRouter.route("/:courseId/:sectionId/:lectureId").delete()
-lectureRouter.route("/:courseId/:sectionId/:lectureId").get()
-lectureRouter.route("/:courseId/:sectionId/getAllLectures").get()
+lectureRouter.route("/:sectionId/create-lecture").post(createLecture)
+lectureRouter.route("/:lectureId").patch(updateLecture)
+lectureRouter.route("/:sectionId/:lectureId").delete(deleteLecture)
+lectureRouter.route("/:lectureId").get(getLecture)
+//lectureRouter.route("/:sectionId/getAllLectures").get()
 
 
 export default lectureRouter

@@ -5,6 +5,7 @@ import {
   Logout,
 } from "../controllers/authentication.controller";
 import passport from "passport";
+import { adminAuthentication } from "../middlewares/adminAuthentication";
 
 const authenticationRoute = express.Router();
 
@@ -19,7 +20,7 @@ authenticationRoute.route("/login").get(
 );
 authenticationRoute.route("/auth/google/callback").get(GoogleCallBack);
 
-authenticationRoute.route("/authcheck").get(AuthCheck);
+authenticationRoute.route("/authcheck").get(adminAuthentication,AuthCheck);
 authenticationRoute.route("/logout").get(Logout);
 
 export default authenticationRoute;

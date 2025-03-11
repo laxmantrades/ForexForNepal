@@ -4,11 +4,12 @@ interface userSchema {
   email: string;
   role: "student" | "owner" | "admin";
   coursePurhcased: mongoose.Schema.Types.ObjectId[];
-  refreshToken: string;
+
+  googleId: string;
   photoUrl: string;
   lastLogin: string;
 }
-interface IUSERDocument extends userSchema, Document {
+export interface IUSERDocument extends userSchema, Document {
   createdAt: Date;
   updatedAt: Date;
 }
@@ -32,7 +33,8 @@ const userSchema = new mongoose.Schema<IUSERDocument>(
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Course",
     },
-    refreshToken: {
+
+    googleId: {
       type: String,
       required: true,
     },
@@ -41,6 +43,7 @@ const userSchema = new mongoose.Schema<IUSERDocument>(
     },
     lastLogin: {
       type: String,
+      default: "Default",
     },
   },
   {

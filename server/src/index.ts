@@ -10,6 +10,7 @@ import connectDatabae from "./config/db.config";
 import courseRouter from "./routes/course.route";
 import sectionRoute from "./routes/section.route";
 import lectureRouter from "./routes/lecture.route";
+import { IUSERDocument, User } from "./models/user.model";
 
 const app = express();
 
@@ -20,7 +21,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-app.use(express.json())
+app.use(express.json());
 
 app.use(
   session({
@@ -41,16 +42,20 @@ app.use(passport.session()); //use session for keeping track
 
 passport.use(GoogleOauth);
 
-passport.serializeUser((user: any, done) => done(null, user));
-passport.deserializeUser((user: any, done) => {
-  //console.log(user);
+passport.serializeUser((id: any, done) => done(null, id));
+passport.deserializeUser(async(id: any, done) => {
+  const user = await User.findById(id); 
+  
+  
+  
+    
 
-  return done(null, user);
+  return done(null, user as IUSERDocument);
 });
 app.use(authenticationRoute);
-app.use("/api/v1/course",courseRouter)
-app.use("/api/v1/section",sectionRoute)
-app.use("/api/v1/lecture",lectureRouter)
+app.use("/api/v1/course", courseRouter);
+app.use("/api/v1/section", sectionRoute);
+app.use("/api/v1/lecture", lectureRouter);
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

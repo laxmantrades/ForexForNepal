@@ -4,8 +4,8 @@ export const createUser = async (userData: {
   email: string;
   fullName: string;
   photoUrl: string;
-  lastLogin: string;
-  refreshToken: string;
+
+  googleId: string;
 }) => {
   try {
     const { email } = userData;

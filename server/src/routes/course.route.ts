@@ -1,9 +1,15 @@
-import express from "express"
-import { CreateCourse, findAllCourse, findCourseByID, UpdateCourse } from "../controllers/course.controller"
-const courseRouter=express.Router()
-courseRouter.route("/create-course").post(CreateCourse)
-courseRouter.route("/:courseId").patch(UpdateCourse)
-courseRouter.route("/:courseId").get(findCourseByID)
-courseRouter.route("/").get(findAllCourse)
+import express from "express";
+import {
+  CreateCourse,
+  findAllCourse,
+  findCourseByID,
+  UpdateCourse,
+} from "../controllers/course.controller";
+import { authCheck } from "../middlewares/authentication";
+const courseRouter = express.Router();
+courseRouter.route("/create-course").post(authCheck, CreateCourse);
+courseRouter.route("/:courseId").patch(authCheck, UpdateCourse);
+courseRouter.route("/:courseId").get(authCheck, findCourseByID);
+courseRouter.route("/").get(authCheck, findAllCourse);
 
-export default courseRouter
+export default courseRouter;

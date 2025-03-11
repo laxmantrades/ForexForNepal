@@ -2,6 +2,7 @@ import { RequestHandler } from "express";
 import passport from "passport";
 import { createUser } from "../services/userService";
 import { format } from "date-fns";
+import { IUSERDocument, User } from "../models/user.model";
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
@@ -31,33 +32,21 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
 
 export const AuthCheck: RequestHandler = async (req, res) => {
   try {
-    //console.log(req.isAuthenticated());
-
-    if (req.isAuthenticated()) {
-      const user: any = req.user;
+    if (req.user) {
+      const { _id } = req.user as IUSERDocument;
       const date = new Date();
-      const formattedDate = format(date, "EEEE MMMM yyyy HH:mm");
-
-      const userData = {
-        email: user?.emails[0]?.value,
-        fullName: user?.displayName,
-        refreshToken: req.sessionID,
-        photoUrl: user.photos[0].value,
-        lastLogin: formattedDate,
-      };
-
-      const createdUser = await createUser(userData);
-
-      //console.log("This is", user);
-
+      const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
+      const user = await User.findByIdAndUpdate(_id, {
+        lastLogin: fromattedDate,
+      });
       res.status(200).json({
         authenticated: true,
-        user: createdUser,
+        user: req.user,
       });
 
       return;
     } else {
-      res.status(200).json({
+      res.status(404).json({
         authenticated: false,
       });
     }

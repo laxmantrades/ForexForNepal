@@ -10,6 +10,6 @@ const courseRouter = express.Router();
 courseRouter.route("/create-course").post(authCheck, CreateCourse);
 courseRouter.route("/:courseId").patch(authCheck, UpdateCourse);
 courseRouter.route("/:courseId").get(authCheck, findCourseByID);
-courseRouter.route("/").get(authCheck, findAllCourse);
+courseRouter.route("/").get( findAllCourse);
 
 export default courseRouter;

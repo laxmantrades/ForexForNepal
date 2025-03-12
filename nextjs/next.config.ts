@@ -2,7 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ['https://lh3.googleusercontent.com', ], // Add all trusted image domains
+    domains: [
+      "lh3.googleusercontent.com",
+      "res.cloudinary.com",
+    ], // Add all trusted image domains
   },
 };
 

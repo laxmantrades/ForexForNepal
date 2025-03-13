@@ -17,10 +17,9 @@ interface CourseCardProps {
   course: Course;
 }
 
-const CourseCard:React.FC<CourseCardProps> = ({ course }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const isPurchased = false;
-  console.log(course);
-  
+
   return (
     <Card className="py-0 pb-2 mt-10 md:mt-0">
       <CardHeader className="px-0">
@@ -38,8 +37,8 @@ const CourseCard:React.FC<CourseCardProps> = ({ course }) => {
         <p className="text-2xl font-bold">{course?.courseName}</p>
       </CardContent>
       <CardFooter className="flex justify-end">
-        <Link href={`/courses/${course?._id}`}>
-          <Button className="text-2xl bg-orange-400">Explore</Button>
+        <Link href={`/courses/${course?._id}`} >
+          <Button className="text-2xl bg-orange-400 cursor-pointer">Explore</Button>
         </Link>
       </CardFooter>
     </Card>

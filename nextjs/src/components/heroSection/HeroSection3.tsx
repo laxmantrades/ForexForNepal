@@ -1,22 +1,11 @@
-"use client"
-import { useGetAllCourseQuery } from "@/redux/api/courseApi";
-import CourseCard from "../student/CourseCard";
+import Course from "../student/Course";
 
 const HeroSection3 = () => {
-
-  const {data,isError}=useGetAllCourseQuery(null)
-  
-  
-  //const {courseName,courseThumbnail}=data
-  
-
   return (
-    <div className=" mt-10 ">
-      <h1 className="text-6xl font-bold underline text-center">Our Courses</h1>
-      <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18">
-        {data?.course.map((course:any) => (
-          <CourseCard course={course}/>
-        ))}
+    <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18">
+      <div className="">
+        <h1 className="text-5xl text-center font-extrabold underline">Our Courses</h1>
+        <Course />
       </div>
     </div>
   );

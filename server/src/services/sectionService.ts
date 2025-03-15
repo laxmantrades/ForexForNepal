@@ -49,3 +49,11 @@ export const getSectionService = async (sectionId: string) => {
     console.log(error);
   }
 };
+export const getSectionByCourseService = async (courseId: string) => {
+  try {
+    const section = await COURSE.findById(courseId).populate("sections");
+    return section;
+  } catch (error) {
+    console.log(error);
+  }
+};

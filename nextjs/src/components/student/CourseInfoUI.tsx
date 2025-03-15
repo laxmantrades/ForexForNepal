@@ -1,3 +1,9 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import Image from "next/image";
 import {
   Card,
@@ -9,8 +15,26 @@ import {
 } from "@/components/ui/card";
 import { CirclePlay } from "lucide-react";
 import { Button } from "../ui/button";
+import { Course } from "@/types/courseType";
+import VideoComponent from "./VideoComponent";
+import Link from "next/link";
 
-const CourseInfoUI = () => {
+// interface CourseProps {
+//   courseInfo: Course;
+// }
+
+const CourseInfoUI = ({ courseInfo }) => {
+  if (!courseInfo) return;
+  const {
+    courseDescription,
+    courseName,
+    coursePrice,
+    courseTitle,
+    courseThumbnail,
+    lectureSection,
+  } = courseInfo;
+  const purchased = true;
+
   return (
     <div className="">
       <div className="mt-20 flex justify-center w-full ">
@@ -23,46 +47,17 @@ const CourseInfoUI = () => {
         />
         <div className="absolute w-3/4 mt-5 ">
           {" "}
-          <h1 className="text-2xl sm:text-4xl font-bold">
-            Master Fractals with ICT
-          </h1>
-          <h1>Master How to Trade in Forex Markets Using Fractals and ICT</h1>
-          <h1>For Trader By Trader</h1>
+          <h1 className="text-2xl sm:text-4xl font-bold">{courseName}</h1>
+          <h1>{courseTitle}</h1>
         </div>
       </div>
 
-      <div className=" w-5/6 mx-auto flex  justify-between flex-col-reverse md:flex-row max-w-7xl">
+      <div className=" lg:w-5/6  flex mx-4  lg:mx-auto lg:justify-between flex-col-reverse md:flex-row sm:max-w-5xl sm:space-x-14">
         <div className="mt-4">
           <h1 className="mt-2 ml-4 text-3xl">Description</h1>
-          <h1>
-            ✅ In depth High-Quality videos Hands-on experience with Express.js
-          </h1>
-          <h1>
-            ✅ & MongoDB Deep dive into the architecture of Node.js Building
-          </h1>
-          <h1>
-            ✅Real world Projects from scratch Premium community of Node.js
-          </h1>
-          <h1>
-            ✅ In depth High-Quality videos Hands-on experience with Express.js
-          </h1>
-          <h1>
-            ✅ & MongoDB Deep dive into the architecture of Node.js Building
-          </h1>
-          <h1>
-            ✅Real world Projects from scratch Premium community of Node.js
-          </h1>
-          <h1>
-            ✅ In depth High-Quality videos Hands-on experience with Express.js
-          </h1>
-          <h1>
-            ✅ & MongoDB Deep dive into the architecture of Node.js Building
-          </h1>
-          <h1>
-            ✅Real world Projects from scratch Premium community of Node.js
-          </h1>
+          <h1>{courseDescription}</h1>
 
-          <Card className="mt-10 ">
+          <Card className="mt-10 w-full md:w-96 lg:w-md">
             <CardHeader>
               <CardTitle>
                 {" "}
@@ -71,31 +66,60 @@ const CourseInfoUI = () => {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              {Array.from({ length: 10 }).map((item) => (
-                <div className="flex space-x-2.5 space-y-2.5">
-                  <CirclePlay /> <h1>Intro to SMC</h1>
+              {lectureSection.map((item: any) => (
+                <div
+                  key={item._id}
+                  className="flex  md:space-x-2.5 md:space-y-2.5"
+                >
+                  <Accordion type="single" collapsible className="w-full">
+                    <AccordionItem value="item-1 ">
+                      <AccordionTrigger className="text-xl  ">
+                        <h1 className="">{item.sectionTitle}</h1>
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        {item.lectures.map((lecture: any) => (
+                          <div
+                            key={lecture._id}
+                            className="flex  space-x-3.5 space-y-2.5"
+                          >
+                            <CirclePlay /> <h1>{lecture.lectureName}</h1>
+                          </div>
+                        ))}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
               ))}
             </CardContent>
           </Card>
         </div>
 
-        <div className="md:-mt-20 mt-2  md:ml-5 w-full md:w-96  ">
+        <div className="md:-mt-20 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">
           <Card className="">
             <CardHeader>
               <CardTitle>Card Title</CardTitle>
               <CardDescription>Card Description</CardDescription>
             </CardHeader>
-            <CardContent>
-              <video></video>
+            <CardContent className="p-0">
+              <VideoComponent />
             </CardContent>
-            <CardFooter className="flex-col text-">
-              <div className="flex justify-evenly space-x-18">
-                <h1>Price:{"RS 3000"}</h1>
-                <h1>30%Off</h1>
+            <CardFooter className="flex-col p-0">
+              <div className="flex justify-evenly space-x-1 font-bold text-xl">
+                <h1>Price:Rs</h1>
+                <h1 className=" text-red-600"> {coursePrice}</h1>
               </div>
 
-              <Button className="w-full cursor-pointer">Buy Course Now</Button>
+              {purchased ? (
+                <Link href={`/courses/${courseInfo?._id}/lectures`} className="w-full cursor-pointer">
+                  <Button className="w-full cursor-pointer">
+                    Continue Course
+                  </Button>
+                </Link>
+              ) : (
+                <Button className="w-full cursor-pointer">
+                  Buy Course Now
+                </Button>
+              )}
             </CardFooter>
           </Card>
         </div>

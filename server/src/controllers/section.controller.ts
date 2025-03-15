@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import {
   createSectionService,
+  getSectionByCourseService,
   getSectionService,
   updateSectionService,
 } from "../services/sectionService";
@@ -46,25 +47,48 @@ export const updateSection: RequestHandler = async (req, res) => {
     });
   }
 };
-export const getSectionBySectionID:RequestHandler=async(req,res)=>{
+export const getSectionBySectionID: RequestHandler = async (req, res) => {
   try {
-    const {sectionId}=req.params
-    const section=await getSectionService(sectionId)
-    if(!section){
+    const { sectionId } = req.params;
+    const section = await getSectionService(sectionId);
+    if (!section) {
       res.status(404).json({
-        success:false,
-        message:"Section Not Found"
-      })
+        success: false,
+        message: "Section Not Found",
+      });
     }
-   res.status(200).json({
-    success:true,
-    message:"Successfyll got section",
-    section
-   })
+    res.status(200).json({
+      success: true,
+      message: "Successfyll got section",
+      section,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
       message: "Something went Wrong",
     });
   }
-}
+};
+export const getSectionByCourse: RequestHandler = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const section = getSectionByCourseService(courseId);
+    if (!section) {
+      res.status(404).json({
+        success: false,
+        message: "Section Not Found",
+      });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      section,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      meessage: "Something went wrong!",
+    });
+  }
+};

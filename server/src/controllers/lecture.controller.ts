@@ -27,7 +27,7 @@ export const createLecture: RequestHandler = async (req, res) => {
     const lecture = await createLectureService(lectureData, sectionId);
     res.status(200).json({
       message: "Successfully created lecture",
-      success: false,
+      success: true,
       lecture,
     });
   } catch (error) {

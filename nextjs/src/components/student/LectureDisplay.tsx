@@ -5,6 +5,10 @@ import VideoComponent from "./VideoComponent";
 import { Card, CardContent } from "@/components/ui/card";
 
 const LectureDisplay = () => {
+
+  //data fetching 
+  
+
   return (
     <div className="md:flex flex-row mt-20 w-full ">
       <div className="w-[90%] md:w-full mx-2  flex-8/12">

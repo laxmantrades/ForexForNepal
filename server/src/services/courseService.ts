@@ -28,7 +28,17 @@ export const findCourseAndUpdate = async (id: string, updatedData: any) => {
 };
 export const findCourse = async (id: string) => {
   try {
-    const course = await COURSE.findById(id);
+    const course = await COURSE.findById(id)
+      .select("-createdAt -updatedAt -enrolledStudents")
+      .populate({
+        path: "lectureSection",
+       
+        populate: {
+          path: "lectures",
+          
+        },
+      });
+
     return course;
   } catch (error) {
     console.log(error);

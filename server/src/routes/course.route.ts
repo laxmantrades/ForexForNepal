@@ -9,7 +9,7 @@ import { authCheck } from "../middlewares/authentication";
 const courseRouter = express.Router();
 courseRouter.route("/create-course").post(authCheck, CreateCourse);
 courseRouter.route("/:courseId").patch(authCheck, UpdateCourse);
-courseRouter.route("/:courseId").get(authCheck, findCourseByID);
+courseRouter.route("/:courseId").get( findCourseByID);
 courseRouter.route("/").get( findAllCourse);
 
 export default courseRouter;

@@ -1,6 +1,7 @@
 import mongoose, { Document, Model } from "mongoose";
 interface sectionSchema {
   sectionTitle: String;
+  courseId:mongoose.Schema.Types.ObjectId,
   lectures: mongoose.Schema.Types.ObjectId[];
 }
 interface ISECTIONDocument extends sectionSchema, Document {
@@ -12,6 +13,10 @@ const sectionSchema = new mongoose.Schema<ISECTIONDocument>(
     sectionTitle: {
       type: String,
       required: true,
+    },
+    courseId:{
+      type:mongoose.Schema.Types.ObjectId,
+      required:true
     },
     lectures: [
       {

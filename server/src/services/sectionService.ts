@@ -7,7 +7,7 @@ export const createSectionService = async (
   courseId: string
 ) => {
   try {
-    const section = await SECTION.create({ sectionTitle });
+    const section = await SECTION.create({ sectionTitle, courseId });
     console.log(section);
 
     const course = await COURSE.findByIdAndUpdate(
@@ -51,7 +51,9 @@ export const getSectionService = async (sectionId: string) => {
 };
 export const getSectionByCourseService = async (courseId: string) => {
   try {
-    const section = await COURSE.findById(courseId).populate("sections");
+    const section = await SECTION.find({ courseId })
+      .populate({ path: "lectures", select: "id lectureName videoUrl" })
+      .lean();
     return section;
   } catch (error) {
     console.log(error);

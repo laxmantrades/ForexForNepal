@@ -1,13 +1,19 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query"
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const sectionAndLectureApi=createApi({
-    reducerPath:"sectionAndLectureApi",
-    baseQuery:fetchBaseQuery({baseUrl:"",credentials:"include"}),
-   endpoints:(builder)=>({
-    getAllSection:builder.query({
-        query:(courseId)=>({
-            url:"",
-            method:"get"
-        })
-    })
-   })
+export const sectionAndLectureApi = createApi({
+  reducerPath: "sectionAndLectureApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "http://localhost:5005/api/v1/section",
+    credentials: "include",
+  }),
+  endpoints: (builder) => ({
+    useGetAllSectionWithLectures: builder.query({
+      query: (courseId) => ({
+        url: `/${courseId}`,
+        method: "GET",
+      }),
+    }),
+  }),
+});
+
+export const { useUseGetAllSectionWithLecturesQuery } = sectionAndLectureApi;

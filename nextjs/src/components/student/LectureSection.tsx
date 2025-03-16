@@ -7,15 +7,24 @@ import {
 import { CirclePlay } from "lucide-react";
 import { Separator } from "../ui/separator";
 
-const LectureSection = () => {
+const LectureSection = ({ section, setVideoUrl, OnVideoClick }) => {
+  
+
   return (
     <Accordion type="single" collapsible className=" ">
       <AccordionItem value="item-2">
         <AccordionTrigger className="font-bold">
-          <h1>{"Learn ICT"}</h1>
+          <h1>{section?.sectionTitle}</h1>
         </AccordionTrigger>
-        {["Intro To ICT", "What is FVG", "What is OrderBlock"].map((title) => (
-          <AccordionContent className="h-20 bg-gray-100">
+        {section?.lectures?.map((lecture) => (
+          <AccordionContent
+            onClick={() => {OnVideoClick(lecture.videoUrl)
+              console.log("clicked");
+              }
+            }
+            className="h-20 bg-gray-100 cursor-pointer"
+            key={lecture._id}
+          >
             <Separator
               orientation="horizontal"
               className="bg-gray-300  w-full  "
@@ -24,7 +33,7 @@ const LectureSection = () => {
               <div className="flex space-x-2 items-center ml-2 mt-5 ">
                 <CirclePlay />
                 <div>
-                  <h1>{title}</h1>
+                  <h1>{lecture?.lectureName}</h1>
                 </div>
               </div>
             </div>

@@ -72,11 +72,13 @@ export const getSectionBySectionID: RequestHandler = async (req, res) => {
 export const getSectionByCourse: RequestHandler = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const section = getSectionByCourseService(courseId);
+
+    
+    const section = await getSectionByCourseService(courseId);
     if (!section) {
       res.status(404).json({
         success: false,
-        message: "Section Not Found",
+        message: "Course Not Found",
       });
       return;
     }

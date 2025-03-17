@@ -10,15 +10,16 @@ export const courseApi = createApi({
         url: "/",
         method: "GET",
       }),
-    
     }),
-    getCourseById:builder.query({
-      query:(courseId)=>({
-        url:`/${courseId}`,
-        method:"GET"
-      })
-    })
+    getCourseById: builder.query({
+      query: (courseId) => ({
+        url: `/${courseId}`,
+        method: "GET",
+      }),
+    }),
   }),
+  refetchOnFocus: false, // Add this
+  refetchOnReconnect: false, // Add this
 });
 
-export const { useGetAllCourseQuery,useGetCourseByIdQuery } = courseApi;
+export const { useGetAllCourseQuery, useGetCourseByIdQuery } = courseApi;

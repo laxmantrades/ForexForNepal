@@ -32,12 +32,14 @@ export const findCourse = async (id: string) => {
       .select("-createdAt -updatedAt -enrolledStudents")
       .populate({
         path: "lectureSection",
-       
+
         populate: {
           path: "lectures",
-          
+          /// match: { isPreviewFree: true }
+          select: "lectureName",
         },
-      });
+      })
+      .lean();
 
     return course;
   } catch (error) {

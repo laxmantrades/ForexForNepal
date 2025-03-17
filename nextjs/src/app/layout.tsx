@@ -42,7 +42,7 @@ export default function RootLayout({
             {" "}
             <Header />
           </header>
-          <div className="flex-1"> {children}</div>
+          <div className="flex-1 mt-20"> {children}</div>
 
           <footer>
             <Footer />

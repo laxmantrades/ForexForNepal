@@ -6,7 +6,7 @@ import useProtectedRoute from "@/hooks/useProtectedRoute";
 
 export default function Home() {
   return (
-    <div className="">
+    <div className=" -mt-20">
       <HeroSection />
       <Herosection2 />
       <HeroSection3 />

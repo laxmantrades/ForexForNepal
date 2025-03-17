@@ -24,7 +24,7 @@ const LectureDisplay = () => {
   };
 
   return (
-    <div className="md:flex flex-row mt-20 w-full ">
+    <div className="md:flex flex-row mt-5 w-full ">
       <div className="w-[90%] md:w-full mx-2  flex-8/12">
         <Card className="p-0">
           <CardContent className="p-0">

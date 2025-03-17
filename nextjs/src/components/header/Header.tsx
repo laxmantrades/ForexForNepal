@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { changeLoading, userLoggedin } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
+import { Separator } from "../ui/separator";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -111,6 +112,11 @@ const Header = () => {
               <Button className="text-xl cursor-pointer ">Sign Up</Button>
             </Link>
           )}
+          {user.user?.role && (
+            <Link href={"/admin"} className=" mr-4 text-white">
+              <Button className="text-xl cursor-pointer ">Admin</Button>
+            </Link>
+          )}
           {user.isAuthenticated && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
@@ -142,6 +148,7 @@ const Header = () => {
           )}
         </div>
       </div>
+      <Separator orientation="horizontal"/>
     </header>
   );
 };

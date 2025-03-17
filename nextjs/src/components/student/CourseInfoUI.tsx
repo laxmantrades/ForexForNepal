@@ -19,11 +19,11 @@ import { Course } from "@/types/courseType";
 import VideoComponent from "./VideoComponent";
 import Link from "next/link";
 
-// interface CourseProps {
-//   courseInfo: Course;
-// }
+interface CourseProps {
+  courseInfo: Course;
+}
 
-const CourseInfoUI = ({ courseInfo }) => {
+const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
   if (!courseInfo) return;
   const {
     courseDescription,
@@ -32,12 +32,13 @@ const CourseInfoUI = ({ courseInfo }) => {
     courseTitle,
     courseThumbnail,
     lectureSection,
+    IntroVideo,
   } = courseInfo;
   const purchased = true;
 
   return (
     <div className="">
-      <div className="mt-20 flex justify-center w-full ">
+      <div className=" flex justify-center w-full ">
         <Image
           src={"/ForexForNepal.png"}
           width={1400}
@@ -94,14 +95,14 @@ const CourseInfoUI = ({ courseInfo }) => {
           </Card>
         </div>
 
-        <div className="md:-mt-20 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">
+        <div className="md:-mt-14 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">
           <Card className="">
             <CardHeader>
               <CardTitle>Card Title</CardTitle>
               <CardDescription>Card Description</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <VideoComponent />
+              <VideoComponent videoUrl={IntroVideo} />
             </CardContent>
             <CardFooter className="flex-col p-0">
               <div className="flex justify-evenly space-x-1 font-bold text-xl">
@@ -110,7 +111,10 @@ const CourseInfoUI = ({ courseInfo }) => {
               </div>
 
               {purchased ? (
-                <Link href={`/courses/${courseInfo?._id}/lectures`} className="w-full cursor-pointer">
+                <Link
+                  href={`/courses/${courseInfo?._id}/lectures`}
+                  className="w-full cursor-pointer"
+                >
                   <Button className="w-full cursor-pointer">
                     Continue Course
                   </Button>

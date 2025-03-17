@@ -1,7 +1,9 @@
-interface VideoUrl
+interface VideoUrl{
+  videoUrl:string
+}
 
 
-const VideoComponent = ({videoUrl:string}) => {
+const VideoComponent:React.FC<VideoUrl> = ({videoUrl}) => {
   return (
     <div className="relative pb-[56.25%] w-full">
       <iframe

@@ -6,7 +6,7 @@ const Course = () => {
   const { data, isError } = useGetAllCourseQuery(null);
 
   return (
-    <div className=" mt-20 ">
+    <div className="  ">
       <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18">
         {data?.course.map((course: any) => (
           <CourseCard course={course} />

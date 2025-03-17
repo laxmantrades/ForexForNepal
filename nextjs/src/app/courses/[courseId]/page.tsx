@@ -2,7 +2,7 @@ import CourseInfoPage from "@/components/student/CourseInfoPage";
 
 const CourseIinfo = () => {
   return (
-    <div className="mt-30">
+    <div className="mt-5">
       <CourseInfoPage />
     </div>
   );

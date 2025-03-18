@@ -53,12 +53,12 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
         </div>
       </div>
 
-      <div className=" lg:w-5/6  flex mx-4  lg:mx-auto lg:justify-between flex-col-reverse md:flex-row sm:max-w-5xl sm:space-x-14">
-        <div className="mt-4">
+      <div className=" max-w-7xl  flex mx-4  lg:mx-auto lg:justify-between flex-col-reverse md:flex-row sm:max-w-5xl sm:space-x-14">
+        <div className="mt-4 w-full lg:w-2/2">
           <h1 className="mt-2 ml-4 text-3xl">Description</h1>
           <h1>{courseDescription}</h1>
 
-          <Card className="mt-10 w-full md:w-96 lg:w-md">
+          <Card className="">
             <CardHeader>
               <CardTitle>
                 {" "}

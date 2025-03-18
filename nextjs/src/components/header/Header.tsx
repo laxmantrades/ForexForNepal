@@ -113,7 +113,7 @@ const Header = () => {
             </Link>
           )}
           {user.user?.role && (
-            <Link href={"/admin"} className=" mr-4 text-white">
+            <Link href={"/admin/dashboard"} className=" mr-4 text-white">
               <Button className="text-xl cursor-pointer ">Admin</Button>
             </Link>
           )}

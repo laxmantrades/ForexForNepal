@@ -1,7 +1,19 @@
-import AdminLayout from "@/components/admin/MainAdminLayout";
+"use client";
 
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
+import { SiteHeader } from "@/components/site-header";
+import { AppSidebar } from "@/components/app-sidebar";
 
-export default function AdminPanelLayout({ children }: { children: React.ReactNode }) {
-  return <AdminLayout>{children}</AdminLayout>;
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <SidebarProvider className="mt-5">
+      <AppSidebar variant="inset" />
+      <div className="flex flex-1 flex-col mt-5">{children}</div>
+    </SidebarProvider>
+  );
 }

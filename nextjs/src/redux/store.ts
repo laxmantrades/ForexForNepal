@@ -10,6 +10,7 @@ const store = configureStore({
     course:courseSlice,
     [courseApi.reducerPath]: courseApi.reducer,
     [sectionAndLectureApi.reducerPath]: sectionAndLectureApi.reducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(

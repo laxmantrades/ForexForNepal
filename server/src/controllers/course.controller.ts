@@ -6,6 +6,7 @@ import {
   findCourseAndUpdate,
 } from "../services/courseService";
 import { COURSE } from "../models/course.model";
+import { deleteMediaFromCloudinary, uploadImageOnCloudinary } from "../utils/cloudinary";
 
 export const CreateCourse: RequestHandler = async (req, res) => {
   try {
@@ -44,19 +45,30 @@ export const CreateCourse: RequestHandler = async (req, res) => {
 export const UpdateCourse: RequestHandler = async (req, res) => {
   try {
     const { courseId } = req.params;
-    const {
-      courseName,
-      coursePrice,
-      courseDescription,
-      courseTitle,
-      courseThumbnail,
-    } = req.body;
+    const { courseName, coursePrice, courseDescription, courseTitle } =
+      req.body;
+    const file = req.file;
+
     if (courseId.length !== 24) {
       res.status(400).json({
         message: "You failed the test",
       });
       return;
     }
+
+    const coursefind = await findCourse(courseId);
+    let courseThumbnail;
+    if (file) {
+      
+      if (coursefind?.courseThumbnail) {
+        const publicID = coursefind?.courseThumbnail?.split("/").pop()?.split(".")[0];
+        await deleteMediaFromCloudinary(publicID as string);
+      }
+      courseThumbnail = await uploadImageOnCloudinary(
+        file as Express.Multer.File
+      );
+    }
+
     const updatedData = {
       courseName,
       coursePrice,
@@ -81,6 +93,8 @@ export const UpdateCourse: RequestHandler = async (req, res) => {
     });
     return;
   } catch (error: any) {
+    console.log(error);
+
     res.status(500).json({
       message: "Some Interal Server Error",
       success: false,
@@ -114,10 +128,10 @@ export const findAllCourse: RequestHandler = async (req, res) => {
   try {
     const course = await findALLCourse();
     res.status(200).json({
-        message:"Successfully fetched the course",
-        success:true,
-        course
-    })
+      message: "Successfully fetched the course",
+      success: true,
+      course,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Some Interal Server Error",

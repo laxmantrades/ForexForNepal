@@ -7,7 +7,7 @@ export const sectionAndLectureApi = createApi({
     credentials: "include",
   }),
   endpoints: (builder) => ({
-    useGetAllSectionWithLectures: builder.query({
+    GetAllSectionWithLectures: builder.query({
       query: (courseId) => ({
         url: `/${courseId}`,
         method: "GET",
@@ -16,4 +16,4 @@ export const sectionAndLectureApi = createApi({
   }),
 });
 
-export const { useUseGetAllSectionWithLecturesQuery } = sectionAndLectureApi;
+export const { useGetAllSectionWithLecturesQuery } = sectionAndLectureApi;

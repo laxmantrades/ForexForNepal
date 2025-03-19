@@ -25,9 +25,16 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+    editCourse:builder.mutation({
+      query:({formData,courseId})=>({
+        url:`/${courseId}`,
+        method:"PATCH",
+        body:formData
+      })
+    })
   }),
   refetchOnFocus: false, // Add this
   refetchOnReconnect: false, // Add this
 });
 
-export const { useGetAllCourseQuery, useGetCourseByIdQuery } = courseApi;
+export const { useGetAllCourseQuery, useGetCourseByIdQuery,useEditCourseMutation } = courseApi;

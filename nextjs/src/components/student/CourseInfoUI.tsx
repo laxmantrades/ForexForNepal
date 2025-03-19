@@ -18,6 +18,7 @@ import { Button } from "../ui/button";
 import { Course } from "@/types/courseType";
 import VideoComponent from "./VideoComponent";
 import Link from "next/link";
+import SectionAndLecture from "./SectionsAndLecture";
 
 interface CourseProps {
   courseInfo: Course;
@@ -58,41 +59,7 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
           <h1 className="mt-2 ml-4 text-3xl">Description</h1>
           <h1>{courseDescription}</h1>
 
-          <Card className="">
-            <CardHeader>
-              <CardTitle>
-                {" "}
-                <h1 className="text-2xl font-bold ">Course Content 1</h1>
-                <h1>{"5"} lectures</h1>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              {lectureSection.map((item: any) => (
-                <div
-                  key={item._id}
-                  className="flex  md:space-x-2.5 md:space-y-2.5"
-                >
-                  <Accordion type="single" collapsible className="w-full">
-                    <AccordionItem value="item-1 ">
-                      <AccordionTrigger className="text-xl  ">
-                        <h1 className="">{item.sectionTitle}</h1>
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        {item.lectures.map((lecture: any) => (
-                          <div
-                            key={lecture._id}
-                            className="flex  space-x-3.5 space-y-2.5"
-                          >
-                            <CirclePlay /> <h1>{lecture.lectureName}</h1>
-                          </div>
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
+          <SectionAndLecture lectureSection={lectureSection} />
         </div>
 
         <div className="md:-mt-14 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">

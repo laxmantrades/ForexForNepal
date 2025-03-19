@@ -43,7 +43,7 @@ export default function RootLayout({
             <Header />
           </header>
           <div className="flex-1 mt-20"> {children}</div>
-
+          <Toaster/>
           <footer>
             <Footer />
           </footer>

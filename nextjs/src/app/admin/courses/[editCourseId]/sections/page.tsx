@@ -1,4 +1,4 @@
-import ViewSections from "@/components/admin/ViewSections";
+import ViewSections from "@/components/admin/sectionPage/ViewSections";
 
 const Page = () => {
   return (

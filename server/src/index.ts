@@ -44,11 +44,11 @@ passport.use(GoogleOauth);
 
 passport.serializeUser((id: any, done) => done(null, id));
 passport.deserializeUser(async(id: any, done) => {
-  const user = await User.findById(id); 
-  
-  
-  
-    
+  const user = await User.findById(id);
+
+
+
+
 
   return done(null, user as IUSERDocument);
 });

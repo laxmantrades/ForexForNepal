@@ -11,8 +11,8 @@ const sectionRoute = express.Router();
 sectionRoute
   .route("/:courseId/create-section")
   .post(/*authCheck,*/ createSection);
-sectionRoute.route("/:courseId/:sectionId").patch(authCheck, updateSection);
-//sectionRoute.route("/:sectionId").get(authCheck, getSectionBySectionID);
-sectionRoute.route("/:courseId").get(getSectionByCourse);
+sectionRoute.route("/:sectionId").patch(/*authCheck,*/ updateSection);
+sectionRoute.route("/:sectionId").get(/*authCheck,*/ getSectionBySectionID);
+sectionRoute.route("/course/:courseId").get(getSectionByCourse);
 
 export default sectionRoute;

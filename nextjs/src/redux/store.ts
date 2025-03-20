@@ -3,6 +3,7 @@ import authSlice from "./slices/authSlice";
 import { courseApi } from "./api/courseApi";
 import { sectionAndLectureApi } from "./api/section&LectureApi";
 import courseSlice from "./slices/courseSlice";
+import { lectureApi } from "./api/lectureApi";
 
 const store = configureStore({
   reducer: {
@@ -10,12 +11,14 @@ const store = configureStore({
     course:courseSlice,
     [courseApi.reducerPath]: courseApi.reducer,
     [sectionAndLectureApi.reducerPath]: sectionAndLectureApi.reducer,
+    [lectureApi.reducerPath]:lectureApi.reducer
     
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       courseApi.middleware,
-      sectionAndLectureApi.middleware
+      sectionAndLectureApi.middleware,
+      lectureApi.middleware
     ),
 });
 export default store;

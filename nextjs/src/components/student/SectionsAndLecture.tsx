@@ -5,12 +5,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { CirclePlay } from "lucide-react";
-
-
-const SectionAndLecture= ({ lectureSection }) => {
- 
-    
+import { CirclePlay, Pencil } from "lucide-react";
+//todo typefor lecturesection
+const SectionAndLecture = ({ lectureSection }) => {
   return (
     <div>
       <Card className="">
@@ -26,7 +23,7 @@ const SectionAndLecture= ({ lectureSection }) => {
             <div key={item._id} className="flex  md:space-x-2.5 md:space-y-2.5">
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1 ">
-                  <AccordionTrigger className="text-xl  ">
+                  <AccordionTrigger className="text-xl flex ">
                     <h1 className="">{item.sectionTitle}</h1>
                   </AccordionTrigger>
                   <AccordionContent>

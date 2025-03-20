@@ -1,5 +1,5 @@
-import express from "express"
+import express from "express";
 
-const lectureProgressRoute=express.Router()
+const lectureProgressRoute = express.Router();
 
-lectureProgressRoute.route("/:lectureProgressId/:lectureId")
+lectureProgressRoute.route("/:lectureProgressId/:lectureId");

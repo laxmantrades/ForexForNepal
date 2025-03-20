@@ -1,4 +1,4 @@
-import AddCourse from "@/components/admin/AddCourse";
+import AddCourse from "@/components/admin/coursePage/AddCourse";
 import { SiteHeader } from "@/components/site-header";
 
 const Page = () => {

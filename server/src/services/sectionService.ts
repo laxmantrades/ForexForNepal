@@ -43,7 +43,7 @@ export const updateSectionService = async (
 
 export const getSectionService = async (sectionId: string) => {
   try {
-    const section = await SECTION.findById(sectionId);
+    const section = await SECTION.findById(sectionId).populate("lectures");
     return section;
   } catch (error) {
     console.log(error);

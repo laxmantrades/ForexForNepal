@@ -11,7 +11,7 @@ export const createSection: RequestHandler = async (req, res) => {
     const { sectionTitle } = req.body;
 
     const { courseId } = req.params;
-    if (!courseId) {
+    if (!courseId || courseId === undefined) {
       res.status(404).json({
         success: false,
         message: "Course Not Found",
@@ -32,8 +32,15 @@ export const createSection: RequestHandler = async (req, res) => {
 };
 export const updateSection: RequestHandler = async (req, res) => {
   try {
-    const { courseId, sectionId } = req.params;
+    const { sectionId } = req.params;
     const { sectionTitle } = req.body;
+    if (!sectionId || sectionId === undefined) {
+      res.status(400).json({
+        success: false,
+        message: "Section Id is required",
+      });
+    }
+
     const section = await updateSectionService(sectionId, sectionTitle);
     res.status(200).json({
       success: true,
@@ -50,6 +57,12 @@ export const updateSection: RequestHandler = async (req, res) => {
 export const getSectionBySectionID: RequestHandler = async (req, res) => {
   try {
     const { sectionId } = req.params;
+    if (!sectionId || sectionId === undefined) {
+      res.status(400).json({
+        success: false,
+        message: "Section Id is required",
+      });
+    }
     const section = await getSectionService(sectionId);
     if (!section) {
       res.status(404).json({
@@ -72,8 +85,13 @@ export const getSectionBySectionID: RequestHandler = async (req, res) => {
 export const getSectionByCourse: RequestHandler = async (req, res) => {
   try {
     const { courseId } = req.params;
+    if (!courseId || courseId === undefined) {
+      res.status(404).json({
+        success: false,
+        message: "Course Not Found",
+      });
+    }
 
-    
     const section = await getSectionByCourseService(courseId);
     if (!section) {
       res.status(404).json({

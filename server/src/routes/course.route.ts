@@ -8,7 +8,7 @@ import {
 import { authCheck } from "../middlewares/authentication";
 import upload from "../utils/multer";
 const courseRouter = express.Router();
-courseRouter.route("/create-course").post(authCheck, CreateCourse);
+courseRouter.route("/create-course").post(authCheck,upload.single("courseThumbnail"), CreateCourse);
 courseRouter
   .route("/:courseId")
   .patch(authCheck, upload.single("courseThumbnail"), UpdateCourse);

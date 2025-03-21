@@ -6,19 +6,25 @@ import {
   findCourseAndUpdate,
 } from "../services/courseService";
 import { COURSE } from "../models/course.model";
-import { deleteMediaFromCloudinary, uploadImageOnCloudinary } from "../utils/cloudinary";
+import {
+  deleteMediaFromCloudinary,
+  uploadImageOnCloudinary,
+} from "../utils/cloudinary";
 
 export const CreateCourse: RequestHandler = async (req, res) => {
   try {
     console.log(req.body);
 
-    const {
-      courseName,
-      courseTitle,
-      courseDescription,
-      coursePrice,
-      courseThumbnail,
-    } = req.body;
+    const { courseName, courseTitle, courseDescription, coursePrice } =
+      req.body;
+    const file = req.file;
+
+    let courseThumbnail;
+    if (file) {
+      courseThumbnail = await uploadImageOnCloudinary(
+        file as Express.Multer.File
+      );
+    }
 
     const UserData = {
       courseName,
@@ -59,9 +65,11 @@ export const UpdateCourse: RequestHandler = async (req, res) => {
     const coursefind = await findCourse(courseId);
     let courseThumbnail;
     if (file) {
-      
       if (coursefind?.courseThumbnail) {
-        const publicID = coursefind?.courseThumbnail?.split("/").pop()?.split(".")[0];
+        const publicID = coursefind?.courseThumbnail
+          ?.split("/")
+          .pop()
+          ?.split(".")[0];
         await deleteMediaFromCloudinary(publicID as string);
       }
       courseThumbnail = await uploadImageOnCloudinary(

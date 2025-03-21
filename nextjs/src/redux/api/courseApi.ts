@@ -31,10 +31,18 @@ export const courseApi = createApi({
         method:"PATCH",
         body:formData
       })
+    }),
+    createCourse:builder.mutation({
+      query:(formData)=>({
+        url:`/create-course`,
+        method:"POST",
+        body:formData
+      })
     })
+
   }),
   refetchOnFocus: false, // Add this
   refetchOnReconnect: false, // Add this
 });
 
-export const { useGetAllCourseQuery, useGetCourseByIdQuery,useEditCourseMutation } = courseApi;
+export const { useGetAllCourseQuery, useGetCourseByIdQuery,useEditCourseMutation,useCreateCourseMutation } = courseApi;

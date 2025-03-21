@@ -5,26 +5,36 @@ import { useRouter, usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const useProtectedRoute = (redirectPATH: string) => {
-  const pathname = usePathname();
+export const useProtectedRouteLndS = () => {
+  const { isAuthenticated } = useSelector((store: RootState) => store.auth);
 
   const router = useRouter();
-  const { isAuthenticated, user, loading } = useSelector(
-    (store: RootState) => store.auth
-  );
-
-  const storeLastVisitedUrl = () => {
-    localStorage.setItem("lastVisitedUrl", pathname);
-  };
 
   useEffect(() => {
-    if (loading) return;
-
-    if (!user && !isAuthenticated) {
-      router.push(redirectPATH);
+    if (typeof window !== "undefined") {
+      const lastVisited: string | null = localStorage.getItem("lastVisitedUrl");
+      const validateURl = lastVisited ? lastVisited : "/";
+      if (isAuthenticated) {
+        router.replace(validateURl);
+      }
     }
-
-    storeLastVisitedUrl();
-  }, [pathname, router, isAuthenticated, loading]);
+  }, [isAuthenticated]);
+  if (isAuthenticated) return null;
 };
-export default useProtectedRoute;
+
+export const useProtectedRoutesForNotAuthenticated = () => {
+  const pathname = usePathname();
+  const { isAuthenticated } = useSelector(
+    (store: RootState) => store.auth
+  );
+ 
+  const router = useRouter();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace("/signup");
+      console.log("hi");
+      
+    }
+    
+  }, [router, isAuthenticated,pathname]);
+};

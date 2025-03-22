@@ -13,7 +13,7 @@ export const adminAuthentication: RequestHandler = async (req, res, next) => {
     }
     next();
   } catch (error) {
-    res.status(500).json({
+    res.status(500).json({    
       message: "Something went wrong",
       success: false,
     });

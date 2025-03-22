@@ -5,7 +5,7 @@ export const createCourse = async (UserData: {
   courseTitle: string;
   courseDescription: string;
   coursePrice: string;
-  courseThumbnail: string;
+  courseThumbnail: any;
 }) => {
   try {
     const user = await COURSE.create(UserData);

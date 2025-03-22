@@ -2,6 +2,7 @@
 
 type lastVisitedUrl = string;
 import { Button } from "@/components/ui/button";
+import { useProtectedRouteLndS } from "@/hooks/useProtectedRoute";
 
 
 import { RootState } from "@/redux/store";
@@ -26,18 +27,7 @@ const LoginPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const lastVisited: string | null = localStorage.getItem("lastVisitedUrl");
-      const validateURl = lastVisited ? lastVisited : "/";
-      if (isAuthenticated) {
-        router.replace(validateURl);
-      }
-    }
-
-    //console.log("hi");
-  }, [isAuthenticated]);
-  if (isAuthenticated) return null;
+ useProtectedRouteLndS()
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">

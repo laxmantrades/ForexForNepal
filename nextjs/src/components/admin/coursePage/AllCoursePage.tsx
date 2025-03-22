@@ -12,8 +12,8 @@ import Link from "next/link";
 
 const AllCoursePage = () => {
   const store = useSelector((store: RootState) => store?.course.course);
-  console.log("Redux store:", store); // Check what it logs
 
+  //!api call
   const { data, isError } = useGetAllCourseQuery(null, {
     skip: store !== null,
   });
@@ -22,7 +22,7 @@ const AllCoursePage = () => {
     <div>
       <div className="flex justify-between p-4">
         <h1 className="text-4xl  font-extrabold underline ">Our Courses</h1>
-        <Link href={"courses/create-course"}>
+        <Link href={"create-course"}>
           <Button className="text-xl  font-extrabold p-4 cursor-pointer flex">
             <Plus className="rounded-full bg-white text-black" />
             Create Course

@@ -7,43 +7,39 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "../../ui/button";
-import { Input } from "../../ui/input";
-
 import { useEffect, useState } from "react";
-
 import "react-quill-new/dist/quill.snow.css";
 import { useParams, useRouter } from "next/navigation";
-
 import {
   useEditCourseMutation,
   useGetCourseByIdQuery,
 } from "@/redux/api/courseApi";
-
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
-import dynamic from "next/dynamic";
-const ReactQuill = dynamic(() => import("react-quill-new"), {
-  ssr: false,
-});
+import CourseFormPage from "./CourseFormPage";
+
 const EditPage = () => {
+  //!constants
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [courseDescription, setValue] = useState("");
   const [courseInput, setCourseInput] = useState({
     courseName: "",
-
     coursePrice: "",
     courseThumbnail: "",
     courseTitle: "",
     IntroVideo: "",
   });
-  //data fetching
+
+  //!data fetching
   const { editCourseId } = useParams();
-  console.log(editCourseId);
+  const router = useRouter();
 
   const { data } = useGetCourseByIdQuery(editCourseId);
+  const [editCourse, { data: editCourseData, isLoading, isSuccess, isError }] =
+    useEditCourseMutation();
 
-  //change Handler
+  //!change Handler
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value, name, type, files } = e.target;
     setCourseInput({
@@ -58,24 +54,8 @@ const EditPage = () => {
     }
   };
 
-  //useEffect
-  useEffect(() => {
-    if (data) {
-      setCourseInput({
-        courseName: data.course?.courseName || "",
+  //!submit handler
 
-        coursePrice: data.course?.coursePrice || "",
-        courseThumbnail: data.course?.courseThumbnail || "",
-        courseTitle: data.course?.courseTitle || "",
-        IntroVideo: data.course?.IntroVideo || "",
-      });
-      setValue(data.course.courseDescription || "");
-    }
-  }, [data]);
-
-  ///submit handler
-  const [editCourse, { data: editCourseData, isLoading, isSuccess, isError }] =
-    useEditCourseMutation();
   const formSubmit = async () => {
     try {
       const formData = new FormData();
@@ -90,11 +70,28 @@ const EditPage = () => {
       console.log(error);
     }
   };
-  //toast + refetch
+
+
+  //!toast + refetch
+  useEffect(() => {
+    if (data) {
+      setCourseInput({
+        courseName: data.course?.courseName || "",
+
+        coursePrice: data.course?.coursePrice || "",
+        courseThumbnail: data.course?.courseThumbnail || "",
+        courseTitle: data.course?.courseTitle || "",
+        IntroVideo: data.course?.IntroVideo || "",
+      });
+      setValue(data.course.courseDescription || "");
+    }
+  }, [data]);
+
+  
   useEffect(() => {
     if (isSuccess) {
       toast.success(editCourseData?.message || "Successfully Updated COurse");
-      //router.push("/");
+      router.push("/courses");
     }
     if (isError) {
       toast.success(editCourseData?.message || "Something went wrong");
@@ -115,61 +112,15 @@ const EditPage = () => {
         </CardHeader>
 
         <CardContent>
-          {/**Course Name */}
-          <h1>CourseName</h1>
-          <Input
-            value={courseInput.courseName}
-            placeholder="Your Course Name"
-            name="courseName"
-            onChange={onChangeHandler}
-          />
-          {/**Course Title */}
-          <h1 className="mt-4">CourseTitle</h1>
-          <Input
-            value={courseInput.courseTitle}
-            placeholder="Your Course Name"
-            name="courseTitle"
-            onChange={onChangeHandler}
-          />
-          {/**Course Description */}
-
-          <h1 className="mt-4">CourseDescription</h1>
-          <ReactQuill
-            theme="snow"
-            value={courseDescription}
-            onChange={setValue}
-            className=""
-          />
-
-          {/**Course Price */}
-
-          <h1 className="mt-4">CoursePrice</h1>
-          <Input
-            value={courseInput.coursePrice}
-            placeholder="Your Course Name"
-            name="coursePrice"
-            onChange={onChangeHandler}
-          />
-
-          {/**Course Thumbnail */}
-          <h1 className="mt-4">CourseThumbnail</h1>
-          <Input
-            type="file"
-            placeholder="Your Course Name"
-            name="courseThumbnail"
-            onChange={onChangeHandler}
-          />
-          <img
-            src={imagePreview ? imagePreview : courseInput?.courseThumbnail}
-          />
-
-          {/**Course Thumbnail */}
-          <h1 className="mt-4">IntroVideo</h1>
-          <Input
-            value={courseInput.IntroVideo}
-            placeholder="Your Course Name"
-            name="IntroVideo"
-            onChange={onChangeHandler}
+          <CourseFormPage
+            constants={{
+              imagePreview,
+              setImagePreview,
+              courseDescription,
+              setValue,
+              courseInput,
+            }}
+            onChangeHandler={onChangeHandler}
           />
         </CardContent>
         <CardFooter className="flex justify-center">

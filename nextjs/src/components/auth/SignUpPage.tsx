@@ -1,19 +1,21 @@
-"use client"
+"use client";
 
 import { Button } from "@/components/ui/button";
+import { useProtectedRouteLndS } from "@/hooks/useProtectedRoute";
 import Image from "next/image";
 import Link from "next/link";
 
-const SignUpPage=()=>{
-    const signUpHandler = () => {
-        try {
-          window.location.href = "http://localhost:5005/login";
-        } catch (error) {
-          console.log(error);
-        }
-      };
-    return(
-        <div className="flex items-center justify-center min-h-screen relative ">
+const SignUpPage = () => {
+  useProtectedRouteLndS();
+  const signUpHandler = () => {
+    try {
+      window.location.href = "http://localhost:5005/login";
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div className="flex items-center justify-center min-h-screen relative ">
       <div className="border p-50 radius-xl">
         <h1 className="text-4xl font-bold text-center">
           Sign up your account!
@@ -56,6 +58,6 @@ const SignUpPage=()=>{
         </h1>
       </div>
     </div>
-    )
-}
-export default SignUpPage
+  );
+};
+export default SignUpPage;

@@ -20,7 +20,7 @@ authenticationRoute.route("/login").get(
 );
 authenticationRoute.route("/auth/google/callback").get(GoogleCallBack);
 
-authenticationRoute.route("/authcheck").get(adminAuthentication,AuthCheck);
+authenticationRoute.route("/authcheck").get(AuthCheck);
 authenticationRoute.route("/logout").get(Logout);
 
 export default authenticationRoute;

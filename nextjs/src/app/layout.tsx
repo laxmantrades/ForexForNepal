@@ -8,6 +8,7 @@ import ReduxProvideProps from "./ReduxProvier";
 
 import LoadingWrapper from "./LoadingWrapper";
 import Footer from "@/components/Footer/Footer";
+import StorePathName from "./StorePathName";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,15 +36,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
       >
         <ReduxProvideProps>
+          {" "}
           <LoadingWrapper />
-
           <Toaster />
           <header>
             {" "}
             <Header />
           </header>
-          <div className="flex-1 mt-20"> {children}</div>
-          <Toaster/>
+          <StorePathName>
+            <div className="flex-1 mt-20"> {children}</div>
+          </StorePathName>
+          <Toaster />
           <footer>
             <Footer />
           </footer>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useUseGetAllSectionWithLecturesQuery } from "@/redux/api/section&LectureApi";
+import { useGetAllSectionWithLecturesQuery } from "@/redux/api/section&LectureApi";
 import { Separator } from "../ui/separator";
 import LectureDescription from "./LectureDescription";
 import LectureSection from "./LectureSection";
@@ -8,11 +8,13 @@ import VideoComponent from "./VideoComponent";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useProtectedRoutesForNotAuthenticated } from "@/hooks/useProtectedRoute";
 
 const LectureDisplay = () => {
   //data fetching
   const { courseId } = useParams();
-  const { data } = useUseGetAllSectionWithLecturesQuery(courseId);
+  const { data } = useGetAllSectionWithLecturesQuery(courseId);
+  useProtectedRoutesForNotAuthenticated()
 
   const [videoUrl, setVideoUrl] = useState("");
 

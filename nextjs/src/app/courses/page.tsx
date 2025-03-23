@@ -1,11 +1,15 @@
-import Course from "@/components/student/Course";
+
+
+
+import CourseForpage from "@/components/student/CourseForPage";
+import { useProtectedRouteLndS, useProtectedRoutesForNotAuthenticated } from "@/hooks/useProtectedRoute";
 
 
 const CoursePage = () => {
  
   return (
     <>
-      <Course />
+      <CourseForpage />
     </>
   );
 };

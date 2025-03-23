@@ -46,6 +46,17 @@ export const findCourse = async (id: string) => {
     console.log(error);
   }
 };
+
+//!this is used in courseservice
+export const findCourseServiceForCoursePurchase = async (id: string) => {
+  try {
+    const course = await COURSE.findById(id)
+
+    return course;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const findALLCourse = async () => {
   try {
     const course = await COURSE.find();

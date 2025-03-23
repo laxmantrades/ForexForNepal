@@ -32,9 +32,11 @@ export const useProtectedRoutesForNotAuthenticated = () => {
   useEffect(() => {
     if (!isAuthenticated) {
       router.replace("/signup");
-      console.log("hi");
+     
       
     }
     
   }, [router, isAuthenticated,pathname]);
 };
+
+

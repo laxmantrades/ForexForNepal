@@ -39,6 +39,8 @@ export const AuthCheck: RequestHandler = async (req, res) => {
       const user = await User.findByIdAndUpdate(_id, {
         lastLogin: fromattedDate,
       });
+      
+
       res.status(200).json({
         authenticated: true,
         user: req.user,

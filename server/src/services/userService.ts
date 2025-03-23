@@ -20,3 +20,13 @@ export const createUser = async (userData: {
     console.log(error);
   }
 };
+
+export const findUserService = async (userId: string) => {
+  try {
+    let user = await User.findById(userId);
+
+    return user;
+  } catch (error) {
+    throw new Error("Something went wrong!");
+  }
+};

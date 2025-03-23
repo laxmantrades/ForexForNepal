@@ -13,7 +13,7 @@ lectureRouter
   .post(/*authCheck,*/ createLecture);
 lectureRouter.route("/:lectureId").patch(authCheck, updateLecture);
 lectureRouter.route("/:sectionId/:lectureId").delete(authCheck, deleteLecture);
-lectureRouter.route("/:lectureId").get(/*authCheck,*/ getLecture);
+lectureRouter.route("/:lectureId").get(authCheck, getLecture);
 //lectureRouter.route("/:sectionId/getAllLectures").get()
 
 export default lectureRouter;

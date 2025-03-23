@@ -11,6 +11,8 @@ import courseRouter from "./routes/course.route";
 import sectionRoute from "./routes/section.route";
 import lectureRouter from "./routes/lecture.route";
 import { IUSERDocument, User } from "./models/user.model";
+import couponRouter from "./routes/couponcode.route";
+import coursePurchaseRouter from "./routes/coursePurchase";
 
 const app = express();
 
@@ -56,6 +58,8 @@ app.use(authenticationRoute);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/section", sectionRoute);
 app.use("/api/v1/lecture", lectureRouter);
+app.use("/api/v1/coupon",couponRouter)
+app.use("/api/v1/coursepurchase",coursePurchaseRouter)
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

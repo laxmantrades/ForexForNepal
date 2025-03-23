@@ -1,6 +1,7 @@
 import express from "express";
 import {
   AuthCheck,
+ 
   GoogleCallBack,
   Logout,
 } from "../controllers/authentication.controller";
@@ -14,13 +15,13 @@ authenticationRoute.route("/login").get(
   passport.authenticate("google", {
     scope: ["profile", "email"],
     //accessType: "offline", // Request a refresh token for offline access
-    "prompt":"select_account"
-    
+    prompt: "select_account",
   })
 );
 authenticationRoute.route("/auth/google/callback").get(GoogleCallBack);
 
 authenticationRoute.route("/authcheck").get(AuthCheck);
+
 authenticationRoute.route("/logout").get(Logout);
 
 export default authenticationRoute;

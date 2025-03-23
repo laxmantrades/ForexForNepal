@@ -1,0 +1,79 @@
+import { RequestHandler } from "express";
+import {
+  deleteCouponCodeServiceByCouponCode,
+  getCouponCodeService,
+  getCouponCodeServiceByCouponCode,
+} from "../services/couponcodeService";
+import { createCoursePurchaseService } from "../services/coursePurchaseService";
+import {
+  findCourse,
+  findCourseServiceForCoursePurchase,
+} from "../services/courseService";
+import mongoose, { Types } from "mongoose";
+import { findUserService } from "../services/userService";
+
+export const coursePurchase: RequestHandler = async (req, res) => {
+  try {
+    const { couponCode,userId } = req.body;
+    const { courseId } = req.params;
+    //const courseIdObjectId = new mongoose.Schema.Types.ObjectId(courseId);
+
+    ;
+    //const userIdObjectId = new mongoose.Schema.Types.ObjectId(courseId);
+    const course = await findCourseServiceForCoursePurchase(courseId);
+    const findcouponCode = await getCouponCodeServiceByCouponCode(couponCode);
+    const user = await findUserService(userId);
+    if (!course) {
+      res.status(404).json({
+        message: "Course Not Found!",
+        success: false,
+      });
+      return;
+    }
+    if (!user) {
+      res.status(404).json({
+        message: "User Not Found!",
+        success: false,
+      });
+      return;
+    }
+    if (!findcouponCode) {
+      res.status(404).json({
+        message: "Invalid Coupon Code!",
+        success: false,
+      });
+      return;
+    }
+    if (findcouponCode?.subtype !== "free") {
+      //! only save paid users information in db
+      await createCoursePurchaseService(
+        courseId as string,
+        userId as string,
+        course?.coursePrice as string
+      );
+    }
+
+    //! update course with the users information
+    course.enrolledStudents.push(userId as any);
+    await course.save();
+
+    //! save the student is enrolled in the users models
+
+    user?.coursePurhcased?.push(courseId as any); // Convert before pushing
+    await user.save(); // Save the updated user document
+
+    //!delete couponcode
+
+    await deleteCouponCodeServiceByCouponCode(couponCode);
+
+    res.status(200).json({
+      message: "Successfully Purchased Course!",
+      success: true,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Something went wrong!",
+      success: false,
+    });
+  }
+};

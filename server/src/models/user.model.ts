@@ -1,4 +1,4 @@
-import mongoose, { Document, Model } from "mongoose";
+import mongoose, { Document, Model, Types } from "mongoose";
 interface userSchema {
   fullName: string;
   email: string;
@@ -10,6 +10,7 @@ interface userSchema {
   lastLogin: string;
 }
 export interface IUSERDocument extends userSchema, Document {
+  _id: Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,10 +30,7 @@ const userSchema = new mongoose.Schema<IUSERDocument>(
       enum: ["student", "owner", "admin"],
       default: "student",
     },
-    coursePurhcased: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Course",
-    },
+    coursePurhcased: [{ type: mongoose.Schema.Types.ObjectId, ref: "Course" }],
 
     googleId: {
       type: String,

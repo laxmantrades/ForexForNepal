@@ -1,9 +1,6 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+"use client"
+
+
 import Image from "next/image";
 import {
   Card,
@@ -13,12 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { CirclePlay } from "lucide-react";
+
 import { Button } from "../ui/button";
 import { Course } from "@/types/courseType";
 import VideoComponent from "./VideoComponent";
 import Link from "next/link";
 import SectionAndLecture from "./SectionsAndLecture";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { useParams } from "next/navigation";
+import { useRouter } from "next/router";
 
 interface CourseProps {
   courseInfo: Course;
@@ -27,6 +28,7 @@ interface CourseProps {
 const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
   if (!courseInfo) return;
   const {
+    _id,
     courseDescription,
     courseName,
     coursePrice,
@@ -35,7 +37,16 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
     lectureSection,
     IntroVideo,
   } = courseInfo;
-  const purchased = true;
+ 
+
+  const coursePurhcased=useSelector((store:RootState)=>store.auth.user?.coursePurchased)
+  const purchasedCourse=(coursePurhcased ?? []).length>0 && coursePurhcased?.some((courseId:any)=>{
+    courseId===_id})
+  console.log(purchasedCourse);
+  const{ courseId}=useParams()
+  
+  
+  
 
   return (
     <div className="">
@@ -83,7 +94,7 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
                 <h1 className=" text-red-600"> {coursePrice}</h1>
               </div>
 
-              {purchased ? (
+              {purchasedCourse ? (
                 <Link
                   href={`/courses/${courseInfo?._id}/lectures`}
                   className="w-full cursor-pointer"
@@ -93,9 +104,11 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
                   </Button>
                 </Link>
               ) : (
+                <Link href={`/courses/${courseId}/purchase`}>
                 <Button className="w-full cursor-pointer">
                   Buy Course Now
                 </Button>
+                </Link>
               )}
             </CardFooter>
           </Card>

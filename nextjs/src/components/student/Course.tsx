@@ -5,7 +5,7 @@ import CourseCard from "./CourseCard";
 
 const Course = () => {
   const { data, isError } = useGetAllCourseQuery(null);
-  //useProtectedRouteForUser("/login")
+  
 
   return (
     <div className=" w-full ">

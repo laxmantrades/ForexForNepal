@@ -50,13 +50,13 @@ const data = {
       icon: IconListDetails,
     },
     {
-      title: "Analytics",
-      url: "#",
+      title: "Create Course",
+      url: "/admin/create-course",
       icon: IconChartBar,
     },
     {
-      title: "Projects",
-      url: "#",
+      title: "Create Coupon",
+      url: "/admin/create-coupon",
       icon: IconFolder,
     },
     {

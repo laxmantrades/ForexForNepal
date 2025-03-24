@@ -5,6 +5,8 @@ import { sectionAndLectureApi } from "./api/section&LectureApi";
 import courseSlice from "./slices/courseSlice";
 import { lectureApi } from "./api/lectureApi";
 import { coursePurchaseApi } from "./api/coursePurchaseApi";
+import { couponApi } from "./api/couponApi";
+
 
 const store = configureStore({
   reducer: {
@@ -14,13 +16,15 @@ const store = configureStore({
     [sectionAndLectureApi.reducerPath]: sectionAndLectureApi.reducer,
     [lectureApi.reducerPath]: lectureApi.reducer,
     [coursePurchaseApi.reducerPath]: coursePurchaseApi.reducer,
+    [couponApi.reducerPath]:couponApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       courseApi.middleware,
       sectionAndLectureApi.middleware,
       lectureApi.middleware,
-      coursePurchaseApi.middleware
+      coursePurchaseApi.middleware,
+      couponApi.middleware
     ),
 });
 export default store;

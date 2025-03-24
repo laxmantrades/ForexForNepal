@@ -1,6 +1,7 @@
 import { RequestHandler } from "express";
 import {
-  deleteCouponCodeServiceByCouponCode,
+
+  deleteCouponCodeServiceByID,
   getCouponCodeService,
   getCouponCodeServiceByCouponCode,
 } from "../services/couponcodeService";
@@ -64,7 +65,7 @@ export const coursePurchase: RequestHandler = async (req, res) => {
 
     //!delete couponcode
 
-    await deleteCouponCodeServiceByCouponCode(couponCode);
+    await deleteCouponCodeServiceByID(findcouponCode._id as any);
 
     res.status(200).json({
       message: "Successfully Purchased Course!",

@@ -1,4 +1,4 @@
-export interface User  {
+export interface User {
   _id: string;
   email: string;
   fullName: string;
@@ -6,5 +6,5 @@ export interface User  {
   photoUrl: string;
   lastLogin: string;
   role: string;
-  coursePurchased: string[];
-};
+  coursePurhcased: string[];
+}

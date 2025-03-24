@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 
 import Image from "next/image";
 import {
@@ -38,15 +37,20 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
     IntroVideo,
   } = courseInfo;
  
+  
 
-  const coursePurhcased=useSelector((store:RootState)=>store.auth.user?.coursePurchased)
-  const purchasedCourse=(coursePurhcased ?? []).length>0 && coursePurhcased?.some((courseId:any)=>{
-    courseId===_id})
-  console.log(purchasedCourse);
-  const{ courseId}=useParams()
+  const coursePurhcased = useSelector(
+    (store: RootState) => store.auth.user?.coursePurhcased
+  );
   
-  
-  
+
+  const purchasedCourse =
+    
+    coursePurhcased?.some((courseId: any) => {
+      return courseId == _id;
+    })
+ 
+  const { courseId } = useParams();
 
   return (
     <div className="">
@@ -74,7 +78,6 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
               __html: courseDescription || " lorem15 ",
             }}
           />
-         
 
           <SectionAndLecture lectureSection={lectureSection} />
         </div>
@@ -105,9 +108,9 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
                 </Link>
               ) : (
                 <Link href={`/courses/${courseId}/purchase`}>
-                <Button className="w-full cursor-pointer">
-                  Buy Course Now
-                </Button>
+                  <Button className="w-full cursor-pointer">
+                    Buy Course Now
+                  </Button>
                 </Link>
               )}
             </CardFooter>

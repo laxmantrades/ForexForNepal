@@ -11,13 +11,16 @@ const CourseInfoPage = () => {
   const { courseId } = useParams();
   
   const { data, error } = useGetCourseByIdQuery(courseId);
- 
+  const faq=[{
+    faqTitle:"For what is course for?",
+    faqDescription:"This is not for beginners"
+  }]
  
 
   return (
     <>
       <CourseInfoUI  courseInfo={data?.course} />
-      <FAQ />
+      <FAQ faq={faq} />
     </>
   );
 };

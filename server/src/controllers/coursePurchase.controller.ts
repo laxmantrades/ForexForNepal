@@ -1,6 +1,5 @@
 import { RequestHandler } from "express";
 import {
-
   deleteCouponCodeServiceByID,
   getCouponCodeService,
   getCouponCodeServiceByCouponCode,
@@ -15,11 +14,10 @@ import { findUserService } from "../services/userService";
 
 export const coursePurchase: RequestHandler = async (req, res) => {
   try {
-    const { couponCode,userId } = req.body;
+    const { couponCode, userId } = req.body;
     const { courseId } = req.params;
     //const courseIdObjectId = new mongoose.Schema.Types.ObjectId(courseId);
 
-    ;
     //const userIdObjectId = new mongoose.Schema.Types.ObjectId(courseId);
     const course = await findCourseServiceForCoursePurchase(courseId);
     const findcouponCode = await getCouponCodeServiceByCouponCode(couponCode);

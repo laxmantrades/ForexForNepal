@@ -13,6 +13,7 @@ import lectureRouter from "./routes/lecture.route";
 import { IUSERDocument, User } from "./models/user.model";
 import couponRouter from "./routes/couponcode.route";
 import coursePurchaseRouter from "./routes/coursePurchase";
+import courseProgressRoute from "./routes/courseProgress.route";
 
 const app = express();
 
@@ -60,6 +61,8 @@ app.use("/api/v1/section", sectionRoute);
 app.use("/api/v1/lecture", lectureRouter);
 app.use("/api/v1/coupon",couponRouter)
 app.use("/api/v1/coursepurchase",coursePurchaseRouter)
+app.use("/api/v1/courseprogress",courseProgressRoute)
+
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

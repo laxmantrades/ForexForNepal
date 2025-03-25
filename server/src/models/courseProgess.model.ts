@@ -4,7 +4,7 @@ interface courseProgress {
   courseId: mongoose.Schema.Types.ObjectId;
   userId: mongoose.Schema.Types.ObjectId;
   isComplete: Boolean;
-  lectureProgressSchema: mongoose.Schema.Types.ObjectId[];
+  lectureProgressLectures: mongoose.Schema.Types.ObjectId[];
 }
 
 interface ICOURSEPROGRESSDocument extends courseProgress, Document {
@@ -25,10 +25,10 @@ const courseProgressSchema = new mongoose.Schema<ICOURSEPROGRESSDocument>({
     type: Boolean,
     default: false,
   },
-  lectureProgressSchema: [
+  lectureProgressLectures: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "LectureProgress",
+      ref: "Lecture",
     },
   ],
 });

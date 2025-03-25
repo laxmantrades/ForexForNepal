@@ -11,6 +11,8 @@ export const createCouponCodeService = async (
     });
     return newcouponCode;
   } catch (error) {
+    console.log(error);
+    
     throw new Error("Something went wrong");
   }
 };
@@ -29,14 +31,13 @@ export const updateCouponCodeService = async (
     throw new Error("Something went wrong");
   }
 };
-export const getCouponCodeService = async (
-   
-    
-  ) => {
+export const getCouponCodeService = async () => {
     try {
       const couponCode = await COUPONCODE.find();
       return couponCode;
     } catch (error) {
+      console.log(error);
+      
       throw new Error("Something went wrong");
     }
   };
@@ -50,11 +51,13 @@ export const getCouponCodeService = async (
         
     }
   }
-  export const deleteCouponCodeServiceByCouponCode=async(couponCode:string)=>{
+  export const deleteCouponCodeServiceByID=async(couponCodeId:any)=>{
     try {
-         await COUPONCODE.findOneAndDelete({couponCode})
+         await COUPONCODE.findByIdAndDelete(couponCodeId)
         
     } catch (error) {
+      console.log(error);
+      
         throw new Error("Something went wrong");
         
     }

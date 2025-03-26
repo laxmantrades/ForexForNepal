@@ -8,7 +8,7 @@ const VideoComponent:React.FC<VideoUrl> = ({videoUrl}) => {
     <div className="relative pb-[56.25%] w-full">
       <iframe
         className="absolute w-full h-full"
-        src={videoUrl}
+        src={videoUrl||null}
         frameBorder="0"
         allowFullScreen
       ></iframe>

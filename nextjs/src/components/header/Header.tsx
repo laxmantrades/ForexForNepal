@@ -22,6 +22,8 @@ import { Separator } from "../ui/separator";
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.auth);
+  
+  
 
   const AuthCheck = async () => {
     try {

@@ -6,6 +6,7 @@ import courseSlice from "./slices/courseSlice";
 import { lectureApi } from "./api/lectureApi";
 import { coursePurchaseApi } from "./api/coursePurchaseApi";
 import { couponApi } from "./api/couponApi";
+import { courseProgressApi } from "./api/courseProgressApi";
 
 
 const store = configureStore({
@@ -16,7 +17,8 @@ const store = configureStore({
     [sectionAndLectureApi.reducerPath]: sectionAndLectureApi.reducer,
     [lectureApi.reducerPath]: lectureApi.reducer,
     [coursePurchaseApi.reducerPath]: coursePurchaseApi.reducer,
-    [couponApi.reducerPath]:couponApi.reducer
+    [couponApi.reducerPath]:couponApi.reducer,
+    [courseProgressApi.reducerPath]:courseProgressApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -24,7 +26,8 @@ const store = configureStore({
       sectionAndLectureApi.middleware,
       lectureApi.middleware,
       coursePurchaseApi.middleware,
-      couponApi.middleware
+      couponApi.middleware,
+      courseProgressApi.middleware
     ),
 });
 export default store;

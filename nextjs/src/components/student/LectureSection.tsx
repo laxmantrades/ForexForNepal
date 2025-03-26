@@ -1,14 +1,21 @@
+"use client";
+
+import { Label } from "@/components/ui/label";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CirclePlay } from "lucide-react";
+import { CircleCheckBig, CirclePlay } from "lucide-react";
 import { Separator } from "../ui/separator";
+import { Checkbox } from "../ui/checkbox";
+import LectureSectionWithComplete from "./LectureSectionsWithComplete";
+import React from "react";
 
 const LectureSection = ({ section, setVideoUrl, OnVideoClick }) => {
-  
+  const isComplete = true;
 
   return (
     <Accordion type="single" collapsible className=" ">
@@ -17,27 +24,7 @@ const LectureSection = ({ section, setVideoUrl, OnVideoClick }) => {
           <h1>{section?.sectionTitle}</h1>
         </AccordionTrigger>
         {section?.lectures?.map((lecture) => (
-          <AccordionContent
-            onClick={() => {OnVideoClick(lecture.videoUrl)
-              console.log("clicked");
-              }
-            }
-            className="h-20 bg-gray-100 cursor-pointer"
-            key={lecture._id}
-          >
-            <Separator
-              orientation="horizontal"
-              className="bg-gray-300  w-full  "
-            />
-            <div>
-              <div className="flex space-x-2 items-center ml-2 mt-5 ">
-                <CirclePlay />
-                <div>
-                  <h1>{lecture?.lectureName}</h1>
-                </div>
-              </div>
-            </div>
-          </AccordionContent>
+         <LectureSectionWithComplete key={lecture._id} OnVideoClick={OnVideoClick} lecture={lecture}/>
         ))}
       </AccordionItem>
     </Accordion>

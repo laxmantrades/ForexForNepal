@@ -16,6 +16,8 @@ const LectureDisplay = () => {
   const { data } = useGetAllSectionWithLecturesQuery(courseId);
   useProtectedRoutesForNotAuthenticated()
 
+  
+
   const [videoUrl, setVideoUrl] = useState("");
 
   useEffect(() => {

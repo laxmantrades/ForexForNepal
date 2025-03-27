@@ -2,7 +2,6 @@
 
 
 import CourseForpage from "@/components/student/CourseForPage";
-import { useProtectedRouteLndS, useProtectedRoutesForNotAuthenticated } from "@/hooks/useProtectedRoute";
 
 
 const CoursePage = () => {

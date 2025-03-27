@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const SignUpPage = () => {
-  useProtectedRouteLndS();
+  //useProtectedRouteLndS();
   const signUpHandler = () => {
     try {
       window.location.href = "http://localhost:5005/login";

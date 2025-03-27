@@ -1,8 +1,8 @@
 import { RequestHandler } from "express";
 import { COURSEPROGRESS } from "../models/courseProgess.model";
-import mongoose from "mongoose";
+import mongoose, { Mongoose } from "mongoose";
 
-
+const { Types } = mongoose;
 export const createCourseProgressRouter: RequestHandler = async (req, res) => {
   try {
     const { userId, courseId, lectureId } = req.params;
@@ -22,9 +22,13 @@ export const createCourseProgressRouter: RequestHandler = async (req, res) => {
         courseId,
         lectureProgressLectures: lectureId,
       });
-      return;
+      res.status(200).json({
+        message: "Successfully marked lecture!",
+        success: true,
+        findCourseProgress,
+      });
+      return
     }
-   
 
     const lectureExits = findCourseProgress?.lectureProgressLectures?.some(
       (lecture) => lecture == (lectureId as any)
@@ -36,13 +40,11 @@ export const createCourseProgressRouter: RequestHandler = async (req, res) => {
       });
       return;
     }
-    findCourseProgress.lectureProgressLectures.push(
-      new mongoose.Schema.Types.ObjectId(lectureId)
-    );
+    findCourseProgress.lectureProgressLectures.push(lectureId as any);
     await findCourseProgress.save();
 
     res.status(200).json({
-      message: "Something went wrong!",
+      message: "Successfully marked lecture!",
       success: true,
       findCourseProgress,
     });
@@ -55,18 +57,20 @@ export const createCourseProgressRouter: RequestHandler = async (req, res) => {
 };
 export const getCourseProgressRouter: RequestHandler = async (req, res) => {
   try {
-    const { userId, courseId } = req.body;
+    const { userId, courseId } = req.params;
     const findLectureProgress = await COURSEPROGRESS.findOne({
       userId,
       courseId,
     });
+
     if (!findLectureProgress) {
       res.status(404).json({
         message: "Course Progress Not Found!",
         sucess: false,
       });
+      return;
     }
-    res.status(404).json({
+    res.status(200).json({
       message: "Succefully Got Course Progress",
       success: true,
       findLectureProgress,

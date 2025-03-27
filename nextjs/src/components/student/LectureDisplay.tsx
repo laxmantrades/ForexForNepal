@@ -8,13 +8,14 @@ import VideoComponent from "./VideoComponent";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useProtectedRoutesForNotAuthenticated } from "@/hooks/useProtectedRoute";
+import { useProtectedRoutesForLecture } from "@/hooks/useProtectedRoute";
+
 
 const LectureDisplay = () => {
   //data fetching
   const { courseId } = useParams();
   const { data } = useGetAllSectionWithLecturesQuery(courseId);
-  useProtectedRoutesForNotAuthenticated()
+//useProtectedRoutesForLecture()
 
   
 

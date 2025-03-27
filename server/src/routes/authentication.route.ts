@@ -6,7 +6,7 @@ import {
   Logout,
 } from "../controllers/authentication.controller";
 import passport from "passport";
-import { adminAuthentication } from "../middlewares/adminAuthentication";
+
 
 const authenticationRoute = express.Router();
 

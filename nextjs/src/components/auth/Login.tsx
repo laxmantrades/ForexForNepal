@@ -27,7 +27,7 @@ const LoginPage = () => {
     }
   };
 
- useProtectedRouteLndS()
+ //useProtectedRouteLndS()
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">

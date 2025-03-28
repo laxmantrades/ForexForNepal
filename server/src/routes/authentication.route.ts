@@ -1,12 +1,11 @@
 import express from "express";
 import {
   AuthCheck,
- 
   GoogleCallBack,
   Logout,
 } from "../controllers/authentication.controller";
 import passport from "passport";
-
+import { authCheck } from "../middlewares/authentication";
 
 const authenticationRoute = express.Router();
 

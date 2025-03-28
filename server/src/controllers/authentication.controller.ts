@@ -3,66 +3,79 @@ import passport from "passport";
 import { createUser } from "../services/userService";
 import { format } from "date-fns";
 import { IUSERDocument, User } from "../models/user.model";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
   passport.authenticate(
     "google",
-    { failureRedirect: "/" },
-    (err, user, info) => {
-      if (err || !user) {
-        // Handle error or failed authentication
-        return res.redirect("/login"); // Redirect to homepage or show an error page
-      }
-
-      // If authentication is successful, passport automatically manages the session
-      req.logIn(user, (err) => {
-        if (err) {
-          return res.redirect("/"); // Handle error during login
+    { failureRedirect: "/", session: false },
+    (err, data, token) => {
+      try {
+        if (err || !data) {
+          // Handle error or failed authentication
+          return res.redirect("/login"); // Redirect to homepage or show an error page
         }
 
-        // Once the user is logged in, you can save the session if needed and redirect
-        req.session.save(() => {
-          res.redirect("http://localhost:3000/?success=true"); // Redirect after session is saved
+        req.user = { id: data };
+
+        res.cookie("token", token, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
+          maxAge: 36000000, // 1 hour
         });
-      });
+        return res.redirect("http://localhost:3000/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   )(req, res); // Execute passport logic for Google OAuth
 };
 
 export const AuthCheck: RequestHandler = async (req, res) => {
   try {
-    if (req.user) {
-      const { _id } = req.user as IUSERDocument;
-      const date = new Date();
-      const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
-      const user = await User.findByIdAndUpdate(_id, {
-        lastLogin: fromattedDate,
-      });
-      
-
-      res.status(200).json({
-        authenticated: true,
-        user: req.user,
-      });
-
-      return;
-    } else {
+    dotenv.config();
+    const { token } = req.cookies;
+    if (!token) {
       res.status(404).json({
         authenticated: false,
       });
+      return;
     }
+
+    const decode: any = jwt.verify(token, process?.env?.tokenSecret!);
+
+    if (!decode.user) {
+      res.status(404).json({
+        authenticated: false,
+      });
+      return;
+    }
+    const userId = decode?.user;
+    const date = new Date();
+    const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
+    const user = await User.findByIdAndUpdate(userId, {
+      lastLogin: fromattedDate,
+    });
+
+    res.status(200).json({
+      authenticated: true,
+      user,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({
       message: "Something went wrong",
     });
+    return;
   }
 };
 
 export const Logout: RequestHandler = (req, res) => {
   try {
     req.logOut(() => {
+      res.clearCookie("token");
       res.redirect("http://localhost:3000");
     });
   } catch (error) {

@@ -2,6 +2,7 @@ import dotenv from "dotenv";
 import { User } from "../models/user.model";
 import { Profile } from "passport-google-oauth20";
 const GoogleStrategy = require("passport-google-oauth20");
+import jwt from "jsonwebtoken";
 
 dotenv.config();
 const GoogleOauth = new GoogleStrategy(
@@ -25,9 +26,11 @@ const GoogleOauth = new GoogleStrategy(
           });
         }
       }
+      const token = jwt.sign({ user: user?._id }, process.env.tokenSecret!);
+
       await user?.save();
 
-      return done(null, user?._id);
+      return done(null, user?._id, token);
     } catch (error) {
       console.log(error);
     }

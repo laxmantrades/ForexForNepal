@@ -59,7 +59,7 @@ const HeroSection = () => {
           src={"/g1.png"}
           alt="maniamge"
           height={100}
-          className="relative  "
+          className="relative  shadow-2xl shadow-pink-600  rounded-full"
           width={600}
         ></Image>
       </div>

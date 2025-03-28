@@ -7,7 +7,7 @@ import Link from "next/link";
 
 const Herosection4 = () => {
   return (
-    <div className="p-2 sm:w-2/3 mx-auto mt-5 ">
+    <div className="p-2  sm:w-2/3 sm:mx-auto mt-5  ">
       <Card className="p-0 border-3 border-blue-700 shadow-blue-400 shadow-2xl">
         <CardContent className="p-0 ">
           <div className="absolute inset-0 ">

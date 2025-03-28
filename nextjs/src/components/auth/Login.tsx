@@ -2,32 +2,40 @@
 
 type lastVisitedUrl = string;
 import { Button } from "@/components/ui/button";
-import { useProtectedRouteLndS } from "@/hooks/useProtectedRoute";
-
+import { Checkbox } from "@/components/ui/checkbox";
 
 import { RootState } from "@/redux/store";
+import { retry } from "@reduxjs/toolkit/query";
 
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const router = useRouter();
   const path = usePathname();
+  const[checked,setChecked]=useState(false)
+ 
+  
   const { isAuthenticated } = useSelector((store: RootState) => store.auth);
 
   const loginHandler = () => {
     try {
+      if(!checked){
+        toast.error("Please accept terms and condition")
+        return
+      }
       window.location.href = "http://localhost:5005/login";
     } catch (error) {
       console.log(error);
     }
   };
 
- //useProtectedRouteLndS()
+  //useProtectedRouteLndS()
 
   return (
     <div className="flex items-center justify-center min-h-screen relative">
@@ -35,6 +43,15 @@ const LoginPage = () => {
         <h1 className="text-4xl font-bold text-center">
           Sign in to your account
         </h1>
+        <div className="text-center mt-5">
+          <Checkbox id="terms" required={true} checked={checked} onCheckedChange={(checked) => setChecked(checked === "indeterminate" ? false : checked)} className="mr-1 h-5 w-5" />
+          <label
+        htmlFor="terms"
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Accept terms and conditions
+      </label>
+        </div>
 
         <Button
           variant={"outline"}

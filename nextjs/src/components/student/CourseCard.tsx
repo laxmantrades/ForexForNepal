@@ -25,7 +25,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
   const user=useSelector((store:RootState)=>store.auth.user)
 
   return (
-    <Card className="py-0 pb-2 mt-10 md:mt-0 w-full">
+    <Card className="py-0 pb-2 mt-10 md:mt-0 w-full border-green-500 shadow-fuchsia-700 shadow-md">
       <CardHeader className="px-0">
         <CardTitle>
           <Image

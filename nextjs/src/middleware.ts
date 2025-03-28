@@ -1,4 +1,4 @@
-import axios from "axios";
+
 import { NextRequest, NextResponse } from "next/server";
 
 export async function middleware(req: NextRequest) {
@@ -15,11 +15,11 @@ export async function middleware(req: NextRequest) {
       method: "get",
       headers: { cookie: req.headers.get("cookie") || "" },
     });
-    console.log("Headers in middleware:", req.headers);
+    
 
     const data = await res.json();
-    console.log(data, "This is data");
-    //console.log("This is res",res);
+   
+    
 
     if (data.authenticated == false) {
       return NextResponse.redirect(new URL("/login", req.url));
@@ -27,7 +27,12 @@ export async function middleware(req: NextRequest) {
 
     if(allowedPaths.includes(pathname)){
       const parts = pathname.split("/");
-      const isPurchasedCourse=data?.coursePurhcased?.some((course:string)=>course===parts[2])
+      
+      
+      
+      const isPurchasedCourse=await data?.user?.coursePurhcased?.some((course:string)=>course===parts[2])
+      console.log(isPurchasedCourse);
+      
       if(!isPurchasedCourse){
         return NextResponse.redirect(new URL(`/courses/${parts[2]}`, req.url));
       }

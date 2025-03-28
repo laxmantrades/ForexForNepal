@@ -2,7 +2,7 @@ import express from "express";
 
 import dotenv from "dotenv";
 import passport from "passport";
-import session from "express-session";
+
 import authenticationRoute from "./routes/authentication.route";
 import GoogleOauth from "./middlewares/googlestrategy";
 import cors from "cors";
@@ -14,6 +14,7 @@ import { IUSERDocument, User } from "./models/user.model";
 import couponRouter from "./routes/couponcode.route";
 import coursePurchaseRouter from "./routes/coursePurchase";
 import courseProgressRoute from "./routes/courseProgress.route";
+import cookieParser from "cookie-parser";
 
 const app = express();
 
@@ -25,44 +26,20 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
-app.use(
-  session({
-    secret: process.env.SECRET!,
-    resave: false,
-    saveUninitialized: true,
-
-    cookie: {
-      httpOnly: true,
-      //secure: process.env.NODE_ENV === "production",
-      sameSite: "lax",
-      maxAge: 1000 * 60 * 60 * 24,
-    },
-  })
-);
 app.use(passport.initialize()); //initialise passport for authentication
-app.use(passport.session()); //use session for keeping track
 
+//initialized google0auth
 passport.use(GoogleOauth);
 
-passport.serializeUser((id: any, done) => done(null, id));
-passport.deserializeUser(async(id: any, done) => {
-  const user = await User.findById(id);
-
-
-
-
-
-  return done(null, user as IUSERDocument);
-});
 app.use(authenticationRoute);
 app.use("/api/v1/course", courseRouter);
 app.use("/api/v1/section", sectionRoute);
 app.use("/api/v1/lecture", lectureRouter);
-app.use("/api/v1/coupon",couponRouter)
-app.use("/api/v1/coursepurchase",coursePurchaseRouter)
-app.use("/api/v1/courseprogress",courseProgressRoute)
-
+app.use("/api/v1/coupon", couponRouter);
+app.use("/api/v1/coursepurchase", coursePurchaseRouter);
+app.use("/api/v1/courseprogress", courseProgressRoute);
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

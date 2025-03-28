@@ -1,14 +1,23 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useProtectedRouteLndS } from "@/hooks/useProtectedRoute";
+
+
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Checkbox } from "../ui/checkbox";
+import { toast } from "sonner";
 
 const SignUpPage = () => {
-  //useProtectedRouteLndS();
+  const[checked,setChecked]=useState(false)
+  
   const signUpHandler = () => {
     try {
+      if(!checked){
+        toast.error("Please accept terms and condition")
+        return
+      }
       window.location.href = "http://localhost:5005/login";
     } catch (error) {
       console.log(error);
@@ -20,6 +29,15 @@ const SignUpPage = () => {
         <h1 className="text-4xl font-bold text-center">
           Sign up your account!
         </h1>
+        <div className="text-center mt-5">
+          <Checkbox id="terms" required={true} checked={checked} onCheckedChange={(checked) => setChecked(checked === "indeterminate" ? false : checked)} className="mr-1 h-5 w-5" />
+          <label
+        htmlFor="terms"
+        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      >
+        Accept terms and conditions
+      </label>
+        </div>
         <Button
           variant={"outline"}
           onClick={signUpHandler}

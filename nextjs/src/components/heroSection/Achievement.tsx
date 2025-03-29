@@ -8,7 +8,7 @@ const Achievement = () => {
         Our Tutors Certifications
       </h1>
       <h1 className="text-center font-bold">Tutor Certifications</h1>
-      <div className="flex-none md:flex  justify-center space-x-8 space-y-10  md:space-y-0  m-4 ">
+      <div className="flex-none md:flex  justify-center md:space-x-8 space-y-10  md:space-y-0  m-4 ">
         {" "}
         <Card className="p-0 md:p-4 shadow-xl shadow-orange-500">
           <CardContent className="flex justify-center p-0">

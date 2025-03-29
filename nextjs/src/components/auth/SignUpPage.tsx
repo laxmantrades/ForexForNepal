@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
 import { toast } from "sonner";
+import { Card } from "../ui/card";
 
 const SignUpPage = () => {
   const[checked,setChecked]=useState(false)
@@ -24,8 +25,8 @@ const SignUpPage = () => {
     }
   };
   return (
-    <div className="flex items-center justify-center min-h-screen relative ">
-      <div className="border p-50 radius-xl">
+    <div className="flex items-center justify-center mt-20 relative ">
+      <Card className=" shadow-none  border-none md:border md:shadow-xl p-0 md:p-20 ">
         <h1 className="text-4xl font-bold text-center">
           Sign up your account!
         </h1>
@@ -74,7 +75,7 @@ const SignUpPage = () => {
             Privacy Policy.
           </Link>{" "}
         </h1>
-      </div>
+      </Card>
     </div>
   );
 };

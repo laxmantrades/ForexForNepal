@@ -1,5 +1,22 @@
 "use client";
-import { LogOut, Moon, Sun, UserPen } from "lucide-react";
+import {
+  BookOpenText,
+  LockKeyhole,
+  LogOut,
+  Menu,
+  Moon,
+  MoonIcon,
+  Sun,
+  UserPen,
+} from "lucide-react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -18,38 +35,16 @@ import { changeLoading, userLoggedin } from "@/redux/slices/authSlice";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { Separator } from "../ui/separator";
+import { User } from "@/types/userTypes";
+import { useFetchUserQuery } from "@/redux/api/authenticationApi";
 
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.auth);
-  
+  const { data, isLoading } = useFetchUserQuery(null);
+
   
 
-  const AuthCheck = async () => {
-    try {
-      const response = await axios.get(`http://localhost:5005/authcheck`, {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.data.authenticated) {
-        dispatch(userLoggedin(response?.data?.user));
-      }
-      const timeout = setTimeout(() => {
-        dispatch(changeLoading(false));
-      }, 200);
-      return () => {
-        clearTimeout(timeout);
-      };
-    } catch (error) {
-      console.log(error);
-      setTimeout(() => {
-        dispatch(changeLoading(false));
-      }, 200);
-    }
-  };
   const logoutHandler = () => {
     try {
       window.location.href = "http://localhost:5005/logout";
@@ -58,14 +53,8 @@ const Header = () => {
     }
   };
 
-  useEffect(() => {
-    if (!user.isAuthenticated) {
-      AuthCheck();
-    }
-  }, []);
-
   return (
-    <header className="absolute z-10 w-full ">
+    <header className="absolute z-10 w-full">
       <div className="flex items-center justify-between    ">
         <Link href="/">
           <Image
@@ -78,10 +67,10 @@ const Header = () => {
           />
         </Link>
 
-        <div className="mr-10 flex items-center justify-center space-x-4">
+        <div className="mr-10 flex items-center justify-center space-x-4 ">
           <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="icon">
+            <DropdownMenuTrigger asChild className="">
+              <Button variant="outline" size="icon" className="hidden md:flex">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Toggle theme</span>
@@ -106,26 +95,35 @@ const Header = () => {
           )}
 
           {user?.isAuthenticated && (
-            <Button className="text-xl cursor-pointer ">Blog</Button>
+           <Link href={"/outlook"}> <Button className="text-xl cursor-pointer hidden sm:flex">
+              OutLook
+            </Button>
+            </Link>
           )}
 
           {!user?.isAuthenticated && (
-            <Link href={"/signup"} className=" mr-4 text-white">
+            <Link href={"/signup"} className=" mr-4 text-white hidden sm:flex">
               <Button className="text-xl cursor-pointer ">Sign Up</Button>
             </Link>
           )}
-          {user.user?.role && (
-            <Link href={"/admin/dashboard"} className=" mr-4 text-white">
+          {user.user?.role === "owner" && (
+            <Link
+              href={"/admin/dashboard"}
+              className=" mr-4 text-white hidden sm:block"
+            >
               <Button className="text-xl cursor-pointer ">Admin</Button>
             </Link>
           )}
           {user.isAuthenticated && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <img
-                  src={user?.user?.photoUrl}
-                  className="rounded-full h-10"
-                ></img>
+                <Image
+                  src={user?.user?.photoUrl || ""}
+                  alt="image"
+                  height={10}
+                  width={40}
+                  className="rounded-full h-10 hidden sm:block"
+                />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem>
@@ -148,10 +146,100 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
+          <MobileNavBar
+            user={user?.user}
+            isAuthenticated={user.isAuthenticated}
+          />
         </div>
       </div>
-      <Separator orientation="horizontal"/>
+      <Separator orientation="horizontal" />
     </header>
   );
 };
 export default Header;
+
+interface UserPhoto {
+  user: User | null;
+  isAuthenticated: boolean | null;
+}
+const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
+  return (
+    <div className="block sm:hidden">
+      <Sheet>
+        <SheetTrigger>
+          {" "}
+          {isAuthenticated ? (
+            <Image
+              src={user?.photoUrl || ""}
+              alt="image"
+              height={10}
+              width={40}
+              className="rounded-full h-10"
+            />
+          ) : (
+            <Menu />
+          )}
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle className=" text-center">
+              {isAuthenticated ? (
+                <div className="flex text-center">
+                  {" "}
+                  <Image
+                    src={user?.photoUrl || ""}
+                    alt="image"
+                    height={10}
+                    width={40}
+                    className="rounded-full h-10"
+                  />
+                  <h1 className="text-center ml-4 mt-2">
+                    Welcome {user?.fullName}
+                  </h1>
+                </div>
+              ) : (
+                <h1>Menu</h1>
+              )}
+              <Separator className="mt-2 border-1 bg-black " />
+            </SheetTitle>
+            <SheetDescription className="mt-5 space-y-4">
+              {isAuthenticated && (
+                <span className="text-black font-bold text-base flex space-x-3.5">
+                  <LogOut className="mr-4" />
+                  Blog
+                </span>
+              )}{" "}
+              <span className="text-black font-bold text-base flex space-x-3.5 ">
+                <Link href={"/courses"} className="cursor-pointer flex">
+                  <BookOpenText className="mr-4" />
+                  Courses
+                </Link>
+              </span>
+              {user?.role == "owner" && (
+                <Link href={"/admin/dashboard"} className=" mr-4 text-white ">
+                  <span className="text-black font-bold text-base flex space-x-3.5">
+                    <LockKeyhole className="mr-4" />
+                    Admin
+                  </span>
+                </Link>
+              )}
+              <span className="text-black font-bold text-base flex space-x-3.5">
+                <MoonIcon className="mr-4" />
+                DarkMode
+              </span>
+              {isAuthenticated && (
+                <span className="text-black font-bold text-base flex space-x-3.5">
+                  <Link href={"http://localhost:5005/logout"} className="flex">
+                    {" "}
+                    <LogOut className="mr-4 " />
+                    LogOut
+                  </Link>
+                </span>
+              )}
+            </SheetDescription>
+          </SheetHeader>
+        </SheetContent>
+      </Sheet>
+    </div>
+  );
+};

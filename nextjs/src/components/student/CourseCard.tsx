@@ -34,6 +34,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ course }) => {
             height={500}
             width={800}
             className="rounded "
+            priority
           />
         </CardTitle>
       </CardHeader>

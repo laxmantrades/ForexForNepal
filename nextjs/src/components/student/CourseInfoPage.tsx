@@ -10,17 +10,18 @@ const CourseInfoPage = () => {
   //data fetching logics
   const { courseId } = useParams();
   
-  const { data, error } = useGetCourseByIdQuery(courseId);
-  const faq=[{
-    faqTitle:"For what is course for?",
-    faqDescription:"This is not for beginners"
-  }]
+  const { data, error,isLoading } = useGetCourseByIdQuery(courseId);
+
+  
+  if (isLoading) return <p>Loading...</p>;
+if (error) return <p>Error loading course.</p>;
+if (!data?.course) return <p>No course found.</p>
  
 
   return (
     <>
       <CourseInfoUI  courseInfo={data?.course} />
-      <FAQ faq={faq} />
+      <FAQ faq={data?.course?.FAQ} />
     </>
   );
 };

@@ -80,6 +80,7 @@ const CreateCoupon = () => {
           <SelectContent>
             <SelectItem value="free">free</SelectItem>
             <SelectItem value="paid">paid</SelectItem>
+            <SelectItem value="permanent">permanent</SelectItem>
           </SelectContent>
         </Select>
 

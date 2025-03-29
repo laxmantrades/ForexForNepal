@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "sonner";
+import { Card } from "../ui/card";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -38,8 +39,8 @@ const LoginPage = () => {
   //useProtectedRouteLndS()
 
   return (
-    <div className="flex items-center justify-center min-h-screen relative">
-      <div className="border p-50 rounded-xl">
+    <div className="flex md:items-center justify-center relative">
+      <Card className="border-none bg-white shadow-none sm:shadow-md md:p-20 mt-20 md:mt-20">
         <h1 className="text-4xl font-bold text-center">
           Sign in to your account
         </h1>
@@ -90,7 +91,7 @@ const LoginPage = () => {
             Privacy Policy.
           </Link>{" "}
         </h1>
-      </div>
+      </Card>
     </div>
   );
 };

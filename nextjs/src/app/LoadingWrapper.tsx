@@ -7,11 +7,11 @@ import { useSelector } from "react-redux";
 export default function LoadingWrapper() {
   const loading = useSelector((store: RootState) => store.auth.loading);
 
-  if (!loading) return null; // Don't render anything if not loading
+  if (loading) return null; // Don't render anything if not loading
 
   return (
     <div className="fixed inset-0 z-50">
-      <LoadingSpinner />
+    { /* <LoadingSpinner />*/}
     </div>
   );
 }

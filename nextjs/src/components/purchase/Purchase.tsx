@@ -18,25 +18,30 @@ import { useCoursePurchaseMutation } from "@/redux/api/coursePurchaseApi";
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 const Purchase = () => {
 const[couponCode,setCouponcode]=useState("")
 const {courseId}=useParams()
+const router=useRouter()
 
 const userId=useSelector((store:RootState)=>store.auth.user?._id)
 
 
 //!hooks
 const[coursePurchase,{data,isError,isLoading,isSuccess}]=useCoursePurchaseMutation()
+console.log(data);
 
 useEffect(()=>{
 if(isSuccess){
-  toast.success(data.message||"Successfyully Purchased Course")
+  toast.success(data?.message||"Successfyully Purchased Course")
+  router.push(`/courses/${courseId}`)
 
 }
 if(isError){
-  toast.error(data.message||"Failed to  Purchased Course")
+  toast.error(data?.message||"Failed to  Purchase Course")
+  
+  
 }
 },[isError,isSuccess])
 

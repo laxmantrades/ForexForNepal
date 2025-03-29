@@ -18,14 +18,14 @@ import SectionAndLecture from "./SectionsAndLecture";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useParams } from "next/navigation";
-import { useRouter } from "next/router";
+
 
 interface CourseProps {
   courseInfo: Course;
 }
 
 const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
-  if (!courseInfo) return;
+  if (!courseInfo) return null;
   const {
     _id,
     courseDescription,
@@ -38,7 +38,7 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
   } = courseInfo;
  
   
-
+  const { courseId } = useParams();
   const coursePurhcased = useSelector(
     (store: RootState) => store.auth.user?.coursePurhcased
   );
@@ -50,7 +50,7 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
       return courseId == _id;
     })
  
-  const { courseId } = useParams();
+
 
   return (
     <div className="">
@@ -83,7 +83,7 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
         </div>
 
         <div className="md:-mt-14 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">
-          <Card className="">
+          <Card className=" overflow-scroll">
             <CardHeader>
               <CardTitle>Card Title</CardTitle>
               <CardDescription>Card Description</CardDescription>

@@ -20,12 +20,16 @@ const LectureDisplay = () => {
   
 
   const [videoUrl, setVideoUrl] = useState("");
+  const[videoTitle,setVideoTitle]=useState("")
+  
 
   useEffect(() => {
     setVideoUrl(data?.section[0]?.lectures[0]?.videoUrl);
+    setVideoTitle(data?.section[0]?.lectures[0]?.lectureName)
   }, [data]);
-  const OnVideoClick = (url: string) => {
+  const OnVideoClick = (url: string,lectureName:string) => {
     setVideoUrl(url);
+    setVideoTitle(lectureName)
   };
 
   return (
@@ -36,7 +40,7 @@ const LectureDisplay = () => {
             <VideoComponent videoUrl={videoUrl} />
           </CardContent>
         </Card>
-        <LectureDescription />
+        <LectureDescription videoTitle={videoTitle}/>
       </div>
 
       <div className="w-full  text-left flex flex-4/12">

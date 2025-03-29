@@ -3,7 +3,10 @@ import { CircleCheckBig, CirclePlay } from "lucide-react";
 import { AccordionContent } from "../ui/accordion";
 import { Separator } from "../ui/separator";
 import { Checkbox } from "../ui/checkbox";
-import { useCreateCourseProgressMutation, useGetCourseProgressQuery } from "@/redux/api/courseProgressApi";
+import {
+  useCreateCourseProgressMutation,
+  useGetCourseProgressQuery,
+} from "@/redux/api/courseProgressApi";
 import { useParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -11,42 +14,40 @@ import { useEffect } from "react";
 import { toast } from "sonner";
 
 const LectureSectionWithComplete = ({ OnVideoClick, lecture }) => {
- 
   const { courseId } = useParams();
   const userId = useSelector((store: RootState) => store?.auth?.user?._id);
 
- 
-
-
-//!hooks
+  //!hooks
   const { data } = useGetCourseProgressQuery({ courseId, userId });
-  const[createCourseProgress,{data:createCourseProgressApi,isError,isSuccess}]=useCreateCourseProgressMutation()
-  const lectureId=lecture._id
-//!checking if the lectureis in the courseProgress or not
-  const isCompleted=data?.findLectureProgress?.lectureProgressLectures.some((progress:string)=>progress==lecture._id)
-  
-  //! handleclick 
-  const handleComplete=()=>{
-    if(confirm("Congratulations for completing course!")){
-      createCourseProgress({courseId,lectureId,userId})
+  const [
+    createCourseProgress,
+    { data: createCourseProgressApi, isError, isSuccess },
+  ] = useCreateCourseProgressMutation();
+  const lectureId = lecture._id;
+  //!checking if the lectureis in the courseProgress or not
+  const isCompleted = data?.findLectureProgress?.lectureProgressLectures.some(
+    (progress: string) => progress == lecture._id
+  );
+
+  //! handleclick
+  const handleComplete = () => {
+    if (confirm("Congratulations for completing course!")) {
+      createCourseProgress({ courseId, lectureId, userId });
     }
-    
-    
-  }
-  useEffect(()=>{
-if(isSuccess){
-  toast.success("Marked lecture as complete!")
-}
-if(isError){
-  toast.error("Failed to mark lecture complete!")
-}
-  },[isError,isSuccess])
-  
+  };
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Marked lecture as complete!");
+    }
+    if (isError) {
+      toast.error("Failed to mark lecture complete!");
+    }
+  }, [isError, isSuccess]);
 
   return (
     <AccordionContent
       onClick={() => {
-        OnVideoClick(lecture.videoUrl);
+        OnVideoClick(lecture?.videoUrl, lecture?.lectureName);
       }}
       className="h-20 bg-gray-100 cursor-pointer"
       key={lecture._id}
@@ -60,7 +61,10 @@ if(isError){
         </div>
 
         {!isCompleted ? (
-          <Checkbox className="mr-10 border-black  h-5 w-5" onClick={handleComplete} />
+          <Checkbox
+            className="mr-10 border-black  h-5 w-5"
+            onClick={handleComplete}
+          />
         ) : (
           <CircleCheckBig color="#27e70d" className="mr-10" />
         )}

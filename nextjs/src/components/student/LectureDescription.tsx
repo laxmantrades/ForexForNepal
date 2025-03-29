@@ -1,6 +1,8 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-const LectureDescription = () => {
+interface videoTitle{
+  videoTitle:string
+}
+const LectureDescription:React.FC<videoTitle> = ({videoTitle}) => {
   return (
     <div>
       <Tabs defaultValue="video" className="w-[400px] mt-2">
@@ -20,9 +22,9 @@ const LectureDescription = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="video">
-          Make changes to your account here.
+         {videoTitle}
         </TabsContent>
-        <TabsContent value="content">Change your password here.</TabsContent>
+        <TabsContent value="content">Join Our Telegram Community</TabsContent>
       </Tabs>
     </div>
   );

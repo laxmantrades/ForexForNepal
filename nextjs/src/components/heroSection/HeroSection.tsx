@@ -23,12 +23,20 @@ const HeroSection = () => {
         }}
       />
       {/* Your content here */}
-      <div className="  flex  justify-center ">
+      <div className="flex  justify-center ">
         <div>
-          <div className="relative flex flex-col items-center  text-center mt-30 space-x-3">
+          <div className="relative flex flex-col items-center  text-center md:mt-30 space-x-3">
             {/* Background Overlay */}
 
             {/* Content */}
+            <Image
+              src={"/g1.png"}
+              alt="maniamge"
+              height={100}
+              className="relative    rounded-full   block md:hidden "
+              width={300}
+              priority
+            ></Image>
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
               Master Forex Trading from Nepal
             </h1>
@@ -59,8 +67,9 @@ const HeroSection = () => {
           src={"/g1.png"}
           alt="maniamge"
           height={100}
-          className="relative  shadow-2xl shadow-pink-600  rounded-full"
+          className="relative  shadow-2xl shadow-pink-600  rounded-full  sm:w-96 hidden md:block "
           width={600}
+          priority
         ></Image>
       </div>
     </div>

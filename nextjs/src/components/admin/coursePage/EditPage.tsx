@@ -104,6 +104,10 @@ const EditPage = () => {
           <CardTitle className="flex justify-between">
             <h1 className="text-xl font-bold">Edit Your Course</h1>
             <Link href={`${editCourseId}/sections`}>
+            {/** todo faq */}
+            <Button className="text-xl font-bold cursor-pointer">
+                View FAQs
+              </Button>
               <Button className="text-xl font-bold cursor-pointer">
                 View Sections
               </Button>

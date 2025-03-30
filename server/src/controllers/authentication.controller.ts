@@ -17,9 +17,6 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
           // Handle error or failed authentication
           return res.redirect("/login"); // Redirect to homepage or show an error page
         }
-
-        req.user = { id: data };
-
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
@@ -36,6 +33,8 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
 export const AuthCheck: RequestHandler = async (req, res) => {
   try {
     dotenv.config();
+    console.log(req.id);
+    
     const { token } = req.cookies;
     if (!token) {
       res.status(404).json({

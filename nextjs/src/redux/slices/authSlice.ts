@@ -8,7 +8,6 @@ const authSlice = createSlice({
 
     isAuthenticated: false,
     loading: true,
-    
   },
   reducers: {
     userLoggedin: (state, action: PayloadAction<User>) => {
@@ -21,13 +20,7 @@ const authSlice = createSlice({
     changeLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
     },
-   
   },
 });
-export const {
-  userLoggedin,
-  userLoggedOut,
-  changeLoading,
- 
-} = authSlice.actions;
+export const { userLoggedin, userLoggedOut, changeLoading } = authSlice.actions;
 export default authSlice.reducer;

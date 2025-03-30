@@ -11,4 +11,5 @@ export interface Course {
   updatedAt: string;
   __v: 0;
   _id: string;
+  faq:string[]
 }

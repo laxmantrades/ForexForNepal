@@ -8,7 +8,7 @@ interface CourseSchema {
   coursePrice: string;
   courseThumbnail: string;
   IntroVideo:string,
-  FAQ:mongoose.Schema.Types.ObjectId
+  FAQ:mongoose.Schema.Types.ObjectId[]
 }
 interface ICOURSEDocument extends CourseSchema, Document {
   createdAt: Date;
@@ -52,7 +52,7 @@ const courseSchema = new mongoose.Schema<ICOURSEDocument>(
       default:""
     },
     FAQ:{
-      type:mongoose.Schema.Types.ObjectId,
+      type:[mongoose.Schema.Types.ObjectId],
       ref:"FAQSchema"
     }
   },

@@ -3,15 +3,20 @@ import mongoose from "mongoose";
 
 
 interface FAQ{
-    faq:[{
-        question:string,
-        answer:string 
-    }]
+   question:string,
+   answer:string
        
     
 }
-const faqSchema=new mongoose.Schema({
-
+const faqSchema=new mongoose.Schema<FAQ>({
+    question:{
+        type:String,
+        required:true
+    },
+    answer:{
+        type:String,
+        required:true
+    }
 })
 
-export const FAQSCHEMA=mongoose.model("FAQSCCHEMA",faqSchema)
+export const FAQSCHEMA=mongoose.model<FAQ>("FAQSchema",faqSchema)

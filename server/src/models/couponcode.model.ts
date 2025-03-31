@@ -1,7 +1,7 @@
 import mongoose, { Model } from "mongoose";
 interface CouponCode {
   couponCode: string;
-  subtype: "free" | "paid";
+  subtype: "free" | "paid"|"permanent";
 }
 
 const couponcodeSchema = new mongoose.Schema<CouponCode>({
@@ -11,7 +11,7 @@ const couponcodeSchema = new mongoose.Schema<CouponCode>({
   },
   subtype: {
     type: String,
-    enum: ["free", "paid"],
+    enum: ["free", "paid","permanent"],
   },
 });
 export const COUPONCODE: Model<CouponCode> = mongoose.model<CouponCode>(

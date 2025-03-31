@@ -5,7 +5,19 @@ dotenv.config()
 export const authCheck: RequestHandler = (req, res, next) => {
   try {
     const{token}=req.cookies
-    const decode=jwt.verify(token,"laxman")
+    if(!token){
+      res.status(404).json({
+        message:"Invalid Token"
+      })
+      return
+      
+    }
+    const decode=jwt.verify(token,process.env.tokenSecret!) as jwt.JwtPayload
+    req.id=decode?.user
+    
+    
+    
+    
     if (!decode) {
       res.status(401).json({
         message: "Unauthorized Access",
@@ -14,6 +26,8 @@ export const authCheck: RequestHandler = (req, res, next) => {
     }
     next();
   } catch (error) {
+    console.log(error);
+    
     console.log("Something went wrong!");
   }
 };

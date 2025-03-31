@@ -30,7 +30,8 @@ export const findCourse = async (id: string) => {
   try {
     const course = await COURSE.findById(id)
       .select("-createdAt -updatedAt -enrolledStudents")
-      .populate({
+      .populate([{
+       
         path: "lectureSection",
 
         populate: {
@@ -38,7 +39,12 @@ export const findCourse = async (id: string) => {
           /// match: { isPreviewFree: true }
           select: "lectureName",
         },
-      })
+      },
+      {
+        path: "FAQ", // Populate FAQ along with lectureSection
+      },
+    ])
+      
       .lean();
 
     return course;
@@ -50,7 +56,7 @@ export const findCourse = async (id: string) => {
 //!this is used in courseservice
 export const findCourseServiceForCoursePurchase = async (id: string) => {
   try {
-    const course = await COURSE.findById(id)
+    const course = await COURSE.findById(id);
 
     return course;
   } catch (error) {
@@ -59,7 +65,18 @@ export const findCourseServiceForCoursePurchase = async (id: string) => {
 };
 export const findALLCourse = async () => {
   try {
-    const course = await COURSE.find();
+    const course = await COURSE.find().select(
+      "-createdAt -updatedAt -enrolledStudents -lectureSection -FAQ -introVideo -coursePrice -courseDescription -__v -IntroVideo"
+    );
+    return course;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const findCourseBYIDservice = async (id: string) => {
+  try {
+    const course = await COURSE.findById(id);
     return course;
   } catch (error) {
     console.log(error);

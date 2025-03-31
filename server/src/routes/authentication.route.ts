@@ -19,7 +19,7 @@ authenticationRoute.route("/login").get(
 );
 authenticationRoute.route("/auth/google/callback").get(GoogleCallBack);
 
-authenticationRoute.route("/authcheck").get(AuthCheck);
+authenticationRoute.route("/authcheck").get(authCheck,AuthCheck);
 
 authenticationRoute.route("/logout").get(Logout);
 

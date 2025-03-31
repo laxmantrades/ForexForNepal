@@ -15,6 +15,7 @@ import couponRouter from "./routes/couponcode.route";
 import coursePurchaseRouter from "./routes/coursePurchase";
 import courseProgressRoute from "./routes/courseProgress.route";
 import cookieParser from "cookie-parser";
+import faqRouter from "./routes/faq.route";
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use("/api/v1/lecture", lectureRouter);
 app.use("/api/v1/coupon", couponRouter);
 app.use("/api/v1/coursepurchase", coursePurchaseRouter);
 app.use("/api/v1/courseprogress", courseProgressRoute);
+app.use("/api/v1/faq", faqRouter);
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

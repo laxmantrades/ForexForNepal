@@ -45,6 +45,7 @@ export const coursePurchase: RequestHandler = async (req, res) => {
       });
       return;
     }
+    // todo add coursePayment from backend
 
     if (findcouponCode?.subtype === "permanent") {
       if (courseId === "67cdb7359d6376aa9395a8e0") {
@@ -64,7 +65,7 @@ export const coursePurchase: RequestHandler = async (req, res) => {
       await createCoursePurchaseService(
         courseId as string,
         userId as string,
-        course?.coursePrice as string
+        course?.coursePrice as string //! always add from backend
       );
     }
     if (findcouponCode?.subtype === "permanent") {

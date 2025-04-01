@@ -68,42 +68,41 @@ export const coursePurchase: RequestHandler = async (req, res) => {
       );
     }
     if (findcouponCode?.subtype === "permanent") {
-      if(courseId !== "67cdb7359d6376aa9395a8e0"){
+      if (courseId !== "67cdb7359d6376aa9395a8e0") {
         res.status(404).json({
           message: "Wrong Coupon Code!",
           success: false,
         });
-        return
-      }
-        course.enrolledStudents.push(userId as any);
-        await course.save();
-        user?.coursePurhcased?.push(courseId as any); // Convert before pushing
-        await user.save();
-        res.status(200).json({
-          message: "Successfully Purchased Course!",
-          success: true,
-        });
         return;
-    }
-   
-      //! update course with the users information
+      }
       course.enrolledStudents.push(userId as any);
       await course.save();
-
-      //! save the student is enrolled in the users models
-
       user?.coursePurhcased?.push(courseId as any); // Convert before pushing
-      await user.save(); // Save the updated user document
-
-      //!delete couponcode
-
-      await deleteCouponCodeServiceByID(findcouponCode._id as any);
-
+      await user.save();
       res.status(200).json({
         message: "Successfully Purchased Course!",
         success: true,
       });
-    
+      return;
+    }
+
+    //! update course with the users information
+    course.enrolledStudents.push(userId as any);
+    await course.save();
+
+    //! save the student is enrolled in the users models
+
+    user?.coursePurhcased?.push(courseId as any); // Convert before pushing
+    await user.save(); // Save the updated user document
+
+    //!delete couponcode
+
+    await deleteCouponCodeServiceByID(findcouponCode._id as any);
+
+    res.status(200).json({
+      message: "Successfully Purchased Course!",
+      success: true,
+    });
   } catch (error) {
     res.status(500).json({
       message: "Something went wrong!",

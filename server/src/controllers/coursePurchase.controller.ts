@@ -60,7 +60,7 @@ export const coursePurchase: RequestHandler = async (req, res) => {
         return;
       }
     }
-    ///todo
+   
    
     if (findcouponCode?.subtype !== "free" || "permanent") {
       //! only save paid users information in db

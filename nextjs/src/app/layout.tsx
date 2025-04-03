@@ -6,7 +6,6 @@ import { Toaster } from "sonner";
 
 import ReduxProvideProps from "./ReduxProvier";
 
-import LoadingWrapper from "./LoadingWrapper";
 import Footer from "@/components/Footer/Footer";
 import StorePathName from "./StorePathName";
 
@@ -37,7 +36,7 @@ export default function RootLayout({
       >
         <ReduxProvideProps>
           {" "}
-          <LoadingWrapper />
+          ¨
           <Toaster />
           <header>
             {" "}

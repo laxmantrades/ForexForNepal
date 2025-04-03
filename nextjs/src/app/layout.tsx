@@ -36,7 +36,7 @@ export default function RootLayout({
       >
         <ReduxProvideProps>
           {" "}
-          ¨
+        
           <Toaster />
           <header>
             {" "}

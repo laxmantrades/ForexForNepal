@@ -12,10 +12,11 @@ import sectionRoute from "./routes/section.route";
 import lectureRouter from "./routes/lecture.route";
 import { IUSERDocument, User } from "./models/user.model";
 import couponRouter from "./routes/couponcode.route";
-import coursePurchaseRouter from "./routes/coursePurchase";
+import coursePurchaseRouter from "./routes/coursePurchase.route";
 import courseProgressRoute from "./routes/courseProgress.route";
 import cookieParser from "cookie-parser";
 import faqRouter from "./routes/faq.route";
+import outlookRouter from "./routes/outlook.route";
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use("/api/v1/coupon", couponRouter);
 app.use("/api/v1/coursepurchase", coursePurchaseRouter);
 app.use("/api/v1/courseprogress", courseProgressRoute);
 app.use("/api/v1/faq", faqRouter);
+app.use("/api/v1/outlook",outlookRouter)
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

@@ -12,12 +12,49 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useCreateOutlookMutation } from "@/redux/api/outlookApi";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const OutLook=()=>{
-    const [timeFrame,setTimeFrame]=useState("")
-    const [pair,setPair]=useState("")
-    console.log(timeFrame);
+    const [Time,setTime]=useState("")
+    const [Pair,setPair]=useState("")
+    const [outLookDesc,setDesc]=useState({
+      Description:"",
+      OutLookPhotoUrl:""
+    })
+ 
+    
+   const [createOutLook,{data,isLoading,isError,isSuccess}]=useCreateOutlookMutation()
+    const OutLookChangeHandler:React.ChangeEventHandler<HTMLInputElement>=(e)=>{
+      const {value,type,files,name}=e?.target
+      setDesc({...outLookDesc,[name]:type=="file"?files?.[0]:value})
+    }
+
+    const OutLookFormHandler=async()=>{
+      const outlookData=new FormData()
+      outlookData.append("Time",Time)
+      outlookData.append("Pair",Pair)
+      outlookData.append("Description",outLookDesc.Description)
+      outlookData.append("OutLookPhotoUrl",outLookDesc.OutLookPhotoUrl)
+      await createOutLook(outlookData)
+
+    }
+
+    useEffect(()=>{
+      if(isSuccess){
+        toast.success(data?.message||"Successfully Posted OutLook")
+      }
+      if(isError){
+        toast.error(data?.message||"Failed to post OutLook")
+      }
+
+    },[isError,isSuccess])
+   
+    
+
+  
     
   return (
     <div className="mt-5 flex justify-center  ">
@@ -27,10 +64,10 @@ const OutLook=()=>{
         </h1>
         <div className="my-5">
           <div>
-            <Input />
-            <Input type="file" className="mt-2" />
+            <Input name="Description" value={outLookDesc.Description} onChange={OutLookChangeHandler} />
+            <Input name="OutLookPhotoUrl" type="file" className="mt-2" value={outLookDesc.OutLookPhotoUrl} onChange={OutLookChangeHandler} />
             <div className="flex justify-between">
-              <Select value={pair} onValueChange={setPair}>
+              <Select value={Pair} onValueChange={setPair}>
                 <SelectTrigger className="w-[180px] mt-4">
                   <SelectValue placeholder="Select TimeFrame" />
                 </SelectTrigger>
@@ -39,7 +76,7 @@ const OutLook=()=>{
                   <SelectItem value="15min">15 Min</SelectItem>
                 </SelectContent>
               </Select>
-              <Select value={timeFrame} onValueChange={setTimeFrame}>
+              <Select value={Time} onValueChange={setTime}>
                 <SelectTrigger className="w-[180px] mt-4">
                   <SelectValue placeholder="Select Pair" />
                 </SelectTrigger>
@@ -51,7 +88,8 @@ const OutLook=()=>{
             </div>
             <div className="flex justify-center">
               {" "}
-              <Button className="mt-2 ">Create a Post</Button>
+              {!isLoading?<Button className="mt-2 ">Create a Post</Button>:<Button className="mt-2 "><Loader2 className=" animate-spin"/></Button>}
+              
             </div>
           </div>
         </div>

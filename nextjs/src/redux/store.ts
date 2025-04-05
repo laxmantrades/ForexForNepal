@@ -8,6 +8,7 @@ import { coursePurchaseApi } from "./api/coursePurchaseApi";
 import { couponApi } from "./api/couponApi";
 import { courseProgressApi } from "./api/courseProgressApi";
 import { authenticationApi } from "./api/authenticationApi";
+import { outLookApi } from "./api/outlookApi";
 
 
 const store = configureStore({
@@ -20,7 +21,8 @@ const store = configureStore({
     [coursePurchaseApi.reducerPath]: coursePurchaseApi.reducer,
     [couponApi.reducerPath]:couponApi.reducer,
     [courseProgressApi.reducerPath]:courseProgressApi.reducer,
-    [authenticationApi.reducerPath]:authenticationApi.reducer
+    [authenticationApi.reducerPath]:authenticationApi.reducer,
+    [outLookApi.reducerPath]:outLookApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -30,7 +32,8 @@ const store = configureStore({
       coursePurchaseApi.middleware,
       couponApi.middleware,
       courseProgressApi.middleware,
-      authenticationApi.middleware
+      authenticationApi.middleware,
+      outLookApi.middleware
     ),
 });
 export default store;

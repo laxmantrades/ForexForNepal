@@ -5,8 +5,8 @@ export const couponApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5005/api/v1/coupon",
     credentials: "include",
-  }),
-  tagTypes: ["Refetch"],
+  }), tagTypes: ["Refetch"],
+ 
   endpoints: (builder) => ({
     createCoupon: builder.mutation({
       query: ({ couponCode, subtype }) => ({

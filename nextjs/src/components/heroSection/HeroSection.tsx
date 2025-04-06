@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#f5f6f9]  w-full pt-20 bg-gradient-to-r from-blue-100 to-purple-100 p-20">
+    <div className="relative flex flex-col overflow-hidden  border border-[#d8d8db] bg-[#b3b5bb]  w-full pt-20 bg-gradient-to-r from-blue-100 to-purple-100 p-20">
       <div
         className="absolute inset-0 "
         style={{
@@ -37,8 +37,8 @@ const HeroSection = () => {
               width={300}
               priority
             ></Image>
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900">
-              Master Forex Trading from Nepal
+            <h1 className="text-4xl sm:text-xl md:text-5xl xl:text-7xl font-extrabold ">
+              Master Forex Trading from AnyWhere
             </h1>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl">
               Learn Forex strategies, risk management, and live trading insights
@@ -56,7 +56,7 @@ const HeroSection = () => {
             </div>
 
             <div className="mt-20">
-              <Button className="text-5xl fon-bold shadow-2xl py-10 cursor-pointer bg-orange-400 hover:bg-orange-400 hover:scale-105 ">
+              <Button className=" text-5xl fon-bold shadow-2xl py-10 cursor-pointer bg-orange-400 hover:bg-orange-400 hover:scale-105 ">
                 Explore Courses
               </Button>
             </div>
@@ -68,7 +68,7 @@ const HeroSection = () => {
           alt="maniamge"
           height={100}
           className="relative  shadow-2xl shadow-pink-600  rounded-full  sm:w-96 hidden md:block "
-          width={600}
+          width={700}
           priority
         ></Image>
       </div>

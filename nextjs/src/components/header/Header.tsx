@@ -54,12 +54,12 @@ const Header = () => {
   };
 
   return (
-    <header className="absolute z-10 w-full">
+    <header className="absolute z-10 w-full bg-white">
       <div className="flex items-center justify-between    ">
         <Link href="/">
           <Image
-            className="dark:invert mx-10 p-1"
-            src="/REX (1).png"
+            className="dark:invert mx-10 p-1 object-cover h-18"
+            src="/logo.png"
             alt="Next.js logo"
             width={100}
             height={1}
@@ -70,7 +70,7 @@ const Header = () => {
         <div className="mr-10 flex items-center justify-center space-x-4 ">
           <DropdownMenu>
             <DropdownMenuTrigger asChild className="">
-              <Button variant="outline" size="icon" className="hidden md:flex">
+              <Button variant="outline" size="icon" className="hidden sm:flex">
                 <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
                 <span className="sr-only">Toggle theme</span>
@@ -85,25 +85,25 @@ const Header = () => {
 
           {!user?.isAuthenticated && (
             <Link href={"/login"} className=" mx-4 text-white">
-              <Button className="text-xl cursor-pointer">Sign In</Button>
+              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded hover:px-2 text-black">Sign In</h1>
             </Link>
           )}
-          {user?.isAuthenticated && (
-            <Link href={"/courses"} className=" mr-4 text-white">
-              <Button className="text-xl cursor-pointer ">Courses</Button>
+          
+            <Link href={"/courses"} className=" mr-4 text-black">
+              <h1 className="text-xl font-extrabold cursor-pointer   hover:bg-gray-400 hover:rounded px-2 hidden sm:block">Courses</h1>
             </Link>
-          )}
+          
 
           {user?.isAuthenticated && (
-           <Link href={"/outlook"}> <Button className="text-xl cursor-pointer hidden sm:flex">
+           <Link href={"/outlook"}> <h1 className="text-xl font-extrabold cursor-pointer hidden sm:flex  hover:bg-gray-400 hover:rounded px-2">
               OutLook
-            </Button>
+            </h1>
             </Link>
           )}
 
           {!user?.isAuthenticated && (
-            <Link href={"/signup"} className=" mr-4 text-white hidden sm:flex">
-              <Button className="text-xl cursor-pointer ">Sign Up</Button>
+            <Link href={"/signup"} className=" mr-4 text-bloack hidden sm:flex">
+              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2">Sign Up</h1>
             </Link>
           )}
           {user.user?.role === "owner" && (
@@ -111,7 +111,7 @@ const Header = () => {
               href={"/admin/dashboard"}
               className=" mr-4 text-white hidden sm:block"
             >
-              <Button className="text-xl cursor-pointer ">Admin</Button>
+              <h1 className="text-xl cursor-pointer ">Admin</h1>
             </Link>
           )}
           {user.isAuthenticated && (

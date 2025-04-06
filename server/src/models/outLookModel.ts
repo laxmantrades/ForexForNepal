@@ -3,12 +3,10 @@ import mongoose from "mongoose";
 interface outLookSchema {
   Pair: String;
   Description: String;
-  OutLookPhotoUrl:String,
-  Time:String
-
-
+  OutLookPhotoUrl: String;
+  Time: String;
 }
-const outLookSchema= new mongoose.Schema<outLookSchema>(
+const outLookSchema = new mongoose.Schema<outLookSchema>(
   {
     Pair: {
       type: String,
@@ -22,14 +20,17 @@ const outLookSchema= new mongoose.Schema<outLookSchema>(
       type: String,
       required: true,
     },
-    Time:{
-        type: String,
-      enum:["4H","15 Min"]
-    }
+    Time: {
+      type: String,
+      enum: ["4H", "15min"],
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export const OUTLOOKSchema = mongoose.model<outLookSchema>("OutLook", outLookSchema);
+export const OUTLOOKSchema = mongoose.model<outLookSchema>(
+  "OutLook",
+  outLookSchema
+);

@@ -9,18 +9,21 @@ interface ILECTUREPROGRESSDocument extends lectureProgress, Document {
   createdAt: Date;
   updatedAt: Date;
 }
-const lectureProgressSchema = new mongoose.Schema<ILECTUREPROGRESSDocument>({
-  lectureId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Lecture",
+const lectureProgressSchema = new mongoose.Schema<ILECTUREPROGRESSDocument>(
+  {
+    lectureId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Lecture",
+    },
+    isViewed: {
+      type: Boolean,
+      default: false,
+    },
   },
-  isViewed: {
-    type: Boolean,
-    default: false,
-  },
-},{
-    timestamps:true
-});
+  {
+    timestamps: true,
+  }
+);
 export const LECTUREPROGRESS: Model<ILECTUREPROGRESSDocument> =
   mongoose.model<ILECTUREPROGRESSDocument>(
     "LectureProgress",

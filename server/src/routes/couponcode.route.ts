@@ -1,5 +1,10 @@
 import express from "express";
-import { createCouponCode, deleteCouponCode, getCouponCode, updateCouponCode } from "../controllers/coupon.controller";
+import {
+  createCouponCode,
+  deleteCouponCode,
+  getCouponCode,
+  updateCouponCode,
+} from "../controllers/coupon.controller";
 const couponRouter = express.Router();
 couponRouter.route("/").post(createCouponCode);
 couponRouter.route("/:couponId").patch(updateCouponCode);

@@ -1,3 +1,5 @@
+"use client"
+
 import EditLecture from "@/components/admin/lecturepage/EditLecture";
 import { SiteHeader } from "@/components/site-header";
 

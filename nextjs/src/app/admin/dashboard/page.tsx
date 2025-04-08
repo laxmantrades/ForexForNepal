@@ -1,3 +1,5 @@
+"use client"
+
 import StudentShowingComponent from "@/components/admin/StudetnShowingComponent";
 import { ChartAreaInteractive } from "@/components/chart-area-interactive";
 

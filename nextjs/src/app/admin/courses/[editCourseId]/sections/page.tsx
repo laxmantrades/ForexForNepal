@@ -1,3 +1,4 @@
+"use client"
 import ViewSections from "@/components/admin/sectionPage/ViewSections";
 
 const Page = () => {

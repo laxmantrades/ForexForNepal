@@ -9,7 +9,7 @@ const Course = () => {
   if (isLoading)
     return (
       <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18">
-        {["", ""].map((index) => (
+        {["hello", "world"].map((index) => (
           <CourseCardSkeleton key={index} />
         ))}
       </div>

@@ -28,7 +28,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import axios from "axios";
 
 import { useDispatch, useSelector } from "react-redux";
 import { changeLoading, userLoggedin } from "@/redux/slices/authSlice";
@@ -42,8 +41,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((store: RootState) => store.auth);
   const { data, isLoading } = useFetchUserQuery(null);
-
-  
 
   const logoutHandler = () => {
     try {
@@ -85,31 +82,38 @@ const Header = () => {
 
           {!user?.isAuthenticated && (
             <Link href={"/login"} className=" mx-4 text-white">
-              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded hover:px-2 text-black">Sign In</h1>
+              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded hover:px-2 text-black">
+                Sign In
+              </h1>
             </Link>
           )}
-          
-            <Link href={"/courses"} className=" mr-4 text-black">
-              <h1 className="text-xl font-extrabold cursor-pointer   hover:bg-gray-400 hover:rounded px-2 hidden sm:block">Courses</h1>
-            </Link>
-          
+
+          <Link href={"/courses"} className=" mr-4 text-black">
+            <h1 className="text-xl font-extrabold cursor-pointer   hover:bg-gray-400 hover:rounded px-2 hidden sm:block">
+              Courses
+            </h1>
+          </Link>
 
           {user?.isAuthenticated && (
-           <Link href={"/outlook"}> <h1 className="text-xl font-extrabold cursor-pointer hidden sm:flex  hover:bg-gray-400 hover:rounded px-2">
-              OutLook
-            </h1>
+            <Link href={"/outlook"}>
+              {" "}
+              <h1 className="text-xl font-extrabold cursor-pointer hidden sm:flex  hover:bg-gray-400 hover:rounded px-2">
+                OutLook
+              </h1>
             </Link>
           )}
 
           {!user?.isAuthenticated && (
             <Link href={"/signup"} className=" mr-4 text-bloack hidden sm:flex">
-              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2">Sign Up</h1>
+              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2">
+                Sign Up
+              </h1>
             </Link>
           )}
           {user.user?.role === "owner" && (
             <Link
               href={"/admin/dashboard"}
-              className=" mr-4 text-white hidden sm:block"
+              className=" mr-4 text-black hidden sm:block font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2"
             >
               <h1 className="text-xl cursor-pointer ">Admin</h1>
             </Link>

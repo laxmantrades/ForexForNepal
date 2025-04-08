@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Forex For Nepal",
-  description: "Master Forex Trading Nepal",
+  description: "Master Forex Trading in Nepal",
 };
 
 export default function RootLayout({

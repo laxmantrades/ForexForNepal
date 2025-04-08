@@ -18,7 +18,7 @@ const ProtectedRouteForAdmin = ({
         router.replace("/");
       }
     
-  }, [router]);
+  }, [router,user]);
   return<>{children}</>;
 };
 export default ProtectedRouteForAdmin;

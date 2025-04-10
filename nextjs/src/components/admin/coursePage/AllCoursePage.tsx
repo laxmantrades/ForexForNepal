@@ -31,8 +31,8 @@ const AllCoursePage = () => {
       </div>
 
       <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18  max-w-5xl">
-        {store?.map((course: Course) => (
-          <CourseCard course={course} />
+        {store?.map((course: Course,) => (
+          <CourseCard key={course._id}  course={course} />
         ))}
       </div>
     </div>

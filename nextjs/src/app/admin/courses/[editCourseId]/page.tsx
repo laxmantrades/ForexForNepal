@@ -1,4 +1,4 @@
-"use client"
+
 import EditPage from "@/components/admin/coursePage/EditPage";
 import { SiteHeader } from "@/components/site-header";
 

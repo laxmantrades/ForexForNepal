@@ -58,7 +58,7 @@ const CourseFormPage = ({constants,onChangeHandler}) => {
             onChange={onChangeHandler}
           />
           <img
-            src={imagePreview ? imagePreview : courseInput?.courseThumbnail}
+            src={imagePreview ? imagePreview : courseInput?.courseThumbnail||null}
            alt="png"
           />
 

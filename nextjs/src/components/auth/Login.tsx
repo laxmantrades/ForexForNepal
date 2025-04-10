@@ -1,34 +1,24 @@
 "use client";
 
-type lastVisitedUrl = string;
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
-import { RootState } from "@/redux/store";
-import { retry } from "@reduxjs/toolkit/query";
-
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+
+import { useState } from "react";
+
 import { toast } from "sonner";
 import { Card } from "../ui/card";
 
 const LoginPage = () => {
-  const router = useRouter();
-  const path = usePathname();
-  const[checked,setChecked]=useState(false)
- 
-  
-  const { isAuthenticated } = useSelector((store: RootState) => store.auth);
+  const [checked, setChecked] = useState(false);
 
   const loginHandler = () => {
     try {
-      if(!checked){
-        toast.error("Please accept terms and condition")
-        return
+      if (!checked) {
+        toast.error("Please accept terms and condition");
+        return;
       }
       window.location.href = "http://localhost:5005/login";
     } catch (error) {
@@ -45,13 +35,21 @@ const LoginPage = () => {
           Sign in to your account
         </h1>
         <div className="text-center mt-5">
-          <Checkbox id="terms" required={true} checked={checked} onCheckedChange={(checked) => setChecked(checked === "indeterminate" ? false : checked)} className="mr-1 h-5 w-5" />
+          <Checkbox
+            id="terms"
+            required={true}
+            checked={checked}
+            onCheckedChange={(checked) =>
+              setChecked(checked === "indeterminate" ? false : checked)
+            }
+            className="mr-1 h-5 w-5"
+          />
           <label
-        htmlFor="terms"
-        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-      >
-        Accept terms and conditions
-      </label>
+            htmlFor="terms"
+            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+          >
+            Accept terms and conditions
+          </label>
         </div>
 
         <Button

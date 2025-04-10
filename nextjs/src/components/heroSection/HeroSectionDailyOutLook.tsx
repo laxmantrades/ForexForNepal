@@ -1,8 +1,8 @@
-import { ChartCandlestick, ShieldCheck } from "lucide-react";
+import {  ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "../ui/button";
+
 
 const cards = [
   {
@@ -94,39 +94,51 @@ const cards = [
 const DailyOutLook = () => {
   return (
     <div className="text-center mt-15">
-        <Card className="p-0 md:w-2/3 md:mx-auto m-2 mt-20">
-        <CardContent className=" text-center  py-2 mx-auto  flex justify-between">
-          <div className="space-y-3.5  text-center ">
-            <h1 className="text-xl font-bold mt-5">
-              Interactive Chart Analysis
-            </h1>
-            <span className="flex text-wrap">
-              {" "}
-              <ShieldCheck color="#23ab21" />
-              Tracking Trades
-            </span>
-            <span className="flex ">
-              {" "}
-              <ShieldCheck color="#23ab21" />
-              Multi-timeframe analysis!
-            </span>
-            <span className="flex ">
-              {" "}
-              <ShieldCheck color="#23ab21" />
-              Possible Trade Ideas
-            </span>
-            <span className="flex ">
-              {" "}
-              <ShieldCheck color="#23ab21" />
-              Advanced pattern recognition!
-            </span>
+      <Card className="p-0 md:w-4/5 md:mx-auto m-2 mt-20 py-10">
+        <CardContent className=" text-center  py-2 mx-auto grid md:grid-cols-2 ">
+          <div className="space-y-3.5  text-center flex justify-center  ">
+            <div className="space-y-5">
+              <h1 className="text-xl font-bold">
+                Interactive Chart Analysis
+              </h1>
+              <span className="flex text-wrap ">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Tracking Trades
+              </span>
+              <span className="flex mt-5">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Multi-timeframe analysis!
+              </span>
+              <span className="flex ">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Possible Trade Ideas
+              </span>
+              <span className="flex ">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Advanced pattern recognition!
+              </span>
+              <span className="flex ">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Journal Of Trades!
+              </span>
+              <span className="flex ">
+                {" "}
+                <ShieldCheck color="#23ab21" />
+                Psychology!
+              </span>
+            </div>
           </div>
           <Image
-            src={"/neeche-1.png"}
+            src="https://res.cloudinary.com/dqrza04p1/image/upload/macbook_3_hxopvj.jpg"
             alt=""
-            width={500}
+            width={900}
             height={100}
-            className="w-40 sm:w-64"
+            className="w-3xl md:w-xl mt-5 "
           />
         </CardContent>
       </Card>
@@ -146,7 +158,7 @@ const DailyOutLook = () => {
           </Card>
         ))}
       </div>
-      
+
       <div className="w-1/2 mx-auto mt-20">
         <svg
           className="w-10 h-10 text-primary-500 dark:text-blue-400"
@@ -168,7 +180,6 @@ const DailyOutLook = () => {
           </Avatar>
           <h1 className=" ml-1 mt-5 text-center">Raj Tamang</h1>
         </div>
-        
       </div>
     </div>
   );

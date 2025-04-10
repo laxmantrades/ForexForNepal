@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent, } from "../ui/card";
 
 const Achievement = () => {
   return (
@@ -12,13 +12,18 @@ const Achievement = () => {
         {" "}
         <Card className="p-0 md:p-4 shadow-xl shadow-orange-500">
           <CardContent className="flex justify-center p-0">
-            <Image src="/defunded1.jpeg" width={500} height={100} alt="" />
+            <Image
+              src="https://res.cloudinary.com/dqrza04p1/image/upload/v1744305275/defunded1_1_eqbwnh.webp"
+              width={500}
+              height={100}
+              alt="deifunded certificate"
+            />
           </CardContent>
         </Card>
         <Card className=" p-0 md:p-4 shadow-xl shadow-red-700">
           <CardContent className="flex justify-center p-0 ">
             <Image
-              src="/defunded1.jpeg"
+              src="https://res.cloudinary.com/dqrza04p1/image/upload/f_auto/q_auto/v1744305261/defundedp2_i7gfbx.jpg"
               width={500}
               height={100}
               alt=""
@@ -28,7 +33,12 @@ const Achievement = () => {
         </Card>
         <Card className="p-0 md:p-2 shadow-xl shadow-orange-500">
           <CardContent className="flex justify-center p-0 md:p-2">
-            <Image src="/mff.jpeg" width={500} height={100} alt="" />
+            <Image
+              src="https://res.cloudinary.com/dqrza04p1/image/upload/f_auto/q_auto/v1744305335/mff_qnnrtp.webp"
+              width={500}
+              height={100}
+              alt="mff certificate"
+            />
           </CardContent>
         </Card>
       </div>
@@ -36,11 +46,12 @@ const Achievement = () => {
         Called trade calls with 6% returns on telegram for free!
       </h1>
       <Image
-        src="/tradecalls.png"
+        src="https://res.cloudinary.com/dqrza04p1/image/upload/v1744304973/f_auto/q_auto/tradecalls_rxzp6g.webp"
         width={600}
         height={100}
         alt=""
         className="mx-auto mt-10 rounded-md p-1"
+        priority
       />
       <div className="text-center font-extrabold italic mt-10  w-full p-2 flex justify-center">
         <svg

@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 const HeroSection = () => {
   return (
-    <div className="relative flex flex-col overflow-hidden  border border-[#4f4fdf] bg-[#233f95]  w-full pt-20 bg- p-20 text-white">
+    <div className=" flex flex-col overflow-hidden  border border-[#4f4fdf] bg-black    w-full pt-20 py-20 text-white">
       <div
         className="absolute inset-0 "
         
@@ -19,11 +19,11 @@ const HeroSection = () => {
               src={"/g1.png"}
               alt="maniamge"
               height={100}
-              className="relative    rounded-full   block md:hidden "
+              className="relative    rounded-full w-auto h-auto   block md:hidden "
               width={300}
               priority
             ></Image>
-            <h1 className="text-4xl sm:text-xl md:text-5xl xl:text-7xl font-extrabold ">
+            <h1 className="text-4xl sm:text-xl md:text-3xl  xl:text-7xl font-extrabold ">
               Master Forex Trading from AnyWhere
             </h1>
             <p className="mt-4 text-lg  max-w-2xl">
@@ -32,17 +32,17 @@ const HeroSection = () => {
             </p>
 
             {/* CTA Buttons */}
-            <div className="mt-6 flex flex-wrap gap-4">
-              <button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700">
+            <div className="mt-6 flex flex-wrap gap-1 md:gap-4">
+              <Button className="px-6 py-3 bg-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-700">
                 Start Learning Today
-              </button>
-              <button className="px-6 py-3 border border-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-100">
+              </Button>
+              <Button className="px-6 py-3 border border-blue-600 text-white font-medium rounded-lg shadow-md hover:bg-blue-100">
                 Join Free Webinar
-              </button>
+              </Button>
             </div>
 
-            <div className="mt-20">
-              <Button className=" text-5xl fon-bold shadow-2xl py-10 cursor-pointer bg-orange-400 hover:bg-orange-400 hover:scale-105 ">
+            <div className="md:mt-20 mt-10">
+              <Button className="text-2xl sm:text-5xl fon-bold shadow-2xl py-5 sm:py-10 cursor-pointer bg-blue-400 hover:bg-orange-400 hover:scale-105 ">
                 Explore Courses
               </Button>
             </div>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent } from "../ui/card";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
+
 import { Button } from "../ui/button";
 import Link from "next/link";
 

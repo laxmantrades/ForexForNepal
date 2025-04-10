@@ -29,16 +29,16 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 
-import { useDispatch, useSelector } from "react-redux";
-import { changeLoading, userLoggedin } from "@/redux/slices/authSlice";
+import { useSelector } from "react-redux";
+
 import { RootState } from "@/redux/store";
-import { useEffect } from "react";
+
 import { Separator } from "../ui/separator";
 import { User } from "@/types/userTypes";
 import { useFetchUserQuery } from "@/redux/api/authenticationApi";
 
 const Header = () => {
-  const dispatch = useDispatch();
+ 
   const user = useSelector((store: RootState) => store.auth);
   const { data, isLoading } = useFetchUserQuery(null);
 
@@ -56,7 +56,7 @@ const Header = () => {
         <Link href="/">
           <Image
             className="dark:invert mx-10 p-1 object-cover h-18"
-            src="/logo.png"
+            src="https://res.cloudinary.com/dqrza04p1/image/upload/v1744305052/logo_vztg4g.webp"
             alt="Next.js logo"
             width={100}
             height={1}
@@ -124,9 +124,9 @@ const Header = () => {
                 <Image
                   src={user?.user?.photoUrl || ""}
                   alt="image"
-                  height={10}
-                  width={40}
-                  className="rounded-full h-10 hidden sm:block"
+                  height={9}
+                  width={33}
+                  className="rounded-full  w-auto h-auto hidden sm:block"
                 />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
@@ -174,11 +174,11 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
           {" "}
           {isAuthenticated ? (
             <Image
-              src={user?.photoUrl || ""}
+              src={user?.photoUrl ||"laxman.png"}
               alt="image"
               height={10}
               width={40}
-              className="rounded-full h-10"
+              className="rounded-full h-10 w-auto"
             />
           ) : (
             <Menu />
@@ -195,7 +195,7 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
                     alt="image"
                     height={10}
                     width={40}
-                    className="rounded-full h-10"
+                    className="rounded-full h-10 w-auto"
                   />
                   <h1 className="text-center ml-4 mt-2">
                     Welcome {user?.fullName}

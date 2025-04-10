@@ -161,14 +161,14 @@ const OutLook = () => {
                           Pair: {outlook?.Pair}
                         </h1>
                       </CardTitle>
-                      <CardContent className="p-0">
+                      <CardContent className="p-0 ">
                         <Image
                           src={outlook.OutLookPhotoUrl}
                           width={700}
                           height={100}
                           alt="image"
                         />
-                        <h1 className="px-2">{outlook?.Description}</h1>
+                        <h1 className="px-2 text-wrap w-auto md:w-[700]">{outlook?.Description}</h1>
                       </CardContent>
                       {user === "owner" && (
                         <CardFooter className="flex justify-end">
@@ -193,14 +193,14 @@ const OutLook = () => {
                         Pair: {outlook?.Pair}
                       </h1>
                     </CardTitle>
-                    <CardContent className="p-0">
+                    <CardContent className="p-0 flex">
                       <Image
                         src={outlook.OutLookPhotoUrl}
                         width={700}
                         height={100}
                         alt="image"
                       />
-                      <h1 className="px-2">{outlook?.Description}</h1>
+                      <h1 className="px-2 text-wrap">{outlook?.Description}</h1>
                     </CardContent>
 
                     {user === "owner" && (

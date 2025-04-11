@@ -56,7 +56,7 @@ export const AuthCheck: RequestHandler = async (req, res) => {
     const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
     const user = await User.findByIdAndUpdate(userId, {
       lastLogin: fromattedDate,
-    });
+    }).select("-createdAt -updatedAt -lastLogin -__v");
 
     res.status(200).json({
       authenticated: true,

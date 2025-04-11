@@ -13,7 +13,7 @@ endpoints:(builder)=>({
         async onQueryStarted(_, { queryFulfilled, dispatch }) {
             try {
               const result = await queryFulfilled;
-              console.log(result.data.user);
+              
               
               dispatch(userLoggedin(result?.data?.user));
             } catch (error) {}

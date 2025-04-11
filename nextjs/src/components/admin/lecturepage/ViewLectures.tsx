@@ -3,9 +3,7 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
+  
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -13,18 +11,18 @@ import { useGetSectionByIdQuery } from "@/redux/api/section&LectureApi";
 import { CirclePlay, Loader2, Plus } from "lucide-react";
 
 import { useParams } from "next/navigation";
-import EditLectureForm from "./LectureForm";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useLazyDeleteLectureQuery } from "@/redux/api/lectureApi";
 import { toast } from "sonner";
+import { lectureTypeForAdmin } from "@/types/lectureType";
+
+
 
 const ViewLecture = () => {
-  //!constants
-  const [lectureInfo, setlectureInfo] = useState({
-    lectureName: "",
-    lectureVideo: "",
-  });
+
+ 
 
   //!hooks
   const { sectionId } = useParams();
@@ -42,8 +40,9 @@ const ViewLecture = () => {
       toast.error(deletedData?.message || "Failed to delete Lecture!");
     }
     
-  },[isLoading,isError])
+  },[isLoading,isError,deletedData])
 
+  
   //!deleteHandler
   const deleteHandler = (lectureId:string) => {
     trigger({ sectionId, lectureId });
@@ -62,7 +61,7 @@ const ViewLecture = () => {
           </Link>
         </CardTitle>
         <CardContent>
-          {data?.section?.lectures?.map((item: any) => (
+          {data?.section?.lectures?.map((item: lectureTypeForAdmin) => (
             <div key={item._id} className="space-x-2.5 w-full">
               <div className="flex  space-y-2  mb-2 w-full justify-between ">
                 {" "}

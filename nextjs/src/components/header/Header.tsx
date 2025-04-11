@@ -40,7 +40,7 @@ import { useFetchUserQuery } from "@/redux/api/authenticationApi";
 const Header = () => {
  
   const user = useSelector((store: RootState) => store.auth);
-  const { data, isLoading } = useFetchUserQuery(null);
+  useFetchUserQuery(null);
 
   const logoutHandler = () => {
     try {

@@ -5,7 +5,7 @@ import LectureForm from "./LectureForm";
 import { useParams } from "next/navigation";
 import { useCreateLectureMutation } from "@/redux/api/lectureApi";
 import { toast } from "sonner";
-import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 
 const CreateLecture = () => {
@@ -34,7 +34,7 @@ const CreateLecture = () => {
     if (isError) {
       toast.error(data?.message || "Failed to create Lecture!");
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError,data]);
 
   // !changeHandler
 

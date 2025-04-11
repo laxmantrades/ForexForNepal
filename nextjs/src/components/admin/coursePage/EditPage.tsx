@@ -71,7 +71,6 @@ const EditPage = () => {
     }
   };
 
-
   //!toast + refetch
   useEffect(() => {
     if (data) {
@@ -79,7 +78,7 @@ const EditPage = () => {
         courseName: data.course?.courseName || "",
 
         coursePrice: data.course?.coursePrice || "",
-        courseThumbnail: data.course?.courseThumbnail || "",
+        courseThumbnail: data.course?.courseThumbnail,
         courseTitle: data.course?.courseTitle || "",
         IntroVideo: data.course?.IntroVideo || "",
       });
@@ -87,7 +86,6 @@ const EditPage = () => {
     }
   }, [data]);
 
-  
   useEffect(() => {
     if (isSuccess) {
       toast.success(editCourseData?.message || "Successfully Updated COurse");
@@ -96,7 +94,7 @@ const EditPage = () => {
     if (isError) {
       toast.success(editCourseData?.message || "Something went wrong");
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, editCourseData]);
   return (
     <div className="p-5">
       <Card>
@@ -104,8 +102,8 @@ const EditPage = () => {
           <CardTitle className="flex justify-between">
             <h1 className="text-xl font-bold">Edit Your Course</h1>
             <Link href={`${editCourseId}/sections`}>
-            {/** todo faq */}
-            <Button className="text-xl font-bold cursor-pointer">
+              {/** todo faq */}
+              <Button className="text-xl font-bold cursor-pointer">
                 View FAQs
               </Button>
               <Button className="text-xl font-bold cursor-pointer">
@@ -119,7 +117,7 @@ const EditPage = () => {
           <CourseFormPage
             constants={{
               imagePreview,
-              setImagePreview,
+
               courseDescription,
               setValue,
               courseInput,

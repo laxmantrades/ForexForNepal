@@ -24,18 +24,19 @@ const AddCourse = () => {
   });
 
   //!hooks
-const[createCourse,{data,isError,isLoading,isSuccess}]=useCreateCourseMutation()
-const router=useRouter()
+  const [createCourse, { data, isError, isLoading, isSuccess }] =
+    useCreateCourseMutation();
+  const router = useRouter();
 
-useEffect(()=>{
-if(isSuccess){
-    toast.success(data?.message|| "Successfully created course!")
-    router.push("/courses")
-}
-if(isError){
-    toast.error(data?.message|| "Failed to create course!")
-}
-},[])
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(data?.message || "Successfully created course!");
+      router.push("/courses");
+    }
+    if (isError) {
+      toast.error(data?.message || "Failed to create course!");
+    }
+  }, [isSuccess,isError]);
   //!changeHandler
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value, name, files, type } = e.target;
@@ -51,16 +52,16 @@ if(isError){
     }
   };
   //!submitHandler
-  const formSubmit=async()=>{
-    const formData=new FormData()
+  const formSubmit = async () => {
+    const formData = new FormData();
     formData.append("courseName", courseInput.courseName);
     formData.append("courseTitle", courseInput.courseTitle);
     formData.append("courseDescription", courseDescription);
     formData.append("coursePrice", courseInput.coursePrice);
     formData.append("IntroVideo", courseInput.IntroVideo);
     formData.append("courseThumbnail", courseInput.courseThumbnail);
-    await createCourse(formData)
-  }
+    await createCourse(formData);
+  };
 
   return (
     <div>
@@ -73,7 +74,6 @@ if(isError){
           <CourseFormPage
             constants={{
               imagePreview,
-              setImagePreview,
               courseDescription,
               setValue,
               courseInput,
@@ -82,8 +82,15 @@ if(isError){
           />
         </CardContent>
         <CardContent className="flex justify-end">
-          <Button onClick={formSubmit} className="bg-blue-500 hover:bg-blue-500 cursor-pointer">
-           {!isLoading? "Create Course":<Loader2 className="animate-spin"/>}
+          <Button
+            onClick={formSubmit}
+            className="bg-blue-500 hover:bg-blue-500 cursor-pointer"
+          >
+            {!isLoading ? (
+              "Create Course"
+            ) : (
+              <Loader2 className="animate-spin" />
+            )}
           </Button>
         </CardContent>
       </Card>

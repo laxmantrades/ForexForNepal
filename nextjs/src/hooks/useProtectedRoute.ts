@@ -1,9 +1,9 @@
 "use client";
 
 import { RootState } from "@/redux/store";
-import { useRouter, usePathname, useParams } from "next/navigation";
+import { useRouter,  useParams } from "next/navigation";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 export const useProtectedRoutesForLecture = () => {
   const data = useSelector((store: RootState) => store.auth.user?.coursePurhcased);

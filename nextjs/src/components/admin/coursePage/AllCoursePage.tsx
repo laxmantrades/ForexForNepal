@@ -3,18 +3,20 @@
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import CourseCard from "../../student/CourseCard";
-import { Course } from "@/types/courseType";
+import { CourseType } from "@/types/courseType";
 import { Plus } from "lucide-react";
-import { useEffect } from "react";
+
 import { useGetAllCourseQuery } from "@/redux/api/courseApi";
 import { Button } from "../../ui/button";
 import Link from "next/link";
 
 const AllCoursePage = () => {
-  const store = useSelector((store: RootState) => store?.course.course);
+  const store = useSelector((store: RootState) => {
+    return Array.isArray(store?.course?.course) ? store?.course?.course : [];
+  });
 
   //!api call
-  const { data, isError } = useGetAllCourseQuery(null, {
+  useGetAllCourseQuery(null, {
     skip: store !== null,
   });
 
@@ -31,8 +33,8 @@ const AllCoursePage = () => {
       </div>
 
       <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18  max-w-5xl">
-        {store?.map((course: Course,) => (
-          <CourseCard key={course._id}  course={course} />
+        {store?.map((course: CourseType) => (
+          <CourseCard key={course._id} course={course} />
         ))}
       </div>
     </div>

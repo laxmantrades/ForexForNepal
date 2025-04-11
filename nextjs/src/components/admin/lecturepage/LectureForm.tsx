@@ -1,21 +1,25 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+
 import { Input } from "@/components/ui/input";
-import { useGetSectionByIdQuery } from "@/redux/api/section&LectureApi";
+
+
 import { Loader2 } from "lucide-react";
-import { useParams } from "next/navigation";
+import { ChangeEventHandler } from "react";
+
 
 // todo types here
-const LectureForm = ({ lectureInfo, onChange, submitHandler, isLoading }) => {
+interface props{
+  lectureInfo:{
+    lectureName: string,
+    videoUrl: string,
+  },
+  onChange:ChangeEventHandler<HTMLInputElement>,
+  submitHandler:()=>void
+  isLoading:boolean
+}
+const LectureForm:React.FC<props> = ({ lectureInfo, onChange, submitHandler, isLoading }) => {
   const { videoUrl, lectureName } = lectureInfo;
 
   return (

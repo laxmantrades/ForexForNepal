@@ -34,7 +34,7 @@ const EditLecture = () => {
     if (isError) {
       toast.error(lectureData?.message || "Failed to update Lecture!");
     }
-  }, [data,isSuccess,isError]);
+  }, [data,isSuccess,isError,lectureData]);
 
   // !changeHandler
 

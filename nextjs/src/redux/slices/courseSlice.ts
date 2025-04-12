@@ -1,10 +1,10 @@
-import { User } from "@/types/userTypes";
+
 import { createSlice } from "@reduxjs/toolkit";
 
 const courseSlice=createSlice({
     name:"courseSlice",
     initialState:{
-        course:null as any
+        course:null as unknown
     },
     reducers:{
         addCourse:(state,action)=>{

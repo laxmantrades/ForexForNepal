@@ -33,6 +33,7 @@ export const findCourse = async (id: string) => {
       .populate([{
        
         path: "lectureSection",
+        select:"-createdAt -updatedAt -__v",
 
         populate: {
           path: "lectures",

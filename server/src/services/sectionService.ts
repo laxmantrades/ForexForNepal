@@ -52,6 +52,7 @@ export const getSectionService = async (sectionId: string) => {
 export const getSectionByCourseService = async (courseId: string) => {
   try {
     const section = await SECTION.find({ courseId })
+    .select("-createdAt -updatedAt -__v")
       .populate({ path: "lectures", select: "id lectureName videoUrl" })
       .lean();
     return section;

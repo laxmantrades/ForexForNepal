@@ -1,10 +1,6 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useGetAllCourseQuery } from "@/redux/api/courseApi";
-import { useGetAllSectionWithLecturesQuery } from "@/redux/api/section&LectureApi";
-import { useParams } from "next/navigation";
-import SectionAndLecture from "../../student/SectionsAndLecture";
+
 import { Button } from "../../ui/button";
 import AdminShowLecture from "./AdminShowLetures";
 

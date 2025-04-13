@@ -23,6 +23,7 @@ import { toast } from "sonner";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import DeleteAlert from "./DeleteAlert";
+import { outLookType } from "@/types/outlookType";
 
 const OutLook = () => {
   //!constants
@@ -79,7 +80,7 @@ const OutLook = () => {
     if (isError) {
       toast.error(data?.message || "Failed to post OutLook");
     }
-  }, [isError, isSuccess]);
+  }, [isError, isSuccess,data]);
 
   return (
     <div className="mt-5 flex justify-center  ">
@@ -152,7 +153,7 @@ const OutLook = () => {
             </TabsList>
             <TabsContent value="4H">
               <div className="flex flex-col-reverse">
-                {OutLookData?.outLook?.map((outlook: any) => (
+                {OutLookData?.outLook?.map((outlook: outLookType) => (
                   <div key={outlook?._id}>
                     <Card className=" shadow-2xl bg-gray-200 shadow-indigo-500 mx-2 ">
                       <CardTitle className="flex justify-between p-2">
@@ -184,7 +185,7 @@ const OutLook = () => {
               </div>
             </TabsContent>
             <TabsContent value="15min">
-              {OutLookData?.outLook?.map((outlook: any) => (
+              {OutLookData?.outLook?.map((outlook: outLookType) => (
                 <div key={outlook?._id}>
                   <Card className=" shadow-2xl bg-gray-200 shadow-indigo-500 mx-2 ">
                     <CardTitle className="flex justify-between p-2">

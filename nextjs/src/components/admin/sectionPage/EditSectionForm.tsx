@@ -3,18 +3,26 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
 import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
 
-const EditSectionForm = ({
+import { ParamValue } from "next/dist/server/request/params";
+
+interface props {
+  sectionTitle: string;
+  setSectionTitle: React.Dispatch<React.SetStateAction<string>>;
+  isLoading: boolean;
+  submitHandler: (() => void) | ((sectionId: string) => void);
+  sectionId: ParamValue;
+  sectionPurpose: string;
+}
+const EditSectionForm: React.FC<props> = ({
   sectionTitle,
   setSectionTitle,
-  isLoading,
+
   submitHandler,
   sectionId,
   sectionPurpose,
@@ -42,7 +50,10 @@ const EditSectionForm = ({
               onChange={(e) => setSectionTitle(e.target.value)}
               placeholder="Update Section Name"
             />
-            <DialogClose onClick={() => submitHandler(sectionId)} asChild>
+            <DialogClose
+              onClick={() => submitHandler(sectionId as string)}
+              asChild
+            >
               <span className="px-5 p-2 mt-5 cursor-pointer text-center bg-black text-white rounded text-xl">
                 Submit
               </span>

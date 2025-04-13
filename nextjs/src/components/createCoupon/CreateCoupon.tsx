@@ -18,8 +18,10 @@ import {
 import { toast } from "sonner";
 
 const CreateCoupon = () => {
-  const [couponType, setCouponType] = useState("");
+  const [couponType, setCouponType] = useState("paid");
   const [couponCode, setCouponcode] = useState("");
+  console.log(couponCode,couponType);
+  
   
   
 
@@ -62,7 +64,7 @@ const CreateCoupon = () => {
     if (errordeletecopon) {
       toast.error(deletedCoupon?.message || "Error deleting Coupon Code!");
     }
-  }, [isSuccess, isError, deleteSuccessCoupon, errordeletecopon]);
+  }, [isSuccess, isError,deleteSuccessCoupon]);
 
   return (
     <div>
@@ -103,7 +105,7 @@ const CreateCoupon = () => {
                 <div className="flex justify-end">
                   <Button
                     onClick={() => deleteCouponHandler(couponCode?._id)}
-                    className="mt-5 bg-red-600 hover:bg-red-500"
+                    className="mt-5 bg-red-600 hover:bg-red-500 cursor-pointer"
                   >
                     Delete Coupon
                   </Button>

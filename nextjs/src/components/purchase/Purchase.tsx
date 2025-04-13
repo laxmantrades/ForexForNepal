@@ -4,7 +4,7 @@ import { Input } from "../ui/input";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
+  
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -30,7 +30,7 @@ const userId=useSelector((store:RootState)=>store.auth.user?._id)
 
 //!hooks
 const[coursePurchase,{data,isError,isLoading,isSuccess}]=useCoursePurchaseMutation()
-console.log(data);
+
 
 useEffect(()=>{
 if(isSuccess){
@@ -43,7 +43,7 @@ if(isError){
   
   
 }
-},[isError,isSuccess])
+},[isError,isSuccess,data])
 
 
 
@@ -60,7 +60,7 @@ const onClick=async()=>{
           Please write your name only on remarks!
         </h1>
         <Image
-          src={"/QRCODE.png"}
+          src={"https://res.cloudinary.com/dqrza04p1/image/upload/f_auto/q_auto/v1744307752/QRCODE_bkpgu6.png"}
           alt="qr code"
           width={500}
           height={100}

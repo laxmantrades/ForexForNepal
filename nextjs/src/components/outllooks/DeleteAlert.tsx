@@ -17,7 +17,7 @@ interface Props {
   id: string;
 }
 const DeleteAlert: FC<Props> = ({ id }) => {
-  const [deleteOutLook, { data, isError, isSuccess }] = useDeleteOutLookMutation();
+  const [deleteOutLook, {  isError, isSuccess }] = useDeleteOutLookMutation();
   const deletHandler = () => {
      deleteOutLook(id)
   };

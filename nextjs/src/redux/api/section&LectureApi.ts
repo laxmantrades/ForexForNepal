@@ -1,5 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { url } from "inspector";
+
+let URI = "";
+if (typeof window !== "undefined") {
+  URI =
+    window.location.hostname === "forexfornepal.com"
+      ? "https://forexfornepal.com/api/v1/section"
+      : "http://localhost:5005/api/v1/section";
+}
 
 export const sectionAndLectureApi = createApi({
   reducerPath: "sectionAndLectureApi",
@@ -15,7 +22,6 @@ export const sectionAndLectureApi = createApi({
       }),
     }),
 
-    
     updateSection: builder.mutation({
       query: ({ sectionId, sectionTitle }) => ({
         url: `/${sectionId}`,

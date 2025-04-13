@@ -1,9 +1,16 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+let URI = "";
+if (typeof window !== "undefined") {
+  URI =
+    window.location.hostname === "forexfornepal.com"
+      ? "https://forexfornepal.com/api/v1/outlook"
+      : "http://localhost:5005/api/v1/outlook";
+}
 
 export const outLookApi = createApi({
   reducerPath: "outLookApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5005/api/v1/outlook",
+    baseUrl: URI,
     credentials: "include",
   }),
   tagTypes: ["RefetchOutLook"],
@@ -27,7 +34,7 @@ export const outLookApi = createApi({
         url: `/delete/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: (result, error) => [{ type: "RefetchOutLook" }],
+      invalidatesTags: () => [{ type: "RefetchOutLook" }],
     }),
   }),
 });

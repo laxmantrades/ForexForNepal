@@ -11,6 +11,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Card } from "../ui/card";
 
+let URI=""
+if(typeof window !== "undefined"){
+  URI=window.location.hostname=="forexfornepal.com"?"forexfornepal.com/login":"http://localhost:5005/login"
+}
+
 const LoginPage = () => {
   const [checked, setChecked] = useState(false);
 
@@ -20,7 +25,7 @@ const LoginPage = () => {
         toast.error("Please accept terms and condition");
         return;
       }
-      window.location.href = "http://localhost:5005/login";
+      window.location.href = URI;
     } catch (error) {
       console.log(error);
     }

@@ -29,7 +29,7 @@ const limiter = rateLimit({
 dotenv.config();
 
 const corsOptions = {
-  origin: [process.env.FRONTEND_URL_NEXTJS!],
+  origin: [process.env.FRONTEND_URL_NEXTJS!,process.env.FRONTEND_URL_NEXTJSPROD!],
   credentials: true,
 };
 app.use(cors(corsOptions));

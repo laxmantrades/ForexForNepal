@@ -5,20 +5,22 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
-import { CirclePlay, Pencil, Plus } from "lucide-react";
+import { CirclePlay, } from "lucide-react";
 import {
   useCreateSectionMutation,
   useGetAllSectionWithLecturesQuery,
   useUpdateSectionMutation,
 } from "@/redux/api/section&LectureApi";
 import { useParams } from "next/navigation";
-import { Input } from "../../ui/input";
-import { Button } from "../../ui/button";
+
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import EditSectionForm from "./EditSectionForm";
-import { DialogClose } from "@radix-ui/react-dialog";
+
 import Link from "next/link";
+import { Lecture, SectionType } from "@/types/courseType";
+
+
 
 const AdminShowLecture = () => {
   const [sectionTitle, setSectionTitle] = useState<string>("");
@@ -26,6 +28,8 @@ const AdminShowLecture = () => {
 
   //api calls
   const { data } = useGetAllSectionWithLecturesQuery(editCourseId);
+  console.log(data);
+  
   const [updateSection, { data: updatedData, isLoading, isError, isSuccess }] =
     useUpdateSectionMutation();
   const [
@@ -45,7 +49,7 @@ const AdminShowLecture = () => {
       console.log(error);
     }
   };
-  const submitHandlerCreate = async (courseId: string) => {
+  const submitHandlerCreate = async () => {
     try {
       createSection({ courseId: editCourseId, sectionTitle });
     } catch (error) {
@@ -65,7 +69,7 @@ const AdminShowLecture = () => {
     if (isErrorCreation) {
       toast.error(createdData?.message || "Failed to create section!");
     }
-  }, [isSuccess, isError, isErrorCreation, isSuccessCreation]);
+  }, [isSuccess, isError, isErrorCreation, isSuccessCreation,createdData,updatedData]);
 
   return (
     <div>
@@ -88,7 +92,7 @@ const AdminShowLecture = () => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {data?.section?.map((item: any) => (
+          {data?.section?.map((item: SectionType) => (
             <div key={item._id} className="flex  md:space-x-2.5 md:space-y-2.5">
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1 ">
@@ -110,7 +114,7 @@ const AdminShowLecture = () => {
                       />
                     </div>
 
-                    {item.lectures.map((lecture: any) => (
+                    {item.lectures.map((lecture: Lecture) => (
                       <div
                         key={lecture._id}
                         className="flex  space-x-3.5 space-y-2.5"

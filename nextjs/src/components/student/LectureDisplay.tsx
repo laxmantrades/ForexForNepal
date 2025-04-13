@@ -8,7 +8,8 @@ import VideoComponent from "./VideoComponent";
 import { Card, CardContent } from "@/components/ui/card";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useProtectedRoutesForLecture } from "@/hooks/useProtectedRoute";
+import { Section } from "@/types/sectionType";
+
 
 
 const LectureDisplay = () => {
@@ -54,12 +55,12 @@ const LectureDisplay = () => {
             orientation="horizontal"
             className="bg-black font-extrabold w-full "
           />
-          {data?.section?.map((section: any) => (
+          {data?.section?.map((section: Section) => (
             <LectureSection
               key={section._id}
               section={section}
               OnVideoClick={OnVideoClick}
-              setVideoUrl={setVideoUrl}
+     
             />
           ))}
         </div>

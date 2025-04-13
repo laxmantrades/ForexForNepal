@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/card";
 
 import { Button } from "../ui/button";
-import { Course } from "@/types/courseType";
+import { CourseType } from "@/types/courseType";
 import VideoComponent from "./VideoComponent";
 import Link from "next/link";
 import SectionAndLecture from "./SectionsAndLecture";
@@ -19,52 +18,39 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useParams } from "next/navigation";
 
-
 interface CourseProps {
-  courseInfo: Course;
+  courseInfo: CourseType;
 }
 
 const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
-  if (!courseInfo) return null;
   const {
     _id,
     courseDescription,
     courseName,
     coursePrice,
     courseTitle,
-    courseThumbnail,
+
     lectureSection,
     IntroVideo,
   } = courseInfo;
- 
-  
-  const { courseId } = useParams();
+
   const coursePurhcased = useSelector(
     (store: RootState) => store.auth.user?.coursePurhcased
   );
-  
+  const { courseId } = useParams();
 
-  const purchasedCourse =
-    
-    coursePurhcased?.some((courseId: any) => {
-      return courseId == _id;
-    })
- 
-
+  const purchasedCourse = coursePurhcased?.some((courseId: string) => {
+    return courseId == _id;
+  });
+  if (!courseInfo) return null;
 
   return (
     <div className="">
       <div className=" flex justify-center w-full ">
-        <Image
-          src={"/ForexForNepal.png"}
-          width={1400}
-          height={100}
-          alt="image"
-          className="w-full h-40  bg-cover bg-center bg-no-repeat "
-        />
-        <div className="absolute w-3/4 mt-5 ">
+        <div className="w-full h-40  bg-cover bg-center bg-no-repeat bg-black " />
+        <div className="absolute w-3/4 mt-5  text-white">
           {" "}
-          <h1 className="text-2xl sm:text-4xl font-bold">{courseName}</h1>
+          <h1 className="text-2xl font-extrabold sm:text-4xl">{courseName}</h1>
           <h1>{courseTitle}</h1>
         </div>
       </div>

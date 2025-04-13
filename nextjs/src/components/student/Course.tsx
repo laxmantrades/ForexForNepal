@@ -2,9 +2,10 @@
 import { useGetAllCourseQuery } from "@/redux/api/courseApi";
 import CourseCard from "./CourseCard";
 import CourseCardSkeleton from "../skeletons/CourseSkeleton";
+import { CourseType } from "@/types/courseType";
 
 const Course = () => {
-  const { data, isError, isLoading } = useGetAllCourseQuery(null);
+  const { data,  isLoading } = useGetAllCourseQuery(null);
 
   if (isLoading)
     return (
@@ -18,7 +19,7 @@ const Course = () => {
   return (
     <div className=" w-full ">
       <div className="flex flex-wrap md:flex-nowrap justify-center mt-10 mx-2 md:space-x-18">
-        {data?.course.map((course: any) => (
+        {data?.course.map((course: CourseType) => (
           <CourseCard course={course} key={course._id} />
         ))}
       </div>

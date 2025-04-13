@@ -1,12 +1,21 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+let URI = "";
+if (typeof window !== "undefined") {
+  URI =
+    window.location.hostname === "forexfornepal.com"
+      ? "https://forexfornepal.com/api/v1/coupon"
+      : "http://localhost:5005/api/v1/coupon";
+}
+
 export const couponApi = createApi({
   reducerPath: "couponApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5005/api/v1/coupon",
+    baseUrl: URI,
     credentials: "include",
-  }), tagTypes: ["Refetch"],
- 
+  }),
+  tagTypes: ["Refetch"],
+
   endpoints: (builder) => ({
     createCoupon: builder.mutation({
       query: ({ couponCode, subtype }) => ({
@@ -25,12 +34,15 @@ export const couponApi = createApi({
       providesTags: [`Refetch`],
     }),
     deleteCouponCode: builder.mutation({
-        query: (couponId) => ({
-          url: `/${couponId}`,
-          method: "DELETE",
-        }),
-        
+      query: (couponId) => ({
+        url: `/${couponId}`,
+        method: "DELETE",
       }),
+    }),
   }),
 });
-export const { useCreateCouponMutation, useGetCoponcodeQuery,useDeleteCouponCodeMutation } = couponApi;
+export const {
+  useCreateCouponMutation,
+  useGetCoponcodeQuery,
+  useDeleteCouponCodeMutation,
+} = couponApi;

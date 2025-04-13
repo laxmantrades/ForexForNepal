@@ -11,14 +11,14 @@ import {
 import { Button } from "../ui/button";
 import Image from "next/image";
 import Link from "next/link";
-import { Course } from "@/types/courseType";
+import { CourseType } from "@/types/courseType";
 
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
-import { CldImage } from "next-cloudinary";
+
 
 interface CourseCardProps {
-  course: Course;
+  course: CourseType;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ course }) => {

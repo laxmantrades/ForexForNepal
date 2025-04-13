@@ -5,9 +5,17 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { CirclePlay, Pencil } from "lucide-react";
-//todo typefor lecturesection
-const SectionAndLecture = ({ lectureSection }) => {
+import { CirclePlay } from "lucide-react";
+import { SectionType } from "@/types/courseType";
+
+
+interface props{
+  lectureSection:SectionType[]
+}
+
+const SectionAndLecture: React.FC<props> = ({ lectureSection }) => {
+  console.log(lectureSection);
+
   return (
     <div>
       <Card className="">
@@ -19,7 +27,7 @@ const SectionAndLecture = ({ lectureSection }) => {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          {lectureSection?.map((item: any) => (
+          {lectureSection?.map((item: SectionType) => (
             <div key={item._id} className="flex  md:space-x-2.5 md:space-y-2.5">
               <Accordion type="single" collapsible className="w-full">
                 <AccordionItem value="item-1 ">
@@ -27,7 +35,10 @@ const SectionAndLecture = ({ lectureSection }) => {
                     <h1 className="">{item.sectionTitle}</h1>
                   </AccordionTrigger>
                   <AccordionContent>
-                    {item.lectures.map((lecture: any) => (
+                    {item.lectures.map((lecture: {
+                      _id:string
+                      lectureName:string
+                    }) => (
                       <div
                         key={lecture._id}
                         className="flex  space-x-3.5 space-y-2.5"

@@ -1,21 +1,27 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
-
 import {
   Accordion,
-  AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { CircleCheckBig, CirclePlay } from "lucide-react";
-import { Separator } from "../ui/separator";
-import { Checkbox } from "../ui/checkbox";
+
 import LectureSectionWithComplete from "./LectureSectionsWithComplete";
 import React from "react";
+import { Section } from "@/types/sectionType";
+import { lectureType } from "@/types/lectureType";
+interface props {
+  section: Section;
+  
+  OnVideoClick: (videoUrl:string,lecture:string) => void;
+}
 
-const LectureSection = ({ section, setVideoUrl, OnVideoClick }) => {
-  const isComplete = true;
+const LectureSection: React.FC<props> = ({
+  section,
+
+  OnVideoClick,
+}) => {
+  
 
   return (
     <Accordion type="single" collapsible className=" ">
@@ -23,8 +29,12 @@ const LectureSection = ({ section, setVideoUrl, OnVideoClick }) => {
         <AccordionTrigger className="font-bold">
           <h1>{section?.sectionTitle}</h1>
         </AccordionTrigger>
-        {section?.lectures?.map((lecture) => (
-         <LectureSectionWithComplete key={lecture._id} OnVideoClick={OnVideoClick} lecture={lecture}/>
+        {section?.lectures?.map((lecture: lectureType) => (
+          <LectureSectionWithComplete
+            key={lecture._id}
+            OnVideoClick={OnVideoClick}
+            lecture={lecture}
+          />
         ))}
       </AccordionItem>
     </Accordion>

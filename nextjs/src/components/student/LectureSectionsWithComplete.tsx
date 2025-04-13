@@ -12,8 +12,15 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { lectureType } from "@/types/lectureType";
 
-const LectureSectionWithComplete = ({ OnVideoClick, lecture }) => {
+interface props {
+  OnVideoClick:(videoUrl:string,lectureName:string)=>void,
+  lecture:lectureType
+
+}
+
+const LectureSectionWithComplete:React.FC<props> = ({ OnVideoClick, lecture }) => {
   const { courseId } = useParams();
   const userId = useSelector((store: RootState) => store?.auth?.user?._id);
 
@@ -21,7 +28,7 @@ const LectureSectionWithComplete = ({ OnVideoClick, lecture }) => {
   const { data } = useGetCourseProgressQuery({ courseId, userId });
   const [
     createCourseProgress,
-    { data: createCourseProgressApi, isError, isSuccess },
+    {  isError, isSuccess },
   ] = useCreateCourseProgressMutation();
   const lectureId = lecture._id;
   //!checking if the lectureis in the courseProgress or not

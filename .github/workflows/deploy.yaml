@@ -1,0 +1,27 @@
+name: Build and Deploy Docker Image to ECR
+
+on:
+  push:
+    branches:
+      - main # Run the workflow when pushing to the main branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Runs on an Ubuntu environment
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2 # Checkout the code in the repository
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1 # Set up Buildx for Docker (optional, for advanced features)
+
+      - name: Log in to AWS ECR
+        run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 440744253012.dkr.ecr.ap-south-1.amazonaws.com
+      - name: Build Docker Image
+        run: |
+          docker build -t backendforexfornepal .  # Build Docker image using Dockerfile
+
+      - name: Push Docker Image to ECR
+        run: |
+          docker push 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest  # Push Docker image to ECR

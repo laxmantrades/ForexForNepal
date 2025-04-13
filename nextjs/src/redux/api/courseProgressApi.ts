@@ -1,9 +1,17 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
+let URI = "";
+if (typeof window !== "undefined") {
+  URI =
+    window.location.hostname === "forexfornepal.com"
+      ? "https://forexfornepal.com/api/v1/courseprogress"
+      : "http://localhost:5005/api/v1/courseprogress";
+}
+
 export const courseProgressApi = createApi({
   reducerPath: "courseProgressApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5005/api/v1/courseprogress",
+    baseUrl: URI,
     credentials: "include",
   }),
   tagTypes: ["Refetch"],
@@ -20,7 +28,7 @@ export const courseProgressApi = createApi({
         url: `/${userId}/${courseId}`,
         method: "GET",
       }),
-      providesTags:["Refetch"]
+      providesTags: ["Refetch"],
     }),
   }),
 });

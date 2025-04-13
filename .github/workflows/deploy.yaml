@@ -39,8 +39,7 @@ jobs:
           username: ubuntu  # Default EC2 user for Ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }}  # SSH private key from GitHub secrets
           script: |
-            # Remove old Docker images, keeping only the latest 5
-            docker images --format "{{.Repository}}:{{.Tag}} {{.CreatedAt}}" | sort -r -k2 | tail -n +6 | awk '{print $1}' | xargs -I {} sudo docker rmi {}
+            
 
             # Pull the latest Docker image from ECR
             sudo docker pull 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest

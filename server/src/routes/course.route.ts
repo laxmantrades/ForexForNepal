@@ -7,13 +7,14 @@ import {
 } from "../controllers/course.controller";
 import { authCheck } from "../middlewares/authentication";
 import upload from "../utils/multer";
+import { adminAuthenticationCheck } from "../middlewares/adminAuthentication";
 const courseRouter = express.Router();
 courseRouter
   .route("/create-course")
-  .post(authCheck, upload.single("courseThumbnail"), CreateCourse);
+  .post(authCheck,adminAuthenticationCheck, upload.single("courseThumbnail"), CreateCourse);
 courseRouter
   .route("/:courseId")
-  .patch(authCheck, upload.single("courseThumbnail"), UpdateCourse);
+  .patch(authCheck,adminAuthenticationCheck, upload.single("courseThumbnail"), UpdateCourse);
 courseRouter.route("/:courseId").get(findCourseByID);
 courseRouter.route("/").get(findAllCourse);
 

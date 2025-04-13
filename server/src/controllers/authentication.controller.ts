@@ -32,29 +32,13 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
 
 export const AuthCheck: RequestHandler = async (req, res) => {
   try {
-    dotenv.config();
-    console.log(req.id);
+
+
     
-    const { token } = req.cookies;
-    if (!token) {
-      res.status(404).json({
-        authenticated: false,
-      });
-      return;
-    }
-
-    const decode: any = jwt.verify(token, process?.env?.tokenSecret!);
-
-    if (!decode.user) {
-      res.status(404).json({
-        authenticated: false,
-      });
-      return;
-    }
-    const userId = decode?.user;
+    
     const date = new Date();
     const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
-    const user = await User.findByIdAndUpdate(userId, {
+    const user = await User.findByIdAndUpdate(req?.id, {
       lastLogin: fromattedDate,
     }).select("-createdAt -updatedAt -lastLogin -__v");
 

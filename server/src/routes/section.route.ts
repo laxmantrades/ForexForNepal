@@ -6,13 +6,16 @@ import {
   updateSection,
 } from "../controllers/section.controller";
 import { authCheck } from "../middlewares/authentication";
+import { adminAuthenticationCheck } from "../middlewares/adminAuthentication";
 
 const sectionRoute = express.Router();
 sectionRoute
   .route("/:courseId/create-section")
-  .post(/*authCheck,*/ createSection);
-sectionRoute.route("/:sectionId").patch(/*authCheck,*/ updateSection);
-sectionRoute.route("/:sectionId").get(/*authCheck,*/ getSectionBySectionID);
+  .post(authCheck, adminAuthenticationCheck, createSection);
+sectionRoute
+  .route("/:sectionId")
+  .patch(authCheck, adminAuthenticationCheck, updateSection);
+sectionRoute.route("/:sectionId").get(getSectionBySectionID);
 sectionRoute.route("/course/:courseId").get(getSectionByCourse);
 
 export default sectionRoute;

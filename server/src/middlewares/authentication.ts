@@ -1,25 +1,27 @@
 import { RequestHandler } from "express";
-import jwt from "jsonwebtoken"
-import dotenv from "dotenv"
-dotenv.config()
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
 export const authCheck: RequestHandler = (req, res, next) => {
   try {
-    const{token}=req.cookies
-    if(!token){
+    const { token } = req.cookies;
+    if (!token) {
       res.status(404).json({
-        message:"Invalid Token"
-      })
-      return
-      
+        authenticated: false,
+        message: "Invalid Token",
+      });
+      return;
     }
-    const decode=jwt.verify(token,process.env.tokenSecret!) as jwt.JwtPayload
-    req.id=decode?.user
-    
-    
-    
-    
+    //decoding
+    const decode = jwt.verify(
+      token,
+      process.env.tokenSecret!
+    ) as jwt.JwtPayload;
+    req.id = decode?.user;
+
     if (!decode) {
       res.status(401).json({
+        authenticated: false,
         message: "Unauthorized Access",
       });
       return;
@@ -27,7 +29,7 @@ export const authCheck: RequestHandler = (req, res, next) => {
     next();
   } catch (error) {
     console.log(error);
-    
+
     console.log("Something went wrong!");
   }
 };

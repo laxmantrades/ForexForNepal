@@ -6,13 +6,14 @@ import {
   updateLecture,
 } from "../controllers/lecture.controller";
 import { authCheck } from "../middlewares/authentication";
+import { adminAuthenticationCheck } from "../middlewares/adminAuthentication";
 
 const lectureRouter = express.Router();
 lectureRouter
   .route("/:sectionId/create-lecture")
-  .post(/*authCheck,*/ createLecture);
-lectureRouter.route("/:lectureId").patch(authCheck, updateLecture);
-lectureRouter.route("/:sectionId/:lectureId").delete(authCheck, deleteLecture);
+  .post(authCheck,adminAuthenticationCheck, createLecture);
+lectureRouter.route("/:lectureId").patch(authCheck,adminAuthenticationCheck, updateLecture);
+lectureRouter.route("/:sectionId/:lectureId").delete(authCheck,adminAuthenticationCheck, deleteLecture);
 lectureRouter.route("/:lectureId").get(authCheck, getLecture);
 //lectureRouter.route("/:sectionId/getAllLectures").get()
 

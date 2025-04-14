@@ -5,7 +5,7 @@ let URI =""
 if (typeof window !== "undefined") {
   URI =
     window.location.hostname === "forexfornepal.com"
-      ? "https://forexfornepal.com/api/v1/course"
+      ? "https://api.forexfornepal.com/api/v1/course"
       : "http://localhost:5005/api/v1/course";
 }
  

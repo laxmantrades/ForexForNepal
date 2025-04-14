@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
     //the current url the user visits
     const pathname = req.nextUrl.pathname;
     //fetching data
-    const res = await fetch("http://localhost:5005/authcheck", {
+    const res = await fetch(URI, {
       credentials: "include",
       method: "get",
       headers: { cookie: req.headers.get("cookie") || "" },

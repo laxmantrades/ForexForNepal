@@ -4,7 +4,7 @@ import { userLoggedin } from "../slices/authSlice";
 let URI=""
 if(typeof window !=="undefined"){
   URI =
-  window.location.hostname === "forexfornepal.com"
+  window.location.hostname === "forexfornepal"
     ? "https://api.forexfornepal.com/authcheck"
     : "http://localhost:5005/authcheck";
 }

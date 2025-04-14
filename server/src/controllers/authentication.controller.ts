@@ -6,6 +6,11 @@ import { IUSERDocument, User } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
+let URI=""
+if(typeof window !== "undefined"){
+  URI=window.location.hostname=="forexfornepal" ? "https://forexfornepal.com/":"http://localhost:3000/"
+}
+
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
   passport.authenticate(
@@ -20,9 +25,9 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
         res.cookie("token", token, {
           httpOnly: true,
           secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
-          maxAge: 36000000, // 1 hour
+          maxAge: 360000000, // 1 hour
         });
-        return res.redirect("http://localhost:3000/");
+        return res.redirect(URI);
       } catch (error) {
         console.log(error);
       }
@@ -59,7 +64,7 @@ export const Logout: RequestHandler = (req, res) => {
   try {
     req.logOut(() => {
       res.clearCookie("token");
-      res.redirect("http://localhost:3000");
+      res.redirect(URI);
     });
   } catch (error) {
     console.log(error);

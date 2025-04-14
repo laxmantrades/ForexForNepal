@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 
-
+let URI = "";
+if (typeof window !== "undefined") {
+  URI =
+    window.location.hostname === "forexfornepal"
+      ? "https://forexfornepal.com/authcheck"
+      : "http://localhost:5005/authcheck";
+}
 
 export async function middleware(req: NextRequest) {
   try {
@@ -13,7 +19,7 @@ export async function middleware(req: NextRequest) {
 
     //the current url the user visits
     const pathname = req.nextUrl.pathname;
-//fetching data
+    //fetching data
     const res = await fetch("http://localhost:5005/authcheck", {
       credentials: "include",
       method: "get",
@@ -29,7 +35,6 @@ export async function middleware(req: NextRequest) {
     //for lectureRoute
     if (allowedPaths.includes(pathname)) {
       const parts = pathname.split("/");
-     
 
       const isPurchasedCourse = await data?.user?.coursePurhcased?.some(
         (course: string) => course === parts[2]
@@ -46,7 +51,7 @@ export async function middleware(req: NextRequest) {
       if (data.user.role !== "owner") {
         return NextResponse.redirect(new URL("/", req.url));
       }
-      //else go go next 
+      //else go go next
       return NextResponse.next();
     }
 

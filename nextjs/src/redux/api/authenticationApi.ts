@@ -5,7 +5,7 @@ let URI=""
 if(typeof window !=="undefined"){
   URI =
   window.location.hostname === "forexfornepal.com"
-    ? "https://forexfornepal.com/authcheck"
+    ? "https://api.forexfornepal.com/authcheck"
     : "http://localhost:5005/authcheck";
 }
  

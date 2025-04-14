@@ -24,18 +24,21 @@ const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100, // Limit each IP to 100 requests per windowMs
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false,  // Disable the `X-RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 dotenv.config();
 
 const corsOptions = {
-  origin: [process.env.FRONTEND_URL_NEXTJS!,process.env.FRONTEND_URL_NEXTJSPROD!],
+  origin: [
+    process.env.FRONTEND_URL_NEXTJS!,
+    process.env.FRONTEND_URL_NEXTJSPROD!,
+  ],
   credentials: true,
 };
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
-app.use(limiter)
+app.use(limiter);
 
 app.use(passport.initialize()); //initialise passport for authentication
 
@@ -50,7 +53,7 @@ app.use("/api/v1/coupon", couponRouter);
 app.use("/api/v1/coursepurchase", coursePurchaseRouter);
 app.use("/api/v1/courseprogress", courseProgressRoute);
 app.use("/api/v1/faq", faqRouter);
-app.use("/api/v1/outlook",outlookRouter)
+app.use("/api/v1/outlook", outlookRouter);
 
 connectDatabae().then(() =>
   app.listen(process.env.PORT, () => {

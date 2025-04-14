@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-let URI = "";
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname === "forexfornepal"
-      ? "https://forexfornepal.com/authcheck"
-      : "http://localhost:5005/authcheck";
-}
+const URI =
+  process.env.NODE_ENV === "production"
+    ? "https://api.forexfornepal.com/authcheck"
+    : "http://localhost:5005/authcheck";
 
 export async function middleware(req: NextRequest) {
   try {

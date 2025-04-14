@@ -4,14 +4,14 @@ let URI = "";
 if (typeof window !== "undefined") {
   URI =
     window.location.hostname === "forexfornepal.com"
-      ? "https://forexfornepal.com/api/v1/section"
+      ? "https://api.forexfornepal.com/api/v1/section"
       : "http://localhost:5005/api/v1/section";
 }
 
 export const sectionAndLectureApi = createApi({
   reducerPath: "sectionAndLectureApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:5005/api/v1/section",
+    baseUrl: URI,
     credentials: "include",
   }),
   endpoints: (builder) => ({

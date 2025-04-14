@@ -13,7 +13,7 @@ import { Card } from "../ui/card";
 
 let URI=""
 if(typeof window !== "undefined"){
-  URI=window.location.hostname=="forexfornepal.com"?"forexfornepal.com/login":"http://localhost:5005/login"
+  URI=window.location.hostname=="forexfornepal.com"? "https://api.forexfornepal.com/login":"http://localhost:5005/login"
 }
 
 const LoginPage = () => {

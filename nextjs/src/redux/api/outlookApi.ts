@@ -3,7 +3,7 @@ let URI = "";
 if (typeof window !== "undefined") {
   URI =
     window.location.hostname === "forexfornepal.com"
-      ? "https://forexfornepal.com/api/v1/outlook"
+      ? "https://api.forexfornepal.com/api/v1/outlook"
       : "http://localhost:5005/api/v1/outlook";
 }
 

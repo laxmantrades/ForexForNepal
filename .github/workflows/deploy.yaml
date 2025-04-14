@@ -42,14 +42,18 @@ jobs:
             # Gracefully stop and remove any existing container using the same image
             CONTAINER_ID=$(sudo docker ps -q --filter ancestor=440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest)
             if [ ! -z "$CONTAINER_ID" ]; then
-            sudo docker stop $CONTAINER_ID
-            sudo docker rm $CONTAINER_ID
-            echo "Stopped and removed existing container $CONTAINER_ID"
+             sudo docker stop $CONTAINER_ID
+             sudo docker rm $CONTAINER_ID
+             echo "Stopped and removed existing container $CONTAINER_ID"
             else
-            echo "No existing container found"
+             echo "No existing container found"
             fi
             sudo docker system prune -f
              
+            if ! sudo docker pull 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest; then
+             echo "Failed to pull Docker image"
+             exit 1
+            fi
 
              # Pull the latest Docker image from ECR
              sudo docker pull 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest

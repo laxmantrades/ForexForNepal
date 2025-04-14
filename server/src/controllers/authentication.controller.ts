@@ -6,10 +6,9 @@ import { IUSERDocument, User } from "../models/user.model";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-let URI=""
-if(typeof window !== "undefined"){
-  URI=window.location.hostname=="forexfornepal" ? "https://forexfornepal.com/":"http://localhost:3000/"
-}
+
+  const URI= "https://forexfornepal.com/"
+
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback

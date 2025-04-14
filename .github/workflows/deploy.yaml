@@ -59,4 +59,4 @@ jobs:
              sudo docker pull 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest
 
              # Run the new Docker container with the appropriate environment variables
-             sudo docker run --env-file /path/to/your/.env -p 5005:5005 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest
+             sudo docker run -d --env-file /home/ubuntu/.env -p 5005:5005 440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest

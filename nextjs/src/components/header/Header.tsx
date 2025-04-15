@@ -178,7 +178,7 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
               alt="image"
               height={10}
               width={40}
-              className="rounded-full h-10 w-auto"
+              className="rounded-full h-auto w-auto"
             />
           ) : (
             <Menu />

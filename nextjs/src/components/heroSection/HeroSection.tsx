@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 
 const HeroSection = () => {
+  const ladyimage="https://res.cloudinary.com/dqrza04p1/f_auto/q_auto/image/upload/v1744730749/G1_gvptke.png"
   return (
     <div className=" flex flex-col overflow-hidden  border border-[#4f4fdf] bg-black    w-full pt-20 py-20 text-white">
       <div
@@ -16,7 +17,7 @@ const HeroSection = () => {
 
             {/* Content */}
             <Image
-              src={"/g1.png"}
+              src="https://res.cloudinary.com/dqrza04p1/image/upload/v1744730749/G1_gvptke.png"
               alt="maniamge"
               height={100}
               className="relative    rounded-full w-auto h-auto   block md:hidden "
@@ -50,8 +51,8 @@ const HeroSection = () => {
         </div>
 
         <Image
-          src={"/g1.png"}
-          alt="maniamge"
+          src={"https://res.cloudinary.com/dqrza04p1/image/upload/v1744730749/G1_gvptke.png"}
+          alt="main image"
           height={100}
           className="relative  shadow-2xl  shadow-white  rounded-full  sm:w-96 hidden md:block "
           width={700}

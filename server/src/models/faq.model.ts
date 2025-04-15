@@ -9,6 +9,7 @@ interface FAQ{
     
 }
 const faqSchema=new mongoose.Schema<FAQ>({
+ 
     question:{
         type:String,
         required:true

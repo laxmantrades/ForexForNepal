@@ -8,6 +8,7 @@ import ReduxProvideProps from "./ReduxProvier";
 
 import Footer from "@/components/Footer/Footer";
 import StorePathName from "./StorePathName";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,8 +21,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Forex For Nepal",
-  description: "Master Forex Trading in Nepal",
+  title: "Forex Trading in Nepal | Master the Forex Market",
+  description:
+    "Learn forex trading in Nepal with expert strategies and tips. Get insights into the best forex strategy, currency pairs, and market trends in Nepal.",
+  keywords:
+    "Forex trading Nepal, forex  in Nepal,  trading in Nepal, , forex strategies Nepal, best forex course Nepal, forex education Nepal, learn forex in nepal, nepali forex trader",
 };
 
 export default function RootLayout({
@@ -36,7 +40,6 @@ export default function RootLayout({
       >
         <ReduxProvideProps>
           {" "}
-        
           <Toaster />
           <header>
             {" "}
@@ -44,6 +47,7 @@ export default function RootLayout({
           </header>
           <StorePathName>
             <div className="flex-1 mt-20"> {children}</div>
+            <Analytics />
           </StorePathName>
           <Toaster />
           <footer>

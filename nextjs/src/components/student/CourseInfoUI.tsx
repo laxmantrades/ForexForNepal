@@ -57,51 +57,74 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
 
       <div className=" max-w-7xl  flex mx-4  lg:mx-auto lg:justify-between flex-col-reverse md:flex-row sm:max-w-5xl sm:space-x-14">
         <div className="mt-4 w-full lg:w-2/2">
-          <h1 className="mt-2 ml-4 text-3xl">Description</h1>
-          <p
-            className="text-sm"
-            dangerouslySetInnerHTML={{
-              __html: courseDescription || " lorem15 ",
-            }}
-          />
-
           <SectionAndLecture lectureSection={lectureSection} />
         </div>
 
-        <div className="md:-mt-14 mt-2  md:ml-5 w-full md:w-4/6 lg:w-xl ">
+        <div className="md:-mt-14 mt-2  md:ml-5 w-full   ">
           <Card className=" overflow-scroll">
             <CardHeader>
-              <CardTitle>Card Title</CardTitle>
-              <CardDescription>Card Description</CardDescription>
+              <CardTitle></CardTitle>
+              <CardDescription></CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               <VideoComponent videoUrl={IntroVideo} />
             </CardContent>
             <CardFooter className="flex-col p-0">
-              <div className="flex justify-evenly space-x-1 font-bold text-xl">
-                <h1>Price:Rs</h1>
-                <h1 className=" text-red-600"> {coursePrice}</h1>
+              <div className="flex justify-between  space-x-40 font-bold text-xl">
+                <div className="flex">
+                  <h1>Price:Nrs</h1>
+                  {courseId === "67d1e09afce33698ada54ae7" ? (
+                    <h1 className=" text-red-600 line-through"> 30000</h1>
+                  ) : (
+                    <h1>0</h1>
+                  )}
+                </div>
+                {courseId === "67d1e09afce33698ada54ae7" ? (
+                  <div>📴 80% OFF</div>
+                ) : (
+                  <div>100% OFF</div>
+                )}
               </div>
-
-              {purchasedCourse ? (
-                <Link
-                  href={`/courses/${courseInfo?._id}/lectures`}
-                  className="w-full cursor-pointer"
-                >
-                  <Button className="w-full cursor-pointer">
-                    Continue Course
-                  </Button>
-                </Link>
-              ) : (
-                <Link href={`/courses/${courseId}/purchase`}>
-                  <Button className="w-full cursor-pointer">
-                    Buy Course Now
-                  </Button>
-                </Link>
-              )}
+              <div className="flex text-2xl mt-2 space-x-2.5 mb-5 ">
+                <h1 className="">Get it now for</h1>{" "}
+                <h1 className="font-extrabold text-red-500">Nrs{coursePrice} 🎁</h1>{" "}
+              </div>
+              {courseId==="67cdb7359d6376aa9395a8e0"&&<div className="flex space-x-3.5">
+                <h1 className="mt-1"> Use CouponCode</h1>
+                <h1 className="font-extrabold text-purple-700 text-2xl ">LAXMANTRADES</h1>
+              </div>}
+              <div className="w-full">
+                {purchasedCourse ? (
+                  <Link
+                    href={`/courses/${courseInfo?._id}/lectures`}
+                    className="w-full cursor-pointer"
+                  >
+                    <Button className="w-full cursor-pointer bg-blue-500">
+                      Continue Course
+                    </Button>
+                  </Link>
+                ) : (
+                  <Link href={`/courses/${courseId}/purchase`}>
+                    <Button className="w-full cursor-pointer font-bold bg-blue-600">
+                      Buy Course Now
+                    </Button>
+                  </Link>
+                )}
+              </div>
             </CardFooter>
           </Card>
         </div>
+      </div>
+      <div className="mx-auto md:w-4xl  mt-10  px-4 rounded-2xl ">
+        <h1 className="mt-2 ml-4 text-4xl  mx-auto text-center underline mb-5">
+          Description
+        </h1>
+        <p
+          className="text-xl "
+          dangerouslySetInnerHTML={{
+            __html: courseDescription || " lorem15 ",
+          }}
+        />
       </div>
     </div>
   );

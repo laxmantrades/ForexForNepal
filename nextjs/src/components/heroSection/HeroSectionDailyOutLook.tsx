@@ -1,8 +1,7 @@
-import {  ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { Card, CardContent, CardTitle } from "../ui/card";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
 
 const cards = [
   {
@@ -98,9 +97,7 @@ const DailyOutLook = () => {
         <CardContent className=" text-center  py-2 mx-auto grid md:grid-cols-2 ">
           <div className="space-y-3.5  text-center flex justify-center  ">
             <div className="space-y-5">
-              <h1 className="text-xl font-bold">
-                Interactive Chart Analysis
-              </h1>
+              <h1 className="text-xl font-bold">Interactive Chart Analysis</h1>
               <span className="flex text-wrap ">
                 {" "}
                 <ShieldCheck color="#23ab21" />
@@ -168,11 +165,20 @@ const DailyOutLook = () => {
         >
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path>
         </svg>
-        <h1 className="text-xl text-wrap font-bold">
-          "The trading analysis tools and personalized mentorship completely
-          transformed my approach to the markets. Within 3 months, my win rate
-          improved from 32% to 68%. "{" "}
-        </h1>
+        <div className="text-xl text-wrap font-bold">
+          <h1>
+            "I used to struggle with not trading the exact setups my mentor
+            took. Sometimes, I’d take a high-probability trade that hit
+            stop-loss, and then skip a low-probability one my mentor took—which ended
+            up being a winner. That used to frustrate me and even made me mad at
+            him! 😅
+          </h1>{" "}
+          <h1>
+            But this strategy changed everything. Now we don't have  high and
+            low probability setups and I can see exactly what my mentor
+            sees. We even share the same entry, stop-loss, and target now. 😊"
+          </h1>
+        </div>
         <div className="flex justify-center ">
           <Avatar className="mt-5">
             <AvatarImage src="https://github.com/shadcn.png" />

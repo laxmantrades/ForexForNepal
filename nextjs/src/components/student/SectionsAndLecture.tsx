@@ -14,7 +14,7 @@ interface props{
 }
 
 const SectionAndLecture: React.FC<props> = ({ lectureSection }) => {
-  console.log(lectureSection);
+
 
   return (
     <div>
@@ -22,20 +22,22 @@ const SectionAndLecture: React.FC<props> = ({ lectureSection }) => {
         <CardHeader>
           <CardTitle>
             {" "}
-            <h1 className="text-2xl font-bold ">Course Content 1</h1>
-            <h1>{"5"} lectures</h1>
+            <h1 className="text-2xl font-bold ">Course Contents</h1>
+            
           </CardTitle>
         </CardHeader>
         <CardContent>
           {lectureSection?.map((item: SectionType) => (
             <div key={item._id} className="flex  md:space-x-2.5 md:space-y-2.5">
+              
               <Accordion type="single" collapsible className="w-full">
+
                 <AccordionItem value="item-1 ">
                   <AccordionTrigger className="text-xl flex ">
                     <h1 className="">{item.sectionTitle}</h1>
                   </AccordionTrigger>
                   <AccordionContent>
-                    {item.lectures.map((lecture: {
+                    {item.lectures?.map((lecture: {
                       _id:string
                       lectureName:string
                     }) => (

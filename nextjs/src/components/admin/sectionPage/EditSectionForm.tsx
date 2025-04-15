@@ -27,7 +27,7 @@ const EditSectionForm: React.FC<props> = ({
   sectionId,
   sectionPurpose,
 }) => {
-  console.log(sectionId);
+ 
 
   return (
     <div>

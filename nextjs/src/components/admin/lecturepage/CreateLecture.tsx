@@ -14,7 +14,7 @@ const CreateLecture = () => {
     lectureName: "",
     videoUrl: "",
   });
-  console.log(lectureInfo);
+
 
   //!hooks
 

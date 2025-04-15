@@ -20,7 +20,7 @@ import { toast } from "sonner";
 const CreateCoupon = () => {
   const [couponType, setCouponType] = useState("paid");
   const [couponCode, setCouponcode] = useState("");
-  console.log(couponCode,couponType);
+  
   
   
   

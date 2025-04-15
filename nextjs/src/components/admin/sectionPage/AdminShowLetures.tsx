@@ -28,7 +28,7 @@ const AdminShowLecture = () => {
 
   //api calls
   const { data } = useGetAllSectionWithLecturesQuery(editCourseId);
-  console.log(data);
+  
   
   const [updateSection, { data: updatedData, isLoading, isError, isSuccess }] =
     useUpdateSectionMutation();

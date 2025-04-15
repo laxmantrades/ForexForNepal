@@ -6,7 +6,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-
 import Image from "next/image";
 
 const Herosection2 = () => {
@@ -17,14 +16,38 @@ const Herosection2 = () => {
       <Card className="sm:mx-2  h-auto   ml-2 sm:mt-0 mt-4">
         <CardHeader className="">
           <CardTitle className="flex items-center justify-center ">
-            <Image
-              src={"/medal-18.png"}
-              height={0}
-              width={100}
-              alt="icon"
-              className="w-20 sm:w-20"
-              priority
-            />{" "}
+            <svg
+              width="90"
+              height="90"
+              viewBox="0 0 200 300"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <polygon points="60,0 100,100 140,0" fill="#1a73e8" />
+              <polygon points="60,0 40,30 90,110" fill="#e53935" />
+              <polygon points="140,0 160,30 110,110" fill="#e53935" />
+
+              <circle
+                cx="100"
+                cy="200"
+                r="70"
+                fill="gold"
+                stroke="#d4af37"
+                strokeWidth="6"
+              />
+              <circle cx="100" cy="200" r="50" fill="#ffecb3" />
+
+              <text
+                x="100"
+                y="210"
+                fontFamily="Arial, sans-serif"
+                fontSize="48"
+                fill="#d4af37"
+                textAnchor="middle"
+                fontWeight="bold"
+              >
+                1
+              </text>
+            </svg>
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -36,7 +59,6 @@ const Herosection2 = () => {
           <CardTitle className="flex items-center justify-center">
             <Image
               src="https://res.cloudinary.com/dqrza04p1/image/upload/f_auto,q_auto/v1744291276/learnbeststrategy_ih6mv9.png"
-
               height={70}
               width={200}
               alt="icon"

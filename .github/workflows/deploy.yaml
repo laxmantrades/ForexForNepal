@@ -19,7 +19,7 @@ jobs:
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set region ap-south-1
           aws sts get-caller-identity
-          aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 440744253012.dkr.ecr.ap-south-1.amazonaws.com
+          
 
       - name: Log in to AWS ECR
         run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 440744253012.dkr.ecr.ap-south-1.amazonaws.com
@@ -40,6 +40,12 @@ jobs:
           username: ubuntu # Default EC2 user for Ubuntu
           key: ${{ secrets.AWS_SSH_PRIVATE_KEY }} # SSH private key from GitHub secrets
           script: |
+
+            aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws configure set region ap-south-1
+            aws sts get-caller-identity
+            aws ecr get-login-password --region ap-south-1 | sudo docker login --username AWS --password-stdin 440744253012.dkr.ecr.ap-south-1.amazonaws.com
             # Gracefully stop and remove any existing container using the same image
             CONTAINER_ID=$(sudo docker ps -q --filter ancestor=440744253012.dkr.ecr.ap-south-1.amazonaws.com/backendforexfornepal:latest)
             if [ ! -z "$CONTAINER_ID" ]; then

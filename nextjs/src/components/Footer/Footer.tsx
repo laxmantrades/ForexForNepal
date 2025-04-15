@@ -37,6 +37,7 @@ const Footer = () => {
 
         <h1 className="mt-5">@2025 ALL Right Reserverd ForexForNepal.com</h1>
       </div>
+      
     </div>
   );
 };

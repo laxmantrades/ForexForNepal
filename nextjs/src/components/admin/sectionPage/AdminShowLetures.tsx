@@ -30,7 +30,7 @@ const AdminShowLecture = () => {
   const { data } = useGetAllSectionWithLecturesQuery(editCourseId);
   
   
-  const [updateSection, { data: updatedData, isLoading, isError, isSuccess }] =
+  const [updateSection, { data: updatedData, isLoading, isError, isSuccess, }] =
     useUpdateSectionMutation();
   const [
     createSection,
@@ -38,6 +38,7 @@ const AdminShowLecture = () => {
       data: createdData,
       isSuccess: isSuccessCreation,
       isError: isErrorCreation,
+      
     },
   ] = useCreateSectionMutation();
 
@@ -58,6 +59,7 @@ const AdminShowLecture = () => {
   };
   useEffect(() => {
     if (isSuccess) {
+      
       toast.success(updatedData?.message || "Successfully Updated Section!");
     }
     if (isError) {

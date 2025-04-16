@@ -13,13 +13,16 @@ export const sectionAndLectureApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: URI,
     credentials: "include",
+   
   }),
+  tagTypes: ["RefetchSection"],
   endpoints: (builder) => ({
     GetAllSectionWithLectures: builder.query({
       query: (courseId) => ({
         url: `/course/${courseId}`,
         method: "GET",
       }),
+      providesTags:["RefetchSection"]
     }),
 
     updateSection: builder.mutation({
@@ -28,6 +31,7 @@ export const sectionAndLectureApi = createApi({
         method: "PATCH",
         body: { sectionTitle },
       }),
+      invalidatesTags:["RefetchSection"]
     }),
     createSection: builder.mutation({
       query: ({ courseId, sectionTitle }) => ({
@@ -35,6 +39,7 @@ export const sectionAndLectureApi = createApi({
         method: "POST",
         body: { sectionTitle },
       }),
+      invalidatesTags:["RefetchSection"]
     }),
     getSectionById: builder.query({
       query: (sectionId) => ({

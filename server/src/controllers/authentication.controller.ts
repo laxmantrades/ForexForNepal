@@ -1,14 +1,10 @@
 import { RequestHandler } from "express";
 import passport from "passport";
-import { createUser } from "../services/userService";
+
 import { format } from "date-fns";
-import { IUSERDocument, User } from "../models/user.model";
-import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
+import { User } from "../models/user.model";
 
-
-  const URI= "https://forexfornepal.com/"
-
+const URI = "https://forexfornepal.com/";
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
@@ -28,7 +24,7 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
         });
         return res.redirect(URI);
       } catch (error) {
-        console.log(error);
+        throw new Error("");
       }
     }
   )(req, res); // Execute passport logic for Google OAuth
@@ -36,10 +32,6 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
 
 export const AuthCheck: RequestHandler = async (req, res) => {
   try {
-
-
-    
-    
     const date = new Date();
     const fromattedDate = format(date, "dd MMMM HH:mm yyyy");
     const user = await User.findByIdAndUpdate(req?.id, {

@@ -156,7 +156,7 @@ const DailyOutLook = () => {
         ))}
       </div>
 
-      <div className="w-1/2 mx-auto mt-20">
+      <div className="w-4/5 md:w-1/2 mx-auto mt-20">
         <svg
           className="w-10 h-10 text-primary-500 dark:text-blue-400"
           xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +165,7 @@ const DailyOutLook = () => {
         >
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"></path>
         </svg>
-        <div className="text-xl text-wrap font-bold">
+        <div className="sm:text-xl text-wrap font-bold">
           <h1>
             "I used to struggle with not trading the exact setups my mentor
             took. Sometimes, I’d take a high-probability trade that hit

@@ -4,7 +4,7 @@ import passport from "passport";
 import { format } from "date-fns";
 import { User } from "../models/user.model";
 
-const URI = "https://forexfornepal.com/";
+const URI = process.env.NODE_ENV==="production"?"https://forexfornepal.com/":"http://localhost:5000";
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
@@ -22,19 +22,19 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
             maxAge: 360000000, // 1 hour
+
+            sameSite: "none",
+            domain: ".forexfornepal.com",
           });
           return res.redirect(URI);
         } catch (error) {
           console.log(error);
-          
         }
       }
     )(req, res); // Execute passport logic for Google OAuth
   } catch (error) {
     console.log(error);
-    
   }
-  
 };
 
 export const AuthCheck: RequestHandler = async (req, res) => {

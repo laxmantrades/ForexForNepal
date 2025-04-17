@@ -14,19 +14,23 @@ export const lectureApi = createApi({
     baseUrl: URI,
     credentials: "include",
   }),
+  tagTypes:["RefetchLecture"],
   endpoints: (builder) => ({
     getLecture: builder.query({
       query: (lectureId) => ({
         url: `/${lectureId}`,
         method: "GET",
       }),
+      providesTags:["RefetchLecture"]
     }),
+    
     updateLecture: builder.mutation({
       query: ({ lectureId, lectureInfo }) => ({
         url: `/${lectureId}`,
         method: "PATCH",
         body: lectureInfo,
       }),
+      invalidatesTags:["RefetchLecture"]
     }),
     createLecture: builder.mutation({
       query: ({ sectionId, lectureInfo }) => ({
@@ -34,12 +38,14 @@ export const lectureApi = createApi({
         method: "POST",
         body: lectureInfo,
       }),
+      invalidatesTags:["RefetchLecture"]
     }),
     deleteLecture: builder.query({
       query: ({ sectionId, lectureId }) => ({
         url: `/${sectionId}/${lectureId}`,
         method: "DELETE",
       }),
+      
     }),
   }),
 });

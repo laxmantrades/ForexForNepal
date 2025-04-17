@@ -1,6 +1,7 @@
 "use client";
 
 
+import CourseDetailSkeleton from "../skeletons/CourseDetailsSekelton";
 import CourseInfoUI from "./CourseInfoUI";
 import FAQ from "./FAQ";
 import { useGetCourseByIdQuery } from "@/redux/api/courseApi";
@@ -13,7 +14,7 @@ const CourseInfoPage = () => {
   const { data, error,isLoading } = useGetCourseByIdQuery(courseId);
 
   
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <CourseDetailSkeleton/>
 if (error) return <p>Error loading course.</p>;
 if (!data?.course) return <p>No course found.</p>
  

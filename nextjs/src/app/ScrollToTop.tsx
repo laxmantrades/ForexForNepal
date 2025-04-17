@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/router'; 
+import { useRouter } from 'next/router'; // or 'next/router' if using pages/
 
 export default function ScrollToTop() {
   const router = useRouter();

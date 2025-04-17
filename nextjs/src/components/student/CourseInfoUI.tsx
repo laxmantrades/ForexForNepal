@@ -17,6 +17,7 @@ import SectionAndLecture from "./SectionsAndLecture";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { useParams } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
 
 interface CourseProps {
   courseInfo: CourseType;
@@ -130,3 +131,4 @@ const CourseInfoUI: React.FC<CourseProps> = ({ courseInfo }) => {
   );
 };
 export default CourseInfoUI;
+

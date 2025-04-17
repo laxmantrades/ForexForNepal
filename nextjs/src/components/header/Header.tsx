@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
   SheetHeader,
@@ -28,7 +29,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-
 import { useSelector } from "react-redux";
 
 import { RootState } from "@/redux/store";
@@ -36,11 +36,12 @@ import { RootState } from "@/redux/store";
 import { Separator } from "../ui/separator";
 import { User } from "@/types/userTypes";
 import { useFetchUserQuery } from "@/redux/api/authenticationApi";
+import { Skeleton } from "../ui/skeleton";
+//todo sheetclose
 
 const Header = () => {
- 
   const user = useSelector((store: RootState) => store.auth);
-  useFetchUserQuery(null);
+  const { isLoading } = useFetchUserQuery(null);
 
   const logoutHandler = () => {
     try {
@@ -81,75 +82,102 @@ const Header = () => {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {!user?.isAuthenticated && (
-            <Link href={"/login"} className=" mx-4 text-white">
-              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded hover:px-2 text-black">
-                Sign In
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            !user?.isAuthenticated && (
+              <Link href={"/login"} className=" mx-4 text-white">
+                <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded hover:px-2 text-black">
+                  Sign In
+                </h1>
+              </Link>
+            )
+          )}
+
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            <Link href={"/courses"} className=" mr-4 text-black">
+              <h1 className="text-xl font-extrabold cursor-pointer   hover:bg-gray-400 hover:rounded px-2 hidden sm:block">
+                Courses
               </h1>
             </Link>
           )}
 
-          <Link href={"/courses"} className=" mr-4 text-black">
-            <h1 className="text-xl font-extrabold cursor-pointer   hover:bg-gray-400 hover:rounded px-2 hidden sm:block">
-              Courses
-            </h1>
-          </Link>
-
-          {user?.isAuthenticated && (
-            <Link href={"/outlook"}>
-              {" "}
-              <h1 className="text-xl font-extrabold cursor-pointer hidden sm:flex  hover:bg-gray-400 hover:rounded px-2">
-                OutLook
-              </h1>
-            </Link>
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            user?.isAuthenticated && (
+              <Link href={"/outlook"}>
+                {" "}
+                <h1 className="text-xl font-extrabold cursor-pointer hidden sm:flex  hover:bg-gray-400 hover:rounded px-2">
+                  OutLook
+                </h1>
+              </Link>
+            )
           )}
 
-          {!user?.isAuthenticated && (
-            <Link href={"/signup"} className=" mr-4 text-bloack hidden sm:flex">
-              <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2">
-                Sign Up
-              </h1>
-            </Link>
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            !user?.isAuthenticated && (
+              <Link
+                href={"/signup"}
+                className=" mr-4 text-bloack hidden sm:flex"
+              >
+                <h1 className="text-xl font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2">
+                  Sign Up
+                </h1>
+              </Link>
+            )
           )}
-          {user.user?.role === "owner" && (
-            <Link
-              href={"/admin/dashboard"}
-              className=" mr-4 text-black hidden sm:block font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2"
-            >
-              <h1 className="text-xl cursor-pointer ">Admin</h1>
-            </Link>
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            user.user?.role === "owner" && (
+              <Link
+                href={"/admin/dashboard"}
+                className=" mr-4 text-black hidden sm:block font-extrabold cursor-pointer  hover:bg-gray-400 hover:rounded px-2"
+              >
+                <h1 className="text-xl cursor-pointer ">Admin</h1>
+              </Link>
+            )
           )}
-          {user.isAuthenticated && (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Image
-                  src={user?.user?.photoUrl || ""}
-                  alt="image"
-                  height={9}
-                  width={33}
-                  className="rounded-full  w-auto h-auto hidden sm:block"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Button className=" cursor-pointer " variant={"ghost"}>
-                    <UserPen className=" text-black opacity-100" />
-                    Profile
-                  </Button>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  {" "}
-                  <Button
-                    onClick={logoutHandler}
-                    className=" cursor-pointer  "
-                    variant={"ghost"}
-                  >
-                    <LogOut className="text-black" />
-                    Logout
-                  </Button>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+          {isLoading ? (
+            <Skeleton className="w-10 h-5" />
+          ) : (
+            user.isAuthenticated && (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Image
+                    src={user?.user?.photoUrl || ""}
+                    alt="image"
+                    height={9}
+                    width={33}
+                    className="rounded-full  w-auto h-auto hidden sm:block"
+                  />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Button className=" cursor-pointer " variant={"ghost"}>
+                      <UserPen className=" text-black opacity-100" />
+                      Profile
+                    </Button>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    {" "}
+                    <Button
+                      onClick={logoutHandler}
+                      className=" cursor-pointer  "
+                      variant={"ghost"}
+                    >
+                      <LogOut className="text-black" />
+                      Logout
+                    </Button>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
           )}
           <MobileNavBar
             user={user?.user}
@@ -171,20 +199,23 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
   return (
     <div className="block sm:hidden">
       <Sheet>
-        <SheetTrigger>
-          {" "}
-          {isAuthenticated ? (
-            <Image
-              src={user?.photoUrl ||"laxman.png"}
-              alt="image"
-              height={10}
-              width={40}
-              className="rounded-full h-auto w-auto"
-            />
-          ) : (
-            <Menu />
-          )}
+        <SheetTrigger >
+         
+            {" "}
+            {isAuthenticated ? (
+              <Image
+                src={user?.photoUrl || "laxman.png"}
+                alt="image"
+                height={10}
+                width={40}
+                className="rounded-full h-auto w-auto"
+              />
+            ) : (
+              <Menu />
+            )}
+          
         </SheetTrigger>
+       
         <SheetContent>
           <SheetHeader>
             <SheetTitle className=" text-center">
@@ -207,43 +238,56 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
               )}
               <Separator className="mt-2 border-1 bg-black " />
             </SheetTitle>
-            <SheetDescription className="mt-5 space-y-4">
-              {isAuthenticated && (
-                <span className="text-black font-bold text-base flex space-x-3.5">
-                  <LogOut className="mr-4" />
-                  Blog
-                </span>
-              )}{" "}
-              <span className="text-black font-bold text-base flex space-x-3.5 ">
-                <Link href={"/courses"} className="cursor-pointer flex">
-                  <BookOpenText className="mr-4" />
-                  Courses
-                </Link>
-              </span>
-              {user?.role == "owner" && (
-                <Link href={"/admin/dashboard"} className=" mr-4 text-white ">
+          
+              <SheetDescription className="mt-5 space-y-4">
+                {isAuthenticated && (
                   <span className="text-black font-bold text-base flex space-x-3.5">
-                    <LockKeyhole className="mr-4" />
-                    Admin
+                    <LogOut className="mr-4" />
+                    Blog
                   </span>
-                </Link>
-              )}
-              <span className="text-black font-bold text-base flex space-x-3.5">
-                <MoonIcon className="mr-4" />
-                DarkMode
-              </span>
-              {isAuthenticated && (
-                <span className="text-black font-bold text-base flex space-x-3.5">
-                  <Link href={"http://localhost:5005/logout"} className="flex">
-                    {" "}
-                    <LogOut className="mr-4 " />
-                    LogOut
+                )}{" "}
+                 <SheetClose asChild><span className="text-black font-bold text-base flex space-x-3.5 ">
+                  <Link href={"/courses"} className="cursor-pointer flex">
+                    <BookOpenText className="mr-4" />
+                    Courses
                   </Link>
                 </span>
-              )}
-            </SheetDescription>
+                </SheetClose>
+                <span className="text-black font-bold text-base flex space-x-3.5 ">
+                  <Link href={"/outlook"} className="cursor-pointer flex">
+                    <BookOpenText className="mr-4" />
+                    OutLook
+                  </Link>
+                </span>
+                {user?.role == "owner" && (
+                  <Link href={"/admin/dashboard"} className=" mr-4 text-white ">
+                    <span className="text-black font-bold text-base flex space-x-3.5">
+                      <LockKeyhole className="mr-4" />
+                      Admin
+                    </span>
+                  </Link>
+                )}
+                <span className="text-black font-bold text-base flex space-x-3.5">
+                  <MoonIcon className="mr-4" />
+                  DarkMode
+                </span>
+                {isAuthenticated && (
+                  <span className="text-black font-bold text-base flex space-x-3.5">
+                    <Link
+                      href={"http://localhost:5005/logout"}
+                      className="flex"
+                    >
+                      {" "}
+                      <LogOut className="mr-4 " />
+                      LogOut
+                    </Link>
+                  </span>
+                )}
+              </SheetDescription>
+            
           </SheetHeader>
         </SheetContent>
+     
       </Sheet>
     </div>
   );

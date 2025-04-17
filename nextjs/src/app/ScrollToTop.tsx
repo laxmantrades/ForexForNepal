@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useRouter } from 'next/router'; // or 'next/router' if using pages/
+import { useRouter } from 'next/navigation'; // or 'next/router' if using pages/
 
 export default function ScrollToTop() {
   const router = useRouter();
@@ -16,12 +16,9 @@ export default function ScrollToTop() {
         });
       }, 50); // 🔥 Small 50ms delay to fix mobile issue
     };
+    handleRouteChange()
 
-    router.events?.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events?.off('routeChangeComplete', handleRouteChange);
-    };
+   
   }, [router]);
 
   return null;

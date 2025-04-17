@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const URI =
-  process.env.NODE_ENV === "production"
-    ? "https://api.forexfornepal.com/authcheck"
-    : "http://localhost:5005/authcheck";
+const URI ="https://api.forexfornepal.com/authcheck"
 
+
+  //todo URI to make localhost
 export async function middleware(req: NextRequest) {
   try {
     // Inspect headers for debugging

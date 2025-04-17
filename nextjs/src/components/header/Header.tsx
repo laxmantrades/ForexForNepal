@@ -44,7 +44,8 @@ const Header = () => {
 
   const logoutHandler = () => {
     try {
-      window.location.href = "http://localhost:5005/logout";
+      //todo make localhost logout also
+      window.location.href = "https://api.forexfornepal.com/logout";
     } catch (error) {
       console.log(error);
     }

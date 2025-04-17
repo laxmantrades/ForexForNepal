@@ -11,13 +11,11 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Card } from "../ui/card";
 
-let URI = "";
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname == "forexfornepal.com"
-      ? "https://api.forexfornepal.com/login"
-      : "http://localhost:5005/login";
-}
+
+const URI =
+  process.env.NODE_ENV === "production"
+    ? "https://api.forexfornepal.com/login"
+    : "http://localhost:5005/login";
 
 const LoginPage = () => {
   const [checked, setChecked] = useState(false);

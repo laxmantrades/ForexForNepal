@@ -5,11 +5,14 @@ const GoogleStrategy = require("passport-google-oauth20");
 import jwt from "jsonwebtoken";
 
 dotenv.config();
+const isProduction = process.env.NODE_ENV === "production";
 const GoogleOauth = new GoogleStrategy(
   {
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
-    callbackURL: `http://localhost:${process.env.PORT}/auth/google/callback`,
+    callbackURL: isProduction
+      ? "https://api.forexfornepal.com/auth/callback"
+      : `http://localhost:${process.env.PORT}/auth/google/callback`,
 
     prompt: "select_account",
   },

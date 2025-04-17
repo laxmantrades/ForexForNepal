@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Checkbox } from "../ui/checkbox";
@@ -11,14 +10,17 @@ import { Card } from "../ui/card";
 
 const SignUpPage = () => {
   const [checked, setChecked] = useState(false);
-
+  const URI =
+    process.env.NODE_ENV === "production"
+      ? "https://api.forexfornepal.com/login"
+      : "http://localhost:5005/login";
   const signUpHandler = () => {
     try {
       if (!checked) {
         toast.error("Please accept terms and condition");
         return;
       }
-      window.location.href = "http://localhost:5005/login";
+      window.location.href = URI;
     } catch (error) {
       console.log(error);
     }
@@ -31,17 +33,17 @@ const SignUpPage = () => {
         </h1>
         <div className="text-center mt-5 flex justify-center space-x-2">
           <div>
-          <Checkbox
-            id="terms"
-            required={true}
-            checked={checked}
-            onCheckedChange={(checked) =>
-              setChecked(checked === "indeterminate" ? false : checked)
-            }
-            className=" h-5 w-5"
-          />
+            <Checkbox
+              id="terms"
+              required={true}
+              checked={checked}
+              onCheckedChange={(checked) =>
+                setChecked(checked === "indeterminate" ? false : checked)
+              }
+              className=" h-5 w-5"
+            />
           </div>
-          
+
           <label
             htmlFor="terms"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 mt-1"

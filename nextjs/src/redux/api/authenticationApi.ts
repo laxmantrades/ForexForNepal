@@ -1,13 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { userLoggedin } from "../slices/authSlice";
 
-let URI=""
-if(typeof window !=="undefined"){
-  URI =
-  window.location.hostname === "forexfornepal"
-    ? "https://api.forexfornepal.com/authcheck"
-    : "http://localhost:5005/authcheck";
-}
+
+const URI = process.env.NODE_ENV === "production"?"https://api.forexfornepal.com/authcheck":"http://localhost:5005/authcheck";
+
  
 export const authenticationApi = createApi({
   reducerPath: "authenticationApi",

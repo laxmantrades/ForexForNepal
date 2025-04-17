@@ -1,3 +1,4 @@
+"use client"
 import Purchase from "@/components/purchase/Purchase";
 
 const Page = () => {

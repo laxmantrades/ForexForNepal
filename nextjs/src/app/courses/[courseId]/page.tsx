@@ -1,3 +1,5 @@
+"use client"
+
 import CourseInfoPage from "@/components/student/CourseInfoPage";
 
 const CourseIinfo = () => {

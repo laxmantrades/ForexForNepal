@@ -1,5 +1,5 @@
 
-
+"use client"
 
 import CourseForpage from "@/components/student/CourseForPage";
 

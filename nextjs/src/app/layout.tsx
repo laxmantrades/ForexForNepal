@@ -9,6 +9,7 @@ import ReduxProvideProps from "./ReduxProvier";
 import Footer from "@/components/Footer/Footer";
 import StorePathName from "./StorePathName";
 import { Analytics } from "@vercel/analytics/next";
+import ScrollToTop from "./ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +42,7 @@ export default function RootLayout({
         <ReduxProvideProps>
           {" "}
           <Toaster />
+          <ScrollToTop/>
           <header>
             {" "}
             <Header />

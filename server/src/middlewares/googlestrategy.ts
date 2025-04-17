@@ -11,7 +11,7 @@ const GoogleOauth = new GoogleStrategy(
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
     callbackURL: isProduction
-      ? "https://api.forexfornepal.com/auth/callback"
+      ? "https://api.forexfornepal.com/auth/google/callback"
       : `http://localhost:${process.env.PORT}/auth/google/callback`,
 
     prompt: "select_account",

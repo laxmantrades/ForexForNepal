@@ -22,7 +22,6 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
             maxAge: 360000000, // 1 hour
-
             sameSite: "none",
             domain: ".forexfornepal.com",
           });

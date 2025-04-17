@@ -8,26 +8,33 @@ const URI = "https://forexfornepal.com/";
 
 export const GoogleCallBack: RequestHandler = async (req, res) => {
   // You need to explicitly call passport.authenticate to handle the authentication callback
-  passport.authenticate(
-    "google",
-    { failureRedirect: "/", session: false },
-    (err, data, token) => {
-      try {
-        if (err || !data) {
-          // Handle error or failed authentication
-          return res.redirect("/login"); // Redirect to homepage or show an error page
+  try {
+    passport.authenticate(
+      "google",
+      { failureRedirect: "/", session: false },
+      (err, data, token) => {
+        try {
+          if (err || !data) {
+            // Handle error or failed authentication
+            return res.redirect(`${URI}login`); // Redirect to homepage or show an error page
+          }
+          res.cookie("token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
+            maxAge: 360000000, // 1 hour
+          });
+          return res.redirect(URI);
+        } catch (error) {
+          console.log(error);
+          
         }
-        res.cookie("token", token, {
-          httpOnly: true,
-          secure: process.env.NODE_ENV === "production", // Only set this in production with HTTPS
-          maxAge: 360000000, // 1 hour
-        });
-        return res.redirect(URI);
-      } catch (error) {
-        throw new Error("");
       }
-    }
-  )(req, res); // Execute passport logic for Google OAuth
+    )(req, res); // Execute passport logic for Google OAuth
+  } catch (error) {
+    console.log(error);
+    
+  }
+  
 };
 
 export const AuthCheck: RequestHandler = async (req, res) => {

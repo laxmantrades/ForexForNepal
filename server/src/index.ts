@@ -28,6 +28,7 @@ const limiter = rateLimit({
 });
 dotenv.config();
 
+
 const corsOptions = {
   origin: [
     process.env.FRONTEND_URL_NEXTJS!,
@@ -35,6 +36,8 @@ const corsOptions = {
   ],
   credentials: true,
 };
+app.set('trust proxy', 1);  // Enable trusting the first proxy
+
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

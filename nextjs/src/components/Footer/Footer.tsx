@@ -1,3 +1,5 @@
+import { Instagram } from "lucide-react";
+import Link from "next/link";
 
 
 const Footer = () => {
@@ -6,6 +8,8 @@ const Footer = () => {
       <div className="text-center mt-5">
         <h1>Follow Us On</h1>
         <div className="flex space-x-4 text-center justify-center mt-2">
+          <Link href="https://www.instagram.com/laxmantrades/" target="_blank"> <Instagram className="w-10 h-8"/></Link>
+         
           <a href={"https://t.me/+SNQ8nJ6uvzYzYzhl"} target="_blank" className="border rounded-full p-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"

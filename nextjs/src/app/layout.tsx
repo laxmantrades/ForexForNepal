@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 import ReduxProvideProps from "./ReduxProvier";
 
 import Footer from "@/components/Footer/Footer";
-import StorePathName from "./StorePathName";
+
 import { Analytics } from "@vercel/analytics/next";
 import ScrollToTop from "./ScrollToTop";
 
@@ -42,15 +42,12 @@ export default function RootLayout({
         <ReduxProvideProps>
           {" "}
           <Toaster />
-          <ScrollToTop/>
           <header>
             {" "}
             <Header />
           </header>
-          <StorePathName>
-            <div className="flex-1 mt-20"> {children}</div>
-            <Analytics />
-          </StorePathName>
+          <div className="flex-1 mt-20"> {children}</div>
+          <Analytics />
           <Toaster />
           <footer>
             <Footer />

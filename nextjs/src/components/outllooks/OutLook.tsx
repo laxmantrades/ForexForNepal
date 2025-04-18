@@ -194,14 +194,15 @@ const OutLook = () => {
                         Pair: {outlook?.Pair}
                       </h1>
                     </CardTitle>
-                    <CardContent className="p-0 flex">
+                    <CardContent className="p-0 ">
                       <Image
                         src={outlook.OutLookPhotoUrl}
                         width={700}
                         height={100}
                         alt="image"
+                        className="h-"
                       />
-                      <h1 className="px-2 text-wrap">{outlook?.Description}</h1>
+                      <h1 className="px-2 text-wrap w-auto md:w-[700] ">{outlook?.Description}</h1>
                     </CardContent>
 
                     {user === "owner" && (

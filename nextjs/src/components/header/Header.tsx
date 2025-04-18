@@ -43,10 +43,15 @@ const Header = () => {
   const user = useSelector((store: RootState) => store.auth);
   const { isLoading } = useFetchUserQuery(null);
 
+  const logoutUri =
+    process.env.NODE_ENV === "production"
+      ? "https://api.forexfornepal.com/logout"
+      : "http://localhost:5005/logout";
+
   const logoutHandler = () => {
     try {
       //todo make localhost logout also
-      window.location.href = "https://api.forexfornepal.com/logout";
+      window.location.href = logoutUri;
     } catch (error) {
       console.log(error);
     }
@@ -196,26 +201,28 @@ interface UserPhoto {
   isAuthenticated: boolean | null;
 }
 const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
+  const logoutUri =
+    process.env.NODE_ENV === "production"
+      ? "https://api.forexfornepal.com/logout"
+      : "http://localhost:5005/logout";
   return (
     <div className="block sm:hidden">
       <Sheet>
-        <SheetTrigger >
-         
-            {" "}
-            {isAuthenticated ? (
-              <Image
-                src={user?.photoUrl || "laxman.png"}
-                alt="image"
-                height={10}
-                width={40}
-                className="rounded-full h-auto w-auto"
-              />
-            ) : (
-              <Menu />
-            )}
-          
+        <SheetTrigger>
+          {" "}
+          {isAuthenticated ? (
+            <Image
+              src={user?.photoUrl || "laxman.png"}
+              alt="image"
+              height={10}
+              width={40}
+              className="rounded-full h-auto w-auto"
+            />
+          ) : (
+            <Menu />
+          )}
         </SheetTrigger>
-       
+
         <SheetContent>
           <SheetHeader>
             <SheetTitle className=" text-center">
@@ -238,56 +245,52 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
               )}
               <Separator className="mt-2 border-1 bg-black " />
             </SheetTitle>
-          
-              <SheetDescription className="mt-5 space-y-4">
-                {isAuthenticated && (
-                  <span className="text-black font-bold text-base flex space-x-3.5">
-                    <LogOut className="mr-4" />
-                    Blog
-                  </span>
-                )}{" "}
-                 <SheetClose asChild><span className="text-black font-bold text-base flex space-x-3.5 ">
+
+            <SheetDescription className="mt-5 space-y-4">
+              {isAuthenticated && (
+                <span className="text-black font-bold text-base flex space-x-3.5">
+                  <LogOut className="mr-4" />
+                  Blog
+                </span>
+              )}{" "}
+              <SheetClose asChild>
+                <span className="text-black font-bold text-base flex space-x-3.5 ">
                   <Link href={"/courses"} className="cursor-pointer flex">
                     <BookOpenText className="mr-4" />
                     Courses
                   </Link>
                 </span>
-                </SheetClose>
-                <span className="text-black font-bold text-base flex space-x-3.5 ">
-                  <Link href={"/outlook"} className="cursor-pointer flex">
-                    <BookOpenText className="mr-4" />
-                    OutLook
-                  </Link>
-                </span>
-                {user?.role == "owner" && (
-                  <Link href={"/admin/dashboard"} className=" mr-4 text-white ">
-                    <span className="text-black font-bold text-base flex space-x-3.5">
-                      <LockKeyhole className="mr-4" />
-                      Admin
-                    </span>
-                  </Link>
-                )}
-                <span className="text-black font-bold text-base flex space-x-3.5">
-                  <MoonIcon className="mr-4" />
-                  DarkMode
-                </span>
-                {isAuthenticated && (
+              </SheetClose>
+              <span className="text-black font-bold text-base flex space-x-3.5 ">
+                <Link href={"/outlook"} className="cursor-pointer flex">
+                  <BookOpenText className="mr-4" />
+                  OutLook
+                </Link>
+              </span>
+              {user?.role == "owner" && (
+                <Link href={"/admin/dashboard"} className=" mr-4 text-white ">
                   <span className="text-black font-bold text-base flex space-x-3.5">
-                    <Link
-                      href={"http://localhost:5005/logout"}
-                      className="flex"
-                    >
-                      {" "}
-                      <LogOut className="mr-4 " />
-                      LogOut
-                    </Link>
+                    <LockKeyhole className="mr-4" />
+                    Admin
                   </span>
-                )}
-              </SheetDescription>
-            
+                </Link>
+              )}
+              <span className="text-black font-bold text-base flex space-x-3.5">
+                <MoonIcon className="mr-4" />
+                DarkMode
+              </span>
+              {isAuthenticated && (
+                <span className="text-black font-bold text-base flex space-x-3.5">
+                  <Link href={logoutUri} className="flex">
+                    {" "}
+                    <LogOut className="mr-4 " />
+                    LogOut
+                  </Link>
+                </span>
+              )}
+            </SheetDescription>
           </SheetHeader>
         </SheetContent>
-     
       </Sheet>
     </div>
   );

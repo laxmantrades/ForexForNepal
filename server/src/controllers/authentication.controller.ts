@@ -64,7 +64,12 @@ export const AuthCheck: RequestHandler = async (req, res) => {
 
 export const Logout: RequestHandler = (req, res) => {
   try {
-    res.clearCookie("token");
+    res.clearCookie("token", {
+      domain: ".forexfornepal.com", // Notice the leading dot!
+      path: "/",
+      secure: true, // because you are on https
+      sameSite: "none", // because it's cross-site
+    });
     res.status(200).json({
       success: true,
       message: "Logpout Successfull",

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { authenticationApi } from "./authenticationApi";
 
 let URI = "";
 if (typeof window !== "undefined") {
@@ -21,6 +22,17 @@ export const coursePurchaseApi = createApi({
         method: "POST",
         body: { userId, couponCode },
       }),
+      async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+        try {
+          await queryFulfilled;
+          // ✅ After purchase succeeds, refetch user
+          dispatch(
+            authenticationApi.util.invalidateTags(['User'])
+          );
+        } catch (err) {
+          console.error('Purchase error:', err);
+        }
+      },
     }),
   }),
 });

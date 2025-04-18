@@ -11,12 +11,14 @@ export const authenticationApi = createApi({
     baseUrl: URI,
     credentials: "include",
   }),
+  tagTypes:["User"],
   endpoints: (builder) => ({
     fetchUser: builder.query({
       query: () => ({
         url: "/",
         method: "get",
       }),
+      providesTags:["User"],
       async onQueryStarted(_, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
@@ -24,6 +26,7 @@ export const authenticationApi = createApi({
           dispatch(userLoggedin(result?.data?.user));
         } catch (error) {}
       },
+     
     }),
   }),
 });

@@ -1,12 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-let URI = "";
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname === "forexfornepal.com"
+let URI = process.env.NODE_ENV === "production"
       ? "https://api.forexfornepal.com/api/v1/lecture"
       : "http://localhost:5005/api/v1/lecture";
-}
+
 
 export const lectureApi = createApi({
   reducerPath: "sectionApi",

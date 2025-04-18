@@ -1,11 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-let URI = "";
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname === "forexfornepal.com"
-      ? "https://api.forexfornepal.com/api/v1/outlook"
-      : "http://localhost:5005/api/v1/outlook";
-}
+let URI =
+  process.env.NODE_ENV === "production"
+    ? "https://api.forexfornepal.com/api/v1/outlook"
+    : "http://localhost:5005/api/v1/outlook";
 
 export const outLookApi = createApi({
   reducerPath: "outLookApi",

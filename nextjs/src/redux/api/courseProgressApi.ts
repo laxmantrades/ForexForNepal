@@ -1,12 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-let URI = "";
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname === "forexfornepal.com"
-      ? "https://api.forexfornepal.com/api/v1/courseprogress"
-      : "http://localhost:5005/api/v1/courseprogress";
-}
+const URI =
+  process.env.NODE_ENV === "production"
+    ? "https://api.forexfornepal.com/api/v1/courseprogress"
+    : "http://localhost:5005/api/v1/courseprogress";
 
 export const courseProgressApi = createApi({
   reducerPath: "courseProgressApi",

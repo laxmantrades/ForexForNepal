@@ -1,13 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { addCourse } from "../slices/courseSlice";
 
-let URI =""
-if (typeof window !== "undefined") {
-  URI =
-    window.location.hostname === "forexfornepal.com"
+const URI =
+    process.env.NODE_ENV === "production"
       ? "https://api.forexfornepal.com/api/v1/course"
       : "http://localhost:5005/api/v1/course";
-}
+
  
 
 export const courseApi = createApi({

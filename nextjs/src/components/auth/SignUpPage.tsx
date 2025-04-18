@@ -22,7 +22,7 @@ const SignUpPage = () => {
       }
       window.location.href = URI;
     } catch (error) {
-      console.log(error);
+      throw new Error("Something went Wrong!")
     }
   };
   return (

@@ -50,10 +50,10 @@ const Header = () => {
 
   const logoutHandler = () => {
     try {
-      //todo make localhost logout also
+      
       window.location.href = logoutUri;
     } catch (error) {
-      console.log(error);
+     throw new Error("Somethig went wrong on Logout")
     }
   };
 

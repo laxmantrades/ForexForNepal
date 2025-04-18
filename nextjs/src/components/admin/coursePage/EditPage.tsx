@@ -67,7 +67,7 @@ const EditPage = () => {
       formData.append("courseThumbnail", courseInput.courseThumbnail);
       await editCourse({ formData, courseId: editCourseId });
     } catch (error) {
-      console.log(error);
+      throw new Error("Something went Wrong!")
     }
   };
 

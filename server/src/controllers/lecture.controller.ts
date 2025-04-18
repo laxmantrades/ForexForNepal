@@ -9,7 +9,7 @@ import {
 export const createLecture: RequestHandler = async (req, res) => {
   try {
     const { sectionId } = req.params;
-    console.log(sectionId);
+  
 
     const { lectureName, videoUrl, isPreviewFree } = req.body;
 

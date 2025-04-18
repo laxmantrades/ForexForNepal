@@ -28,8 +28,12 @@ export const authCheck: RequestHandler = (req, res, next) => {
     }
     next();
   } catch (error) {
-    console.log(error);
+    
 
-    console.log("Something went wrong!");
+   res.status(500).json({
+    success:false,
+    message:"Something went wrong!"
+   })
+   return
   }
 };

@@ -28,12 +28,12 @@ export const GoogleCallBack: RequestHandler = async (req, res) => {
           });
           return res.redirect(URI);
         } catch (error) {
-          console.log(error);
+          throw new Error("Something went Wrong!")
         }
       }
     )(req, res); // Execute passport logic for Google OAuth
   } catch (error) {
-    console.log(error);
+     throw new Error("Something went Wrong!")
   }
 };
 
@@ -50,7 +50,7 @@ export const AuthCheck: RequestHandler = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    
     res.status(500).json({
       message: "Something went wrong",
     });
@@ -65,6 +65,11 @@ export const Logout: RequestHandler = (req, res) => {
       res.redirect(URI);
     });
   } catch (error) {
-    console.log(error);
+    res.status(500).json({
+      success:false,
+      message:"Something went wrong!"
+    })
+    return
+   
   }
 };

@@ -12,7 +12,7 @@ export const createCourse = async (UserData: {
 
     return user;
   } catch (error) {
-    console.log(error);
+  throw new Error("Error creating createCourse")
   }
 };
 export const findCourseAndUpdate = async (id: string, updatedData: any) => {
@@ -23,7 +23,7 @@ export const findCourseAndUpdate = async (id: string, updatedData: any) => {
 
     return course;
   } catch (error) {
-    //console.log(error);
+    throw new Error("Error creating findCourseAndUpdate")
   }
 };
 export const findCourse = async (id: string) => {
@@ -50,7 +50,7 @@ export const findCourse = async (id: string) => {
 
     return course;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error invloking findCourse")
   }
 };
 
@@ -61,7 +61,7 @@ export const findCourseServiceForCoursePurchase = async (id: string) => {
 
     return course;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error finding findCourseSerciceForCoursePurchase")
   }
 };
 export const findALLCourse = async () => {
@@ -71,7 +71,7 @@ export const findALLCourse = async () => {
     );
     return course;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error finding findAllCourse")
   }
 };
 
@@ -80,6 +80,6 @@ export const findCourseBYIDservice = async (id: string) => {
     const course = await COURSE.findById(id);
     return course;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error creating findCourseByIdService")
   }
 };

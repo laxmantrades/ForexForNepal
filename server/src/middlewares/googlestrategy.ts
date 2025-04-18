@@ -35,7 +35,7 @@ const GoogleOauth = new GoogleStrategy(
 
       return done(null, user?._id, token);
     } catch (error) {
-      console.log(error);
+     throw new Error("Something went wrong on googleOauth")
     }
   }
 );

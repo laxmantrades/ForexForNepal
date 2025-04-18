@@ -13,7 +13,7 @@ import {
 
 export const CreateCourse: RequestHandler = async (req, res) => {
   try {
-    console.log(req.body);
+    
 
     const { courseName, courseTitle, courseDescription, coursePrice } =
       req.body;
@@ -101,7 +101,7 @@ export const UpdateCourse: RequestHandler = async (req, res) => {
     });
     return;
   } catch (error: any) {
-    console.log(error);
+   
 
     res.status(500).json({
       message: "Some Interal Server Error",

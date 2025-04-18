@@ -20,7 +20,7 @@ export const createLectureService = async (
     );
     return lecture;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error creating createLectureService")
   }
 };
 export const getLectureService = async (lectureId: string) => {
@@ -28,7 +28,7 @@ export const getLectureService = async (lectureId: string) => {
     const lecture = await LECTURE.findById(lectureId);
     return lecture;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error creating getLectureService")
   }
 };
 
@@ -42,7 +42,7 @@ export const updateLectureService = async (
     });
     return lecture;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error updating updateLectureService")
   }
 };
 
@@ -58,6 +58,6 @@ export const deleteLectureService = async (
 
     return lecture;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error deleting deleteLectureService")
   }
 };

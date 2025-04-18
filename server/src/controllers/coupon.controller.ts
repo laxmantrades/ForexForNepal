@@ -19,7 +19,7 @@ export const createCouponCode: RequestHandler = async (req, res) => {
       createCoupon,
     });
   } catch (error) {
-    console.log(error);
+   
 
     res.status(400).json({
       message: "Something went wrong!",
@@ -64,7 +64,7 @@ export const getCouponCode: RequestHandler = async (req, res) => {
       couponcode,
     });
   } catch (error) {
-    console.log(error);
+   
 
     res.status(400).json({
       message: "Something went wrong!",

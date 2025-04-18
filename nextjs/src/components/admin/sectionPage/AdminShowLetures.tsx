@@ -47,15 +47,14 @@ const AdminShowLecture = () => {
     try {
       updateSection({ sectionId, sectionTitle });
     } catch (error) {
-      console.log(error);
+      throw new Error("Something went Wrong!")
     }
   };
   const submitHandlerCreate = async () => {
     try {
       createSection({ courseId: editCourseId, sectionTitle });
     } catch (error) {
-      console.log(error);
-    }
+      throw new Error("Something went Wrong!")
   };
   useEffect(() => {
     if (isSuccess) {

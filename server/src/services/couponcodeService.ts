@@ -11,7 +11,7 @@ export const createCouponCodeService = async (
     });
     return newcouponCode;
   } catch (error) {
-    console.log(error);
+   
     
     throw new Error("Something went wrong");
   }
@@ -36,7 +36,7 @@ export const getCouponCodeService = async () => {
       const couponCode = await COUPONCODE.find();
       return couponCode;
     } catch (error) {
-      console.log(error);
+     
       
       throw new Error("Something went wrong");
     }
@@ -56,7 +56,7 @@ export const getCouponCodeService = async () => {
          await COUPONCODE.findByIdAndDelete(couponCodeId)
         
     } catch (error) {
-      console.log(error);
+     
       
         throw new Error("Something went wrong");
         

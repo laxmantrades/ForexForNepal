@@ -8,7 +8,7 @@ export const createSectionService = async (
 ) => {
   try {
     const section = await SECTION.create({ sectionTitle, courseId });
-    console.log(section);
+
 
     const course = await COURSE.findByIdAndUpdate(
       courseId,
@@ -18,7 +18,7 @@ export const createSectionService = async (
 
     return section;
   } catch (error: any) {
-    console.log(error.message);
+    throw new Error("Error creating createSectionService")
   }
 };
 export const updateSectionService = async (
@@ -37,7 +37,7 @@ export const updateSectionService = async (
     );
     return section;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error updating  updateSectionService")
   }
 };
 
@@ -46,7 +46,7 @@ export const getSectionService = async (sectionId: string) => {
     const section = await SECTION.findById(sectionId).populate("lectures");
     return section;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error getting  getSectionService")
   }
 };
 export const getSectionByCourseService = async (courseId: string) => {
@@ -57,6 +57,6 @@ export const getSectionByCourseService = async (courseId: string) => {
       .lean();
     return section;
   } catch (error) {
-    console.log(error);
+    throw new Error("Error getting  getSectionByCourseService")
   }
 };

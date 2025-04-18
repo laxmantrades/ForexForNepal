@@ -14,6 +14,6 @@ export const deleteMediaFromCloudinary = async (OutLookPhotoUrl: String) => {
     const publicId = match ? match[1] : null;
     await cloudinary.uploader.destroy(publicId as string);
   } catch (error) {
-    console.log(error);
+    throw new Error("Error on deleting Cloudinary")
   }
 };

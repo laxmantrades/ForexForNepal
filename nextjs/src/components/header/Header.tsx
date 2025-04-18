@@ -54,12 +54,9 @@ const Header = () => {
         method: "GET", // or POST if your route needs POST
         credentials: "include", // so cookies are sent correctly!
       });
-      window.location.href = "/";
 
-      // window.location.href = "/";
+      window.location.href = "https://forexfornepal.com";
     } catch (error) {
-      console.log(error);
-
       throw new Error("Something went wrong");
     }
   };

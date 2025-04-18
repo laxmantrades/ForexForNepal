@@ -1,3 +1,4 @@
+"use"
 import {
   Accordion,
   AccordionContent,
@@ -56,6 +57,7 @@ const AdminShowLecture = () => {
     } catch (error) {
       throw new Error("Something went Wrong!")
   };
+}
   useEffect(() => {
     if (isSuccess) {
       
@@ -132,6 +134,6 @@ const AdminShowLecture = () => {
       </Card>
     </div>
   );
-};
+
 }
 export default AdminShowLecture;

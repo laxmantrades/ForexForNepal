@@ -133,4 +133,5 @@ const AdminShowLecture = () => {
     </div>
   );
 };
+}
 export default AdminShowLecture;

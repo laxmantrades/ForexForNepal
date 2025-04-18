@@ -37,25 +37,35 @@ import { Separator } from "../ui/separator";
 import { User } from "@/types/userTypes";
 import { useFetchUserQuery } from "@/redux/api/authenticationApi";
 import { Skeleton } from "../ui/skeleton";
+import { useEffect } from "react";
 //todo sheetclose
 
 const Header = () => {
   const user = useSelector((store: RootState) => store.auth);
-  const { isLoading } = useFetchUserQuery(null);
+  const { isLoading, data, refetch } = useFetchUserQuery(null);
 
-  const logoutUri =
-    process.env.NODE_ENV === "production"
-      ? "https://api.forexfornepal.com/logout"
-      : "http://localhost:5005/logout";
-
-  const logoutHandler = () => {
+  const logoutHandler = async () => {
+    const logoutUri =
+      process.env.NODE_ENV === "production"
+        ? "https://api.forexfornepal.com/logout"
+        : "http://localhost:5005/logout";
     try {
-      
-      window.location.href = logoutUri;
+      const logout = await fetch(logoutUri, {
+        method: "GET", // or POST if your route needs POST
+        credentials: "include", // so cookies are sent correctly!
+      });
+      window.location.href = "/";
+
+      // window.location.href = "/";
     } catch (error) {
-     throw new Error("Somethig went wrong on Logout")
+      console.log(error);
+
+      throw new Error("Something went wrong");
     }
   };
+  useEffect(() => {
+    refetch();
+  }, []);
 
   return (
     <header className="absolute z-10 w-full bg-white">

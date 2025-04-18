@@ -208,10 +208,22 @@ interface UserPhoto {
   isAuthenticated: boolean | null;
 }
 const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
-  const logoutUri =
-    process.env.NODE_ENV === "production"
-      ? "https://api.forexfornepal.com/logout"
-      : "http://localhost:5005/logout";
+  const logoutHandler = async () => {
+    const logoutUri =
+      process.env.NODE_ENV === "production"
+        ? "https://api.forexfornepal.com/logout"
+        : "http://localhost:5005/logout";
+    try {
+      const logout = await fetch(logoutUri, {
+        method: "GET", // or POST if your route needs POST
+        credentials: "include", // so cookies are sent correctly!
+      });
+
+      window.location.href = "https://forexfornepal.com";
+    } catch (error) {
+      throw new Error("Something went wrong");
+    }
+  };
   return (
     <div className="block sm:hidden">
       <Sheet>
@@ -287,12 +299,13 @@ const MobileNavBar: React.FC<UserPhoto> = ({ user, isAuthenticated }) => {
                 DarkMode
               </span>
               {isAuthenticated && (
-                <span className="text-black font-bold text-base flex space-x-3.5">
-                  <Link href={logoutUri} className="flex">
-                    {" "}
-                    <LogOut className="mr-4 " />
-                    LogOut
-                  </Link>
+                <span
+                  onClick={logoutHandler}
+                  className="text-black font-bold text-base flex space-x-3.5"
+                >
+                  {" "}
+                  <LogOut className="mr-4 " />
+                  LogOut
                 </span>
               )}
             </SheetDescription>

@@ -24,11 +24,14 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import DeleteAlert from "./DeleteAlert";
 import { outLookType } from "@/types/outlookType";
+import { Skeleton } from "../ui/skeleton";
 
 const OutLook = () => {
   //!constants
   const [Time, setTime] = useState("");
   const [Pair, setPair] = useState("");
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const [outLookDesc, setDesc] = useState({
     Description: "",
     OutLookPhotoUrl: "",
@@ -49,7 +52,11 @@ const OutLook = () => {
   const [createOutLook, { data, isLoading, isError, isSuccess }] =
     useCreateOutlookMutation();
 
-  const { data: OutLookData, refetch } = useGetOutLookQuery(selectedTab);
+  const {
+    data: OutLookData,
+    refetch,
+    isLoading: loadingOutlook,
+  } = useGetOutLookQuery(selectedTab);
 
   //Onchange Handler
   const OutLookChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
@@ -80,7 +87,7 @@ const OutLook = () => {
     if (isError) {
       toast.error(data?.message || "Failed to post OutLook");
     }
-  }, [isError, isSuccess,data]);
+  }, [isError, isSuccess, data]);
 
   return (
     <div className="mt-5 flex justify-center  ">
@@ -168,13 +175,20 @@ const OutLook = () => {
                           width={700}
                           height={100}
                           alt="image"
+                        
+                          placeholder="blur"
+                          blurDataURL={outlook.OutLookPhotoUrl}
                         />
-                        <h1 className="px-2 text-wrap w-auto md:w-[700]">{outlook?.Description}</h1>
+                        
+
+                        <h1 className="px-2 text-wrap w-auto md:w-[700]">
+                          {outlook?.Description}
+                        </h1>
                       </CardContent>
                       {user === "owner" && (
                         <CardFooter className="flex justify-end">
                           <h1 className="bg-red-500 hover:bg-red-500  p-2 text-white font-bold rounded">
-                            <DeleteAlert id={outlook?._id}/>
+                            <DeleteAlert id={outlook?._id} />
                           </h1>
                         </CardFooter>
                       )}
@@ -201,14 +215,18 @@ const OutLook = () => {
                         height={100}
                         alt="image"
                         className="h-"
+                        priority
+                   
                       />
-                      <h1 className="px-2 text-wrap w-auto md:w-[700] ">{outlook?.Description}</h1>
+                      <h1 className="px-2 text-wrap w-auto md:w-[700] ">
+                        {outlook?.Description}
+                      </h1>
                     </CardContent>
 
                     {user === "owner" && (
                       <CardFooter className="flex justify-end">
                         <h1 className="bg-red-500 hover:bg-red-500 p-2 text-white font-bold rounded">
-                          <DeleteAlert id={outlook?._id}/>
+                          <DeleteAlert id={outlook?._id} />
                         </h1>
                       </CardFooter>
                     )}
